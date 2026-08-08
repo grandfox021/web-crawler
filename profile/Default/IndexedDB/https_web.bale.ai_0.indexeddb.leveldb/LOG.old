@@ -1,0 +1,15 @@
+2026/08/08-12:40:05.169 31744 Reusing MANIFEST /home/hassan/Documents/bale_crwaler/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/08-12:40:05.169 31744 Recovering log #242
+2026/08/08-12:40:05.171 31744 Reusing old log /home/hassan/Documents/bale_crwaler/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000242.log 
+2026/08/08-12:40:05.171 31744 Delete type=2 #240
+2026/08/08-12:40:05.430 31745 Level-0 table #247: started
+2026/08/08-12:40:05.443 31745 Level-0 table #247: 1540044 bytes OK
+2026/08/08-12:40:05.446 31745 Delete type=0 #242
+2026/08/08-12:40:05.447 31744 Manual compaction at level-0 from '\x00C\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00D\x00\x00\x00' @ 0 : 0; will stop at '\x00C\x00\x00\x05' @ 57735 : 1
+2026/08/08-12:40:05.447 31744 Compacting 1@0 + 1@1 files
+2026/08/08-12:40:05.471 31744 Generated table #248@0: 15279 keys, 2138980 bytes
+2026/08/08-12:40:05.474 31744 Generated table #249@0: 77 keys, 19530 bytes
+2026/08/08-12:40:05.474 31744 Compacted 1@0 + 1@1 files => 2158510 bytes
+2026/08/08-12:40:05.480 31744 compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/08-12:40:05.480 31744 Delete type=2 #247
+2026/08/08-12:40:05.481 31744 Manual compaction at level-0 from '\x00C\x00\x00\x05' @ 57735 : 1 .. '\x00D\x00\x00\x00' @ 0 : 0; will stop at (end)
