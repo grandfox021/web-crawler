@@ -1,7 +1,7 @@
 from playwright.sync_api import sync_playwright
 from fastapi import FastAPI
 import uvicorn
-
+import time
 
 app = FastAPI()
 
@@ -46,7 +46,7 @@ def scrape_news():
 
         context = p.chromium.launch_persistent_context(
             user_data_dir="./profile",
-            headless=True,
+            headless=False,
         )
 
         page = context.pages[0] if context.pages else context.new_page()
@@ -102,7 +102,7 @@ def scrape_news():
 def get_news():
 
     news = scrape_news()
-
+    # time.sleep(20)
     return {
         "count": len(news),
         "data": news,
