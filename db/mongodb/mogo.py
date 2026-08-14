@@ -26,6 +26,6 @@ news_collection = db[MONGO_COLLECTION_NAME]
 
 # جلوگیری از ذخیره خبر تکراری
 news_collection.create_index(
-    "content_hash",
+    "هش عنوان",
     unique=True,
 )

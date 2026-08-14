@@ -11,7 +11,7 @@ def scrape_news():
 
         context = p.chromium.launch_persistent_context(
             user_data_dir="./profile",
-            headless=False,
+            headless=True,
         )
 
         page = (
@@ -53,8 +53,7 @@ def scrape_news():
             else:
                 stable_count = 0
 
-        messages = page.locator(".KTwPFW")
-
+        messages = page.locator(".message-item")
         messages_count = messages.count()
 
         print("Total:", messages_count)
@@ -71,8 +70,8 @@ def scrape_news():
             parsed_news = clean_body(message)
 
             if (
-                not parsed_news["title"]
-                and not parsed_news["body"]
+                not parsed_news["عنوان"]
+                and not parsed_news["متن"]
             ):
                 continue
 
