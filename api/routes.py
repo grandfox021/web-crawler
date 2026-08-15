@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from scraper.bale_scrapper import scrape_news
+from scraper.bale_scraper import scrape_news
 from db.mongodb.crud import save_news,get_news_from_db
 
 

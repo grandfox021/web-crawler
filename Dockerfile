@@ -1,4 +1,6 @@
-FROM python:3.11-slim
+#FROM python:3.11-slim
+FROM python:3.13.15-bookworm
+
 
 # جلوگیری از سوال‌های تعاملی apt و بافر شدن لاگ پایتون
 ENV PYTHONUNBUFFERED=1 \

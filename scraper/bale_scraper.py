@@ -1,7 +1,9 @@
 from playwright.sync_api import sync_playwright
 
 from .parser import clean_body
+import os
 
+headless = os.getenv("PLAYWRIGHT_HEADLESS", "true").lower() == "true"
 
 def scrape_news():
 
@@ -11,7 +13,7 @@ def scrape_news():
 
         context = p.chromium.launch_persistent_context(
             user_data_dir="./profile",
-            headless=True,
+            headless=headless,
         )
 
         page = (

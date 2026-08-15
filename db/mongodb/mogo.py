@@ -22,10 +22,16 @@ client = MongoClient(
 db = client[MONGO_DB_NAME]
 
 news_collection = db[MONGO_COLLECTION_NAME]
-
+lock_collection = db["scrape_locks"]
 
 # جلوگیری از ذخیره خبر تکراری
 news_collection.create_index(
     "هش عنوان",
     unique=True,
+)
+
+# قفل‌های منقضی‌شده به‌صورت خودکار پاک بشن
+lock_collection.create_index(
+    "expire_at",
+    expireAfterSeconds=0,
 )
