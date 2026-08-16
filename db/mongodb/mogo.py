@@ -23,6 +23,8 @@ db = client[MONGO_DB_NAME]
 
 news_collection = db[MONGO_COLLECTION_NAME]
 lock_collection = db["scrape_locks"]
+channels_collection = db["channels"]
+scrape_errors_collection = db["scrape_errors"]
 
 # جلوگیری از ذخیره خبر تکراری
 news_collection.create_index(
@@ -34,4 +36,16 @@ news_collection.create_index(
 lock_collection.create_index(
     "expire_at",
     expireAfterSeconds=0,
+)
+
+# هر آیدی کانال فقط یک‌بار می‌تواند ثبت شود
+channels_collection.create_index(
+    "آیدی کانال",
+    unique=True,
+)
+
+# خطاهای اسکرپ هم بعد از مدتی پاک بشن (اختیاری - مثلا ۳۰ روز)
+scrape_errors_collection.create_index(
+    "created_at",
+    expireAfterSeconds=60 * 60 * 24 * 30,
 )

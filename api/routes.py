@@ -1,36 +1,47 @@
-from fastapi import APIRouter
+import os
 
-from scraper.bale_scraper import scrape_news
-from db.mongodb.crud import save_news,get_news_from_db
+from fastapi import APIRouter, HTTPException
+
+from scraper.bale_scraper import scrape_all_channels
+from scraper.locks import acquire_lock, release_lock
+from db.mongodb.crud import get_news_from_db
 
 
 router = APIRouter()
 
+# اگه یه اجرا بیشتر از این طول کشید (مثلا crash کرد و قفل آزاد نشد)،
+# قفل به‌صورت خودکار آزاد می‌شه و اجرای بعدی می‌تونه بگیرتش
+LOCK_TIMEOUT = int(os.getenv("SCRAPE_LOCK_TIMEOUT", "600"))  # 10 دقیقه
+
 
 @router.post("/go-scrap")
-def get_news():
+def go_scrap():
+    """Airflow این endpoint رو صدا می‌زنه. تا پایان اسکرپ همه‌ی کانال‌های
+    فعال صبر می‌کنه و خلاصه‌ی نتیجه رو برمی‌گردونه.
 
-    news = scrape_news()
+    نکته: چون کار طولانیه (Playwright + چند کانال)، تایم‌اوت HTTP operator
+    توی Airflow و هر ری‌ورس‌پروکسی جلوی این سرویس باید متناسب تنظیم بشه.
+    """
 
-    saved_count = 0
+    if not acquire_lock(LOCK_TIMEOUT):
+        raise HTTPException(
+            status_code=409,
+            detail="یک اجرای اسکرپ دیگر در حال انجام است.",
+        )
 
-    for item in news:
-
-        saved = save_news(item)
-
-        if saved:
-            saved_count += 1
+    try:
+        summary = scrape_all_channels()
+    finally:
+        release_lock()
 
     return {
-        "scraped": len(news),
-        "saved": saved_count,
+        "channels_succeeded": len(summary["success"]),
+        "channels_failed": len(summary["failed"]),
+        "details": summary,
     }
 
 
 @router.get("/get-news-by-limit")
-def get_news_by_limit(limit:int = 10):
-    result= get_news_from_db(limit)
+def get_news_by_limit(limit: int = 10):
+    result = get_news_from_db(limit)
     return result
-
-
-    

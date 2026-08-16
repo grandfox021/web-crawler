@@ -62,44 +62,44 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
-  celery-worker:
-    build: .
-    command: celery -A tasks.celery_app worker --loglevel=info --pool=solo
-    env_file:
-      - .env
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MONGO_URI=mongodb://mongo:27017
-      - PLAYWRIGHT_HEADLESS=true
-    volumes:
-      - profile_data:/app/profile
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-    restart: unless-stopped
+  # celery-worker:
+  #   build: .
+  #   command: celery -A tasks.celery_app worker --loglevel=info --pool=solo
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+  #     - CELERY_RESULT_BACKEND=redis://redis:6379/0
+  #     - MONGO_URI=mongodb://mongo:27017
+  #     - PLAYWRIGHT_HEADLESS=true
+  #   volumes:
+  #     - profile_data:/app/profile
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #     mongo:
+  #       condition: service_healthy
+  #   restart: unless-stopped
 
-  celery-beat:
-    build: .
-    command: celery -A tasks.celery_app beat --loglevel=info
-    env_file:
-      - .env
-    environment:
-      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - MONGO_URI=mongodb://mongo:27017
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      mongo:
-        condition: service_healthy
-    restart: unless-stopped
+  # celery-beat:
+  #   build: .
+  #   command: celery -A tasks.celery_app beat --loglevel=info
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+  #     - CELERY_RESULT_BACKEND=redis://redis:6379/0
+  #     - MONGO_URI=mongodb://mongo:27017
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #     mongo:
+  #       condition: service_healthy
+  #   restart: unless-stopped
     
 volumes:
   profile_data:

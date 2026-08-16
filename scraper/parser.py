@@ -1,9 +1,8 @@
-
 from datetime import datetime, timedelta, timezone
 import re
 
 
-def clean_body(message):
+def clean_body(message, channel_title=None, channel_type=None):
 
     # ---------------------------
     # عنوان
@@ -129,11 +128,11 @@ def clean_body(message):
                 )
 
     # ---------------------------
-    # منبع
+    # منبع - قبلاً هاردکد بود، حالا از خود کانال میاد
     # ---------------------------
 
-    source = "خبرگزاری مهر"
-    source_type = "خبرگزاری"
+    source = channel_title or "نامشخص"
+    source_type = channel_type or "کانال بله"
 
     return {
         "عنوان": title,

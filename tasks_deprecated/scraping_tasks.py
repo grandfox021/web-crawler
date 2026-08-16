@@ -2,7 +2,7 @@ import logging
 import os
 
 from .celery_app import celery_app
-from .locks import acquire_lock, release_lock
+from ..scraper.locks import acquire_lock, release_lock
 from scraper.bale_scraper import scrape_news
 from db.mongodb.crud import save_news
 
