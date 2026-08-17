@@ -20,35 +20,45 @@ def join_channel_in_bale(channel_id: str) -> bool:
         )
         page = context.pages[0] if context.pages else context.new_page()
         page.goto("https://web.bale.ai")
-        page.wait_for_timeout(3000)
+        page.wait_for_load_state("networkidle")
 
-        # ۱. کلیک روی آیکون جستجو
-        page.locator('[aria-label="Search-icon"]').click()
-        page.wait_for_timeout(1000)
+        try:
+            # ۱. کلیک روی آیکون جستجو
+            # نکته: خود svg زیر یک لایه ریپل/inkeffect (div.ZGzps0) قرار داره که
+            # همیشه روی آیکون overlay می‌شه و باعث Timeout روی actionability check
+            # عادی پلی‌رایت میشه؛ force=True این چک رو دور می‌زنه.
+            page.locator('[aria-label="Search-icon"]').click(force=True)
 
-        # ۲. کلیک روی تب «کانال»
-        page.locator("#channel").click()
-        page.wait_for_timeout(1000)
+            # ۲. صبر برای باز شدن باکس سرچ (به‌جای timeout ثابت)
+            search_input = page.locator('input[type="search"]')
+            search_input.wait_for(state="visible")
 
-        # ۳. تایپ آیدی کانال در سرچ
-        search_input = page.locator('input[placeholder="جستجوی کانال"]')
-        search_input.fill(channel_id)
-        page.wait_for_timeout(2000)
+            # ۳. کلیک روی تب «کانال»
+            page.locator("#channel").click(force=True)
 
-        # ۴. اولین نتیجه‌ای که شامل این آیدیه رو پیدا کن
-        bare_id = channel_id.lstrip("@")
-        result = page.locator("[data-item-index]").filter(has_text=bare_id).first
+            # ۴. تایپ آیدی کانال در سرچ
+            # placeholder واقعی فیلد "جستجوی کانال، گروه و پیام..." هست و صرف‌نظر از
+            # تب انتخاب‌شده تغییر نمی‌کنه، پس بهتره روی input[type="search"] تکیه کنیم.
+            search_input.fill(channel_id)
 
-        if result.count() == 0:
+            # ۵. صبر برای لود نتایج جستجو
+            bale_id = channel_id.lstrip("@")
+            result = (
+                page.locator("[data-item-index]")
+                .filter(has_text=bale_id)
+                .first
+            )
+            result.wait_for(state="visible", timeout=15000)
+
+            # ۶. اگه دکمه‌ی «عضویت» هست کلیکش کن؛ اگه نیست یعنی از قبل عضو بودیم
+            join_button = result.locator('button[aria-label="عضویت"]')
+
+            if join_button.count() > 0:
+                join_button.click(force=True)
+                page.wait_for_timeout(2000)
+
+            return True
+        except Exception as exc:
+            raise RuntimeError(f"کانال «{channel_id}» در نتایج جستجو پیدا نشد یا خطایی رخ داد: {exc}")
+        finally:
             context.close()
-            raise RuntimeError(f"کانال «{channel_id}» در نتایج جستجو پیدا نشد")
-
-        # ۵. اگه دکمه‌ی «عضویت» هست کلیکش کن؛ اگه نیست یعنی از قبل عضو بودیم
-        join_button = result.locator('button[aria-label="عضویت"]')
-
-        if join_button.count() > 0:
-            join_button.click()
-            page.wait_for_timeout(2000)
-
-        context.close()
-        return True

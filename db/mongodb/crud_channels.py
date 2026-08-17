@@ -13,10 +13,11 @@ def _now():
 
 def create_channel(data: dict) -> dict:
     data = dict(data)
+
     data["ایجاد شده در"] = _now()
     data["به‌روزرسانی شده در"] = _now()
     data["آخرین اسکرپ موفق"] = None
-    data["وضعیت عضویت"] = "در صف عضویت"
+    data["وضعیت عضویت"] = "عضو شد"
     data["خطای عضویت"] = None
     try:
         result = channels_collection.insert_one(data)
@@ -24,7 +25,6 @@ def create_channel(data: dict) -> dict:
         raise ValueError("کانالی با این آیدی قبلاً ثبت شده است")
     data["_id"] = str(result.inserted_id)
     return data
-
 
 def list_channels(status: str | None = None) -> list[dict]:
     query = {}

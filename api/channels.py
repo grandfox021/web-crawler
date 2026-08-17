@@ -15,36 +15,52 @@ router = APIRouter(prefix="/channels", tags=["channels"])
 JOIN_LOCK_TIMEOUT = int(os.getenv("JOIN_LOCK_TIMEOUT", "120"))
 
 
-def _try_join(channel_id: str, bale_id: str) -> None:
-    """تلاش برای عضویت. اگه قفل در دسترس نبود (اسکرپ در حال اجراست)،
-    وضعیت رو 'در صف عضویت' نگه می‌داره تا بعداً از طریق /rejoin دوباره تلاش بشه."""
-
+def _try_join(bale_id: str) -> bool:
+    """
+    تلاش برای عضویت در کانال بله.
+    فقط اگر موفق شد True برمی‌گرداند.
+    """
     if not acquire_lock(JOIN_LOCK_TIMEOUT):
-        return
-
+        raise HTTPException(
+            status_code=409,
+            detail="یک اجرای اسکرپ یا عضویت دیگر در حال انجام است."
+        )
     try:
-        join_channel_in_bale(bale_id)
-        crud_channels.update_membership_status(channel_id, "عضو شد")
+        result = join_channel_in_bale(bale_id)
+        if not result:
+            raise HTTPException(
+                status_code=502,
+                detail="عضویت در کانال بله انجام نشد"
+            )
+        return True
     except Exception as e:
-        crud_channels.update_membership_status(
-            channel_id, "خطا در عضویت", error=str(e)
+        raise HTTPException(
+            status_code=502,
+            detail=f"خطا در عضویت بله: {str(e)}"
         )
     finally:
         release_lock()
 
-
 @router.post("", status_code=201)
 def create_channel(payload: ChannelCreate):
+    data = payload.dict(by_alias=True)
+    # اول عضو شدن در بله
+    _try_join(data["آیدی کانال"])
+    # فقط بعد از موفقیت join ذخیره کن
     try:
-        doc = crud_channels.create_channel(payload.dict(by_alias=True))
+        doc = crud_channels.create_channel(data)
+
     except ValueError as e:
-        raise HTTPException(status_code=409, detail=str(e))
-
-    _try_join(doc["_id"], doc["آیدی کانال"])
-
+        raise HTTPException(
+            status_code=409,
+            detail=str(e)
+        )
+    # چون join موفق بوده
+    crud_channels.update_membership_status(
+        doc["_id"],
+        "عضو شد"
+    )
     return crud_channels.get_channel(doc["_id"])
-
-
 @router.get("")
 def list_channels(status: Optional[str] = Query(default=None, alias="وضعیت")):
     return crud_channels.list_channels(status=status)
@@ -111,3 +127,4 @@ def delete_channel(channel_id: str):
     ok = crud_channels.delete_channel(channel_id)
     if not ok:
         raise HTTPException(status_code=404, detail="کانال پیدا نشد")
+
