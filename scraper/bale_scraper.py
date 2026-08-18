@@ -2,7 +2,7 @@ import os
 import traceback
 from datetime import datetime, timezone
 
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 
 from .parser import clean_body
 from db.mongodb.crud import save_news
@@ -12,6 +12,8 @@ from db.mongodb.mogo import scrape_errors_collection
 headless = os.getenv("PLAYWRIGHT_HEADLESS", "true").lower() == "true"
 
 MAX_RETRIES_PER_CHANNEL = 2
+BASE_URL = "https://web.bale.ai"
+DIALOG_SELECTOR = '[aria-label="dialog-item"]'
 
 
 def _log_error(channel: dict, error: Exception) -> None:
@@ -27,32 +29,45 @@ def _log_error(channel: dict, error: Exception) -> None:
     )
 
 
-def _scrape_single_channel(page, channel: dict) -> int:
+async def _ensure_channel_list_visible(page) -> None:
+    """قبل از رفتن سراغ هر کانال، همیشه به صفحه‌ی اصلی برمی‌گردیم و صبر
+    می‌کنیم لیست چت‌ها (dialog-item) واقعاً روی صفحه لود بشه. این کار رو
+    بی‌قید و شرط انجام می‌دیم (نه فقط وقتی count==0)، چون بعد از باز شدن
+    یک چت، لیست ممکنه هنوز تو DOM باشه ولی state داخلیش (مثل اسکرول یا
+    فیلتر) خراب شده باشه."""
+
+    await page.goto(BASE_URL)
+    await page.wait_for_selector(DIALOG_SELECTOR, timeout=15000)
+
+
+async def _scrape_single_channel(page, channel: dict) -> int:
     """اسکرپ یک کانال با page مشترک. تعداد پست‌های ذخیره‌شده رو برمی‌گردونه."""
 
     title = channel["عنوان کانال"]
 
-    dialog = page.locator('[aria-label="dialog-item"]').filter(has_text=title)
+    await _ensure_channel_list_visible(page)
 
-    if dialog.count() == 0:
+    dialog = page.locator(DIALOG_SELECTOR).filter(has_text=title)
+
+    if await dialog.count() == 0:
         raise RuntimeError(f"کانال «{title}» در لیست چت‌ها پیدا نشد")
 
-    dialog.first.click()
-    page.wait_for_timeout(2000)
+    await dialog.first.click()
+    await page.wait_for_timeout(2000)
 
     stable_count = 0
     while stable_count < 3:
-        old_height = page.evaluate("document.body.scrollHeight")
-        page.mouse.wheel(0, 5000)
-        page.wait_for_timeout(2000)
-        new_height = page.evaluate("document.body.scrollHeight")
+        old_height = await page.evaluate("document.body.scrollHeight")
+        await page.mouse.wheel(0, 5000)
+        await page.wait_for_timeout(2000)
+        new_height = await page.evaluate("document.body.scrollHeight")
         if old_height == new_height:
             stable_count += 1
         else:
             stable_count = 0
 
     messages = page.locator(".message-item")
-    messages_count = messages.count()
+    messages_count = await messages.count()
 
     saved_count = 0
 
@@ -60,7 +75,7 @@ def _scrape_single_channel(page, channel: dict) -> int:
         message = messages.nth(i)
 
         try:
-            parsed_news = clean_body(
+            parsed_news = await clean_body(
                 message,
                 channel_title=title,
                 channel_type=channel.get("نوع منبع", "کانال بله"),
@@ -80,7 +95,7 @@ def _scrape_single_channel(page, channel: dict) -> int:
     return saved_count
 
 
-def scrape_all_channels() -> dict:
+async def scrape_all_channels() -> dict:
     """روی همه‌ی کانال‌های فعال با یک browser context مشترک اسکرپ می‌کنه.
     خطای یک کانال بقیه‌ی کانال‌ها رو متوقف نمی‌کنه."""
 
@@ -90,14 +105,14 @@ def scrape_all_channels() -> dict:
     if not channels:
         return summary
 
-    with sync_playwright() as p:
-        context = p.chromium.launch_persistent_context(
+    async with async_playwright() as p:
+        context = await p.chromium.launch_persistent_context(
             user_data_dir="./profile",
             headless=headless,
         )
-        page = context.pages[0] if context.pages else context.new_page()
-        page.goto("https://web.bale.ai")
-        page.wait_for_timeout(3000)
+        page = context.pages[0] if context.pages else await context.new_page()
+        await page.goto(BASE_URL)
+        await page.wait_for_timeout(3000)
 
         for channel in channels:
             channel_id = channel["_id"]
@@ -105,7 +120,7 @@ def scrape_all_channels() -> dict:
 
             for attempt in range(1, MAX_RETRIES_PER_CHANNEL + 1):
                 try:
-                    saved = _scrape_single_channel(page, channel)
+                    saved = await _scrape_single_channel(page, channel)
                     mark_channel_scraped(channel_id, success=True)
                     summary["success"].append(
                         {"channel_id": channel_id, "saved": saved}
@@ -114,7 +129,7 @@ def scrape_all_channels() -> dict:
                     break
                 except Exception as e:
                     last_error = e
-                    page.wait_for_timeout(2000)
+                    await page.wait_for_timeout(2000)
 
             if last_error is not None:
                 _log_error(channel, last_error)
@@ -123,6 +138,6 @@ def scrape_all_channels() -> dict:
                     {"channel_id": channel_id, "error": str(last_error)}
                 )
 
-        context.close()
+        await context.close()
 
     return summary

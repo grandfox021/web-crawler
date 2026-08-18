@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 import re
 
 
-def clean_body(message, channel_title=None, channel_type=None):
+async def clean_body(message, channel_title=None, channel_type=None):
 
     # ---------------------------
     # عنوان
@@ -11,8 +11,8 @@ def clean_body(message, channel_title=None, channel_type=None):
     strongs = message.locator("strong")
 
     title = (
-        strongs.first.inner_text().strip()
-        if strongs.count() > 0
+        (await strongs.first.inner_text()).strip()
+        if await strongs.count() > 0
         else None
     )
 
@@ -21,7 +21,7 @@ def clean_body(message, channel_title=None, channel_type=None):
     # ---------------------------
 
     spans = message.locator("span.p")
-    spans_count = spans.count()
+    spans_count = await spans.count()
 
     body_parts = []
 
@@ -29,7 +29,7 @@ def clean_body(message, channel_title=None, channel_type=None):
 
         span = spans.nth(j)
 
-        html = span.evaluate("""
+        html = await span.evaluate("""
             (el) => {
                 const clone = el.cloneNode(true);
 
@@ -79,8 +79,8 @@ def clean_body(message, channel_title=None, channel_type=None):
 
     link = message.locator("span.link").first
 
-    if link.count() > 0:
-        post_url = link.inner_text().strip()
+    if await link.count() > 0:
+        post_url = (await link.inner_text()).strip()
 
     # ---------------------------
     # تاریخ انتشار
@@ -92,9 +92,9 @@ def clean_body(message, channel_title=None, channel_type=None):
 
     time_element = message.locator("p.x3ai0M").first
 
-    if time_element.count() > 0:
+    if await time_element.count() > 0:
 
-        time_text = time_element.inner_text().strip()
+        time_text = (await time_element.inner_text()).strip()
 
         # تبدیل اعداد فارسی و عربی به انگلیسی
         translation_table = str.maketrans(
@@ -128,10 +128,21 @@ def clean_body(message, channel_title=None, channel_type=None):
                 )
 
     # ---------------------------
-    # منبع - قبلاً هاردکد بود، حالا از خود کانال میاد
+    # منبع - از mention داخل خود پست، با fallback به عنوان کانال
     # ---------------------------
 
-    source = channel_title or "نامشخص"
+    mention = message.locator("span.mention").first
+
+    mention_source = None
+
+    if await mention.count() > 0:
+        mention_source = await mention.get_attribute("data-mention")
+        if not mention_source:
+            mention_source = await mention.inner_text()
+        if mention_source:
+            mention_source = mention_source.strip().lstrip("@")
+
+    source = mention_source or channel_title or "نامشخص"
     source_type = channel_type or "کانال بله"
 
     return {

@@ -43,7 +43,7 @@ def get_channel(channel_id: str) -> dict | None:
         return None
     doc = channels_collection.find_one({"_id": oid})
     if doc:
-        doc["_id"] = str(doc["_id"])
+        doc["_id"] = str(doc["_id"])    
     return doc
 
 

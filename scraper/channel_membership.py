@@ -126,8 +126,6 @@ def join_channel_in_bale(
                 "https://web.bale.ai",
                 wait_until="domcontentloaded",
             )
-
-
             # --------------------------------
             # 2. Search
             # --------------------------------
@@ -151,12 +149,10 @@ def join_channel_in_bale(
                 search_icon = page.locator(
                     '[aria-label="Search-icon"]'
                 ).first
-
                 search_icon.wait_for(
                     state="visible",
                     timeout=30000,
                 )
-
                 # parent همان container قابل کلیک است
                 search_button = search_icon.locator(
                     "xpath=.."
@@ -172,8 +168,6 @@ def join_channel_in_bale(
                 log.info(
                     "سرچ‌باکس از قبل باز است"
                 )
-
-
             # --------------------------------
             # 3. صبر برای Search Input
             # --------------------------------
@@ -184,8 +178,6 @@ def join_channel_in_bale(
                 state="visible",
                 timeout=30000,
             )
-
-
             # --------------------------------
             # 4. انتخاب تب کانال
             # --------------------------------
@@ -205,7 +197,6 @@ def join_channel_in_bale(
                 current_step,
             )
 
-
             # --------------------------------
             # 5. وارد کردن آیدی
             # --------------------------------
@@ -216,11 +207,9 @@ def join_channel_in_bale(
                 "در حال جستجوی کانال: %s",
                 channel_id,
             )
-
             search_input.fill(
                 channel_id
             )
-
 
             # --------------------------------
             # 6. پیدا کردن نتیجه
@@ -240,12 +229,10 @@ def join_channel_in_bale(
                 .filter(has_text=bale_id)
                 .first
             )
-
             result.wait_for(
                 state="visible",
                 timeout=30000,
             )
-
 
             # --------------------------------
             # 7. Join
@@ -256,7 +243,6 @@ def join_channel_in_bale(
             join_button = result.locator(
                 'button[aria-label="عضویت"]'
             )
-
             if join_button.count() > 0:
 
                 log.info(
@@ -267,7 +253,6 @@ def join_channel_in_bale(
                     join_button,
                     current_step,
                 )
-
                 # کمی فرصت بدهیم تا وضعیت UI تغییر کند
                 page.wait_for_timeout(1500)
 
@@ -278,14 +263,12 @@ def join_channel_in_bale(
                     "احتمالاً قبلاً عضو هستیم"
                 )
 
-
             log.info(
                 "عضویت در %s موفق بود",
                 channel_id,
             )
 
             return True
-
 
         except Exception:
 
@@ -298,9 +281,7 @@ def join_channel_in_bale(
                 page,
                 current_step,
             )
-
             raise
-
 
         finally:
 

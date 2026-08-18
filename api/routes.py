@@ -15,7 +15,7 @@ LOCK_TIMEOUT = int(os.getenv("SCRAPE_LOCK_TIMEOUT", "600"))  # 10 دقیقه
 
 
 @router.post("/go-scrap")
-def go_scrap():
+async def go_scrap():
     """Airflow این endpoint رو صدا می‌زنه. تا پایان اسکرپ همه‌ی کانال‌های
     فعال صبر می‌کنه و خلاصه‌ی نتیجه رو برمی‌گردونه.
 
@@ -30,7 +30,7 @@ def go_scrap():
         )
 
     try:
-        summary = scrape_all_channels()
+        summary = await scrape_all_channels()
     finally:
         release_lock()
 
