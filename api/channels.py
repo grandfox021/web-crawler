@@ -44,6 +44,12 @@ def _try_join(bale_id: str) -> bool:
 @router.post("", status_code=201)
 def create_channel(payload: ChannelCreate):
     data = payload.dict(by_alias=True)
+
+    existing_channel = crud_channels.get_channel_by_bale_id(data.get("آیدی کانال"))
+    if existing_channel:
+        raise HTTPException(400 , "این کانال در دیتابیس وجود دارد")
+
+
     # اول عضو شدن در بله
     _try_join(data["آیدی کانال"])
     # فقط بعد از موفقیت join ذخیره کن
@@ -73,6 +79,13 @@ def get_channel(channel_id: str):
         raise HTTPException(status_code=404, detail="کانال پیدا نشد")
     return doc
 
+
+@router.get("get_channel_by_balechannel_id/{bale_channel_id}")
+def get_channel_by_balechannel_id(bale_channel_id: str):
+    doc = crud_channels.get_channel_by_bale_id(bale_channel_id)
+    if not doc:
+        raise HTTPException(status_code=404, detail="کانال پیدا نشد")
+    return doc
 
 @router.patch("/{channel_id}")
 def update_channel(channel_id: str, payload: ChannelUpdate):

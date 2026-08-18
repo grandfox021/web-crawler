@@ -11,6 +11,23 @@ def _now():
     return datetime.now(timezone.utc)
 
 
+
+def _serialize_channel(doc: dict | None) -> dict | None:
+    """
+    تبدیل Document مونگو به دیکشنری قابل استفاده در FastAPI.
+    مهم‌ترین کار: تبدیل ObjectId به str
+    """
+    if not doc:
+        return None
+
+    doc = dict(doc)
+
+    if "_id" in doc:
+        doc["_id"] = str(doc["_id"])
+
+    return doc
+
+
 def create_channel(data: dict) -> dict:
     data = dict(data)
 
@@ -45,6 +62,18 @@ def get_channel(channel_id: str) -> dict | None:
     if doc:
         doc["_id"] = str(doc["_id"])    
     return doc
+
+
+def get_channel_by_bale_id(bale_channel_id: str) -> dict | None:
+    """
+    پیدا کردن کانال بر اساس آیدی کانال بله.
+    """
+
+    doc = channels_collection.find_one(
+        {"آیدی کانال": bale_channel_id}
+    )
+
+    return _serialize_channel(doc)
 
 
 def update_channel(channel_id: str, updates: dict) -> dict | None:
