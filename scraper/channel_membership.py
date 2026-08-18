@@ -1,7 +1,7 @@
 import logging
 import os
 from pathlib import Path
-
+import time
 from playwright.sync_api import Locator, sync_playwright
 
 logging.basicConfig(
@@ -229,10 +229,17 @@ def join_channel_in_bale(
                 .filter(has_text=bale_id)
                 .first
             )
+
+
             result.wait_for(
                 state="visible",
                 timeout=30000,
             )
+
+
+            result.click()
+
+            time.sleep(2)
 
             # --------------------------------
             # 7. Join
@@ -284,5 +291,5 @@ def join_channel_in_bale(
             raise
 
         finally:
-
+            time.sleep(10)
             context.close()
