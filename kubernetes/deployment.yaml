@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: $MICRO_SERVICE
+  name: $MICRO_SERVICE
+spec:
+  replicas: $REPLICAS
+  selector:
+    matchLabels:
+      app: $MICRO_SERVICE
+  template:
+    metadata:
+      labels:
+        app: $MICRO_SERVICE
+    spec:
+      imagePullSecrets:
+      - name: $SECRET_NAME
+      restartPolicy: Always
+      containers:
+      - image: $IMAGE_NAME:$IMAGE_TAG
+        name: $MICRO_SERVICE
+        resources:
+          requests:
+            memory: "2000Mi"
+            cpu: "2000m"
+          limits:
+            memory: "3000Mi"
+            cpu: "3000m"
+        ports:
+          - containerPort: $CONTAINER_PORT
+
+        volumeMounts:
+        - name: store-cm
+          mountPath: "/app/.env"
+          subPath: .env
+          readOnly: true
+
+      volumes:
+      - name: store-cm
+        configMap:
+          name: config-cm
