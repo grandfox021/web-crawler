@@ -239,7 +239,7 @@ def join_channel_in_bale(
 
             result.click()
 
-            time.sleep(2)
+            time.sleep(3)
 
             # --------------------------------
             # 7. Join
@@ -291,5 +291,5 @@ def join_channel_in_bale(
             raise
 
         finally:
-            time.sleep(10)
+            time.sleep(1)
             context.close()

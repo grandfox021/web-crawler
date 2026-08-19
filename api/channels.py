@@ -33,6 +33,8 @@ def _try_join(bale_id: str) -> bool:
                 detail="عضویت در کانال بله انجام نشد"
             )
         return True
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(
             status_code=502,
@@ -41,14 +43,14 @@ def _try_join(bale_id: str) -> bool:
     finally:
         release_lock()
 
+
 @router.post("", status_code=201)
 def create_channel(payload: ChannelCreate):
     data = payload.dict(by_alias=True)
 
-    existing_channel = crud_channels.get_channel_by_bale_id(data.get("آیدی کانال"))
-    if existing_channel:
-        raise HTTPException(400 , "این کانال در دیتابیس وجود دارد")
-
+    # existing_channel = crud_channels.get_channel_by_bale_id(data.get("آیدی کانال"))
+    # if existing_channel:
+    #     raise HTTPException(400 , "این کانال در دیتابیس وجود دارد")
 
     # اول عضو شدن در بله
     _try_join(data["آیدی کانال"])
@@ -67,6 +69,8 @@ def create_channel(payload: ChannelCreate):
         "عضو شد"
     )
     return crud_channels.get_channel(doc["_id"])
+
+
 @router.get("")
 def list_channels(status: Optional[str] = Query(default=None, alias="وضعیت")):
     return crud_channels.list_channels(status=status)
@@ -87,6 +91,7 @@ def get_channel_by_balechannel_id(bale_channel_id: str):
         raise HTTPException(status_code=404, detail="کانال پیدا نشد")
     return doc
 
+
 @router.patch("/{channel_id}")
 def update_channel(channel_id: str, payload: ChannelUpdate):
     updates = payload.dict(by_alias=True, exclude_unset=True)
@@ -99,8 +104,9 @@ def update_channel(channel_id: str, payload: ChannelUpdate):
         raise HTTPException(status_code=404, detail="کانال پیدا نشد")
 
     # اگه آیدی کانال عوض شده باشه، باید دوباره عضو بشیم
+    # نکته: _try_join فقط یک آرگومان (bale_id) می‌گیره، نه channel_id
     if "آیدی کانال" in updates:
-        _try_join(channel_id, doc["آیدی کانال"])
+        _try_join(doc["آیدی کانال"])
         doc = crud_channels.get_channel(channel_id)
 
     return doc
@@ -140,4 +146,3 @@ def delete_channel(channel_id: str):
     ok = crud_channels.delete_channel(channel_id)
     if not ok:
         raise HTTPException(status_code=404, detail="کانال پیدا نشد")
-

@@ -90,6 +90,8 @@ def update_channel(channel_id: str, updates: dict) -> dict | None:
     if "آیدی کانال" in updates:
         updates["وضعیت عضویت"] = "در صف عضویت"
         updates["خطای عضویت"] = None
+        # کانال عوض شده یعنی تاریخچه‌ی متفاوتیه - کرسر قبلی دیگه معتبر نیست
+        updates["last_scraped_date"] = None
 
     try:
         channels_collection.update_one({"_id": oid}, {"$set": updates})
@@ -112,17 +114,29 @@ def get_active_channels() -> list[dict]:
     return list_channels(status="فعال")
 
 
-def mark_channel_scraped(channel_id: str, success: bool) -> None:
-    """فقط در صورت موفقیت کامل، تاریخ آخرین اسکرپ موفق آپدیت می‌شود.
-    این یعنی اگه یه دور fail بشه، دور بعدی خودش دوباره تلاش می‌کنه."""
+def mark_channel_scraped(
+    channel_id: str,
+    success: bool,
+    last_message_date: int | None = None,
+) -> None:
+    """فقط در صورت موفقیت کامل، وضعیت آخرین اسکرپ آپدیت می‌شود.
+    این یعنی اگه یه دور fail بشه، دور بعدی خودش دوباره تلاش می‌کنه.
+
+    last_message_date: جدیدترین data-date (epoch ms) که موفق به پردازشش
+    شدیم. این کرسر برای resume کردن اسکرپ از همون نقطه استفاده می‌شه.
+    فقط وقتی success=True و مقدار معتبری داریم ذخیره می‌شه، تا کرسر
+    هیچ‌وقت با یه اجرای ناموفق عقب نره یا خراب نشه."""
     try:
         oid = ObjectId(channel_id)
     except InvalidId:
         return
     if success:
+        update = {"آخرین اسکرپ موفق": _now()}
+        if last_message_date:
+            update["last_scraped_date"] = last_message_date
         channels_collection.update_one(
             {"_id": oid},
-            {"$set": {"آخرین اسکرپ موفق": _now()}},
+            {"$set": update},
         )
 
 
