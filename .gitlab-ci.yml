@@ -91,25 +91,25 @@ build-image:
     reports:
       dotenv: build.env
   
-update-staging:
-  extends: .build
-  variables:
-    REPLICAS: "1"
-    STAGE_NAME: "staging"
-    DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
-  script:
-    - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
-  needs: ["build-image"]
-  
-# update-production:
+# update-staging:
 #   extends: .build
 #   variables:
 #     REPLICAS: "1"
-#     STAGE_NAME: "production"
+#     STAGE_NAME: "staging"
 #     DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
 #   script:
 #     - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
 #   needs: ["build-image"]
+  
+update-production:
+  extends: .build
+  variables:
+    REPLICAS: "1"
+    STAGE_NAME: "production"
+    DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
+  script:
+    - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
+  needs: ["build-image"]
   
 ######################################## push manifest ##########################################
 
@@ -152,15 +152,15 @@ update-staging:
 
 
 
-push-staging:
-  extends: .push
-  variables:
-    BRANCH: "sepah-stage"   #staging
-  
-# push-production:
+# push-staging:
 #   extends: .push
 #   variables:
-#     BRANCH: "main"
+#     BRANCH: "sepah-stage"   #staging
+  
+push-production:
+  extends: .push
+  variables:
+    BRANCH: "main"
 
 ########################################## refresh argocd ##########################################
 
