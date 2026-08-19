@@ -13,29 +13,38 @@ from db.mongodb.crud_channels import (
 from db.mongodb.mogo import scrape_errors_collection
 
 
-headless = os.getenv("PLAYWRIGHT_HEADLESS", "true").lower() == "true"
-
-
-# ---------------------------------------------------------
+# =========================================================
 # Configuration
-# ---------------------------------------------------------
+# =========================================================
+
+headless = (
+    os.getenv("PLAYWRIGHT_HEADLESS", "true").lower()
+    == "true"
+)
 
 MAX_RETRIES_PER_CHANNEL = 2
 
-# برای تست فعلاً 50 پیام
+# اولین scrape
 INITIAL_MESSAGES_LIMIT = 50
 
-# حداکثر تعداد scroll برای جلوگیری از loop بی‌نهایت
+# حداکثر scroll برای history
 MAX_HISTORY_SCROLLS = 100
 
-# مقدار حرکت هر بار
+# مقدار حرکت به سمت پیام‌های قدیمی‌تر
 SCROLL_STEP = 1200
 
-# زمان انتظار بعد از scroll
+# زمان انتظار lazy-load
 SCROLL_WAIT_MS = 1200
 
-# بعد از باز کردن کانال
+# زمان انتظار بعد از باز شدن کانال
 CHANNEL_LOAD_WAIT_MS = 2000
+
+# چند بار باید واقعاً در ابتدای scroll بمانیم
+# تا بگوییم به ابتدای history رسیده‌ایم.
+TOP_STABLE_LIMIT = 5
+
+# چند بار bottom باید تثبیت شود
+BOTTOM_STABLE_LIMIT = 3
 
 BASE_URL = "https://web.bale.ai"
 
@@ -43,11 +52,15 @@ DIALOG_SELECTOR = '[aria-label="dialog-item"]'
 MESSAGE_SELECTOR = ".message-item"
 
 
-# ---------------------------------------------------------
+# =========================================================
 # Logging
-# ---------------------------------------------------------
+# =========================================================
 
 def _log_error(channel: dict, error: Exception) -> None:
+    """
+    ذخیره خطای scraper در MongoDB.
+    """
+
     scrape_errors_collection.insert_one(
         {
             "channel_id": channel.get("_id"),
@@ -60,13 +73,13 @@ def _log_error(channel: dict, error: Exception) -> None:
     )
 
 
-# ---------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------
+# =========================================================
+# Basic DOM helpers
+# =========================================================
 
 async def _ensure_channel_list_visible(page) -> None:
     """
-    برگشت به صفحه اصلی Bale و اطمینان از وجود لیست کانال‌ها.
+    برگشت به صفحه اصلی Bale.
     """
 
     await page.goto(BASE_URL)
@@ -79,29 +92,34 @@ async def _ensure_channel_list_visible(page) -> None:
 
 async def _get_message_dates(page) -> list[int]:
     """
-    تمام data-date های معتبر پیام‌های فعلی DOM را برمی‌گرداند.
-
-    نکته:
-    0 را معتبر حساب نمی‌کنیم.
+    تمام data-date های معتبر پیام‌های فعلی DOM.
     """
 
     return await page.evaluate(
         """
         (selector) => {
-            const elements = document.querySelectorAll(selector);
+
+            const elements =
+                document.querySelectorAll(selector);
 
             return Array.from(elements)
                 .map(el => Number(el.dataset.date))
-                .filter(date => Number.isFinite(date) && date > 0);
+                .filter(
+                    date =>
+                        Number.isFinite(date)
+                        && date > 0
+                );
         }
         """,
         MESSAGE_SELECTOR,
     )
 
 
-async def _get_oldest_rendered_date(page) -> int | None:
+async def _get_oldest_rendered_date(
+    page,
+) -> int | None:
     """
-    قدیمی‌ترین data-date معتبر بین پیام‌های فعلی DOM.
+    قدیمی‌ترین data-date فعلی DOM.
     """
 
     dates = await _get_message_dates(page)
@@ -112,9 +130,11 @@ async def _get_oldest_rendered_date(page) -> int | None:
     return min(dates)
 
 
-async def _get_newest_rendered_date(page) -> int | None:
+async def _get_newest_rendered_date(
+    page,
+) -> int | None:
     """
-    جدیدترین data-date معتبر بین پیام‌های فعلی DOM.
+    جدیدترین data-date فعلی DOM.
     """
 
     dates = await _get_message_dates(page)
@@ -125,34 +145,109 @@ async def _get_newest_rendered_date(page) -> int | None:
     return max(dates)
 
 
-async def _get_scroll_container(page):
+# =========================================================
+# DOM Snapshot
+# =========================================================
+
+async def _get_message_snapshot(page) -> dict:
     """
-    تلاش می‌کند container واقعی پیام‌ها را پیدا کند.
+    snapshot از وضعیت فعلی پیام‌ها.
 
-    به جای تکیه بر document.body، از یکی از message-item ها
-    به سمت parent ها حرکت می‌کنیم و اولین عنصر scrollable
-    را پیدا می‌کنیم.
+    برای تشخیص virtual scrolling استفاده می‌شود.
+    """
 
-    اگر پیدا نشود، document.scrollingElement برگردانده می‌شود.
+    return await page.evaluate(
+        """
+        (selector) => {
+
+            const elements =
+                Array.from(
+                    document.querySelectorAll(selector)
+                );
+
+            const messages = elements.map(el => ({
+                sid: el.dataset.sid || null,
+                date: Number(el.dataset.date) || null
+            }));
+
+            const validDates = messages
+                .map(x => x.date)
+                .filter(
+                    x =>
+                        Number.isFinite(x)
+                        && x > 0
+                );
+
+            return {
+                count: messages.length,
+
+                oldest:
+                    validDates.length
+                        ? Math.min(...validDates)
+                        : null,
+
+                newest:
+                    validDates.length
+                        ? Math.max(...validDates)
+                        : null,
+
+                firstSid:
+                    messages.length
+                        ? messages[0].sid
+                        : null,
+
+                lastSid:
+                    messages.length
+                        ? messages[messages.length - 1].sid
+                        : null,
+
+                sids:
+                    messages
+                        .map(x => x.sid)
+                        .filter(Boolean)
+            };
+        }
+        """,
+        MESSAGE_SELECTOR,
+    )
+
+
+# =========================================================
+# Scroll container
+# =========================================================
+
+async def _get_scroll_state(
+    page,
+) -> dict | None:
+    """
+    وضعیت واقعی scroll container پیام‌ها.
     """
 
     return await page.evaluate(
         """
         (messageSelector) => {
 
-            const message = document.querySelector(messageSelector);
+            const message =
+                document.querySelector(
+                    messageSelector
+                );
 
             if (!message) {
                 return null;
             }
 
-            let current = message.parentElement;
+            let container =
+                message.parentElement;
 
-            while (current) {
+            while (container) {
 
-                const style = window.getComputedStyle(current);
+                const style =
+                    window.getComputedStyle(
+                        container
+                    );
 
-                const overflowY = style.overflowY;
+                const overflowY =
+                    style.overflowY;
 
                 const isScrollable =
                     (
@@ -161,45 +256,290 @@ async def _get_scroll_container(page):
                         overflowY === "overlay"
                     )
                     &&
-                    current.scrollHeight > current.clientHeight + 5;
+                    container.scrollHeight >
+                    container.clientHeight + 5;
 
                 if (isScrollable) {
-                    return current;
+
+                    const maxScrollTop =
+                        Math.max(
+                            0,
+                            container.scrollHeight -
+                            container.clientHeight
+                        );
+
+                    return {
+                        scrollTop:
+                            container.scrollTop,
+
+                        scrollHeight:
+                            container.scrollHeight,
+
+                        clientHeight:
+                            container.clientHeight,
+
+                        maxScrollTop:
+                            maxScrollTop,
+
+                        distanceFromBottom:
+                            Math.max(
+                                0,
+                                maxScrollTop -
+                                container.scrollTop
+                            ),
+
+                        distanceFromTop:
+                            Math.max(
+                                0,
+                                container.scrollTop
+                            )
+                    };
                 }
 
-                current = current.parentElement;
+                container =
+                    container.parentElement;
             }
 
-            return document.scrollingElement || document.documentElement;
+            const fallback =
+                document.scrollingElement ||
+                document.documentElement;
+
+            const maxScrollTop =
+                Math.max(
+                    0,
+                    fallback.scrollHeight -
+                    fallback.clientHeight
+                );
+
+            return {
+                scrollTop:
+                    fallback.scrollTop,
+
+                scrollHeight:
+                    fallback.scrollHeight,
+
+                clientHeight:
+                    fallback.clientHeight,
+
+                maxScrollTop:
+                    maxScrollTop,
+
+                distanceFromBottom:
+                    Math.max(
+                        0,
+                        maxScrollTop -
+                        fallback.scrollTop
+                    ),
+
+                distanceFromTop:
+                    Math.max(
+                        0,
+                        fallback.scrollTop
+                    )
+            };
         }
         """,
         MESSAGE_SELECTOR,
     )
 
 
-async def _scroll_messages(page, direction: str) -> bool:
+# =========================================================
+# Scroll down
+# =========================================================
+
+async def _force_scroll_bottom(page) -> bool:
     """
-    scroll کردن container پیام‌ها.
-
-    direction:
-        "up"
-        "down"
-
-    خروجی:
-        True  -> scroll انجام شد
-        False -> container پیدا نشد
+    یک بار container را مستقیم به انتها می‌برد.
     """
-
-    if direction not in ("up", "down"):
-        raise ValueError("direction باید up یا down باشد")
-
-    delta = SCROLL_STEP if direction == "down" else -SCROLL_STEP
 
     result = await page.evaluate(
         """
-        ({messageSelector, delta}) => {
+        (messageSelector) => {
 
-            const message = document.querySelector(messageSelector);
+            const message =
+                document.querySelector(
+                    messageSelector
+                );
+
+            if (!message) {
+                return false;
+            }
+
+            let container =
+                message.parentElement;
+
+            while (container) {
+
+                const style =
+                    window.getComputedStyle(
+                        container
+                    );
+
+                const overflowY =
+                    style.overflowY;
+
+                const isScrollable =
+                    (
+                        overflowY === "auto" ||
+                        overflowY === "scroll" ||
+                        overflowY === "overlay"
+                    )
+                    &&
+                    container.scrollHeight >
+                    container.clientHeight + 5;
+
+                if (isScrollable) {
+
+                    container.scrollTop =
+                        container.scrollHeight;
+
+                    return true;
+                }
+
+                container =
+                    container.parentElement;
+            }
+
+            const fallback =
+                document.scrollingElement ||
+                document.documentElement;
+
+            fallback.scrollTop =
+                fallback.scrollHeight;
+
+            return true;
+        }
+        """,
+        MESSAGE_SELECTOR,
+    )
+
+    return bool(result)
+
+
+async def _scroll_to_bottom(page) -> None:
+    """
+    رفتن قطعی به انتهای کانال.
+
+    چون Bale lazy-load دارد، بعد از رسیدن به bottom
+    چند بار دیگر وضعیت بررسی می‌شود.
+    """
+
+    print(
+        "[BALE][BOTTOM] "
+        "شروع رفتن به انتهای کانال..."
+    )
+
+    stable_bottom_count = 0
+
+    for attempt in range(1, 21):
+
+        state = await _get_scroll_state(page)
+
+        if state is None:
+
+            raise RuntimeError(
+                "container پیام‌های Bale پیدا نشد."
+            )
+
+        print(
+            f"[BALE][BOTTOM] "
+            f"attempt={attempt} "
+            f"scrollTop="
+            f"{state['scrollTop']:.0f} "
+            f"max="
+            f"{state['maxScrollTop']:.0f} "
+            f"height="
+            f"{state['scrollHeight']:.0f}"
+        )
+
+        await _force_scroll_bottom(page)
+
+        await page.wait_for_timeout(
+            SCROLL_WAIT_MS
+        )
+
+        await page.wait_for_timeout(500)
+
+        state = await _get_scroll_state(page)
+
+        if state is None:
+            continue
+
+        distance = (
+            state["distanceFromBottom"]
+        )
+
+        print(
+            f"[BALE][BOTTOM] "
+            f"after_scrollTop="
+            f"{state['scrollTop']:.0f} "
+            f"max="
+            f"{state['maxScrollTop']:.0f} "
+            f"distance="
+            f"{distance:.0f}"
+        )
+
+        if distance <= 5:
+
+            stable_bottom_count += 1
+
+            print(
+                f"[BALE][BOTTOM] "
+                f"bottom confirmed "
+                f"{stable_bottom_count}/"
+                f"{BOTTOM_STABLE_LIMIT}"
+            )
+
+        else:
+
+            stable_bottom_count = 0
+
+        if (
+            stable_bottom_count
+            >= BOTTOM_STABLE_LIMIT
+        ):
+            break
+
+    snapshot = await _get_message_snapshot(page)
+
+    print(
+        f"[BALE][BOTTOM][SUCCESS] "
+        f"messages={snapshot['count']} "
+        f"oldest={snapshot['oldest'] or 0} "
+        f"newest={snapshot['newest'] or 0}"
+    )
+
+
+# =========================================================
+# Scroll up
+# =========================================================
+
+async def _scroll_messages_up(
+    page,
+) -> dict:
+    """
+    یک مرحله به سمت پیام‌های قدیمی‌تر می‌رود.
+
+    علاوه بر scrollTop، snapshot قبل و بعد
+    را برمی‌گرداند.
+    """
+
+    before_state = (
+        await _get_scroll_state(page)
+    )
+
+    before_snapshot = (
+        await _get_message_snapshot(page)
+    )
+
+    result = await page.evaluate(
+        """
+        ({messageSelector, step}) => {
+
+            const message =
+                document.querySelector(
+                    messageSelector
+                );
 
             if (!message) {
                 return {
@@ -208,13 +548,18 @@ async def _scroll_messages(page, direction: str) -> bool:
                 };
             }
 
-            let container = message.parentElement;
+            let container =
+                message.parentElement;
 
             while (container) {
 
-                const style = window.getComputedStyle(container);
+                const style =
+                    window.getComputedStyle(
+                        container
+                    );
 
-                const overflowY = style.overflowY;
+                const overflowY =
+                    style.overflowY;
 
                 const isScrollable =
                     (
@@ -223,189 +568,322 @@ async def _scroll_messages(page, direction: str) -> bool:
                         overflowY === "overlay"
                     )
                     &&
-                    container.scrollHeight > container.clientHeight + 5;
+                    container.scrollHeight >
+                    container.clientHeight + 5;
 
                 if (isScrollable) {
 
-                    const before = container.scrollTop;
+                    const before =
+                        container.scrollTop;
 
                     container.scrollBy({
-                        top: delta,
+                        top: -step,
                         behavior: "instant"
                     });
 
+                    const after =
+                        container.scrollTop;
+
                     return {
                         ok: true,
-                        before: before,
-                        after: container.scrollTop,
-                        scrollHeight: container.scrollHeight,
-                        clientHeight: container.clientHeight
+                        before,
+                        after,
+                        maxScrollTop:
+                            Math.max(
+                                0,
+                                container.scrollHeight -
+                                container.clientHeight
+                            ),
+                        scrollHeight:
+                            container.scrollHeight
                     };
                 }
 
-                container = container.parentElement;
+                container =
+                    container.parentElement;
             }
 
-            const fallback =
-                document.scrollingElement ||
-                document.documentElement;
-
-            const before = fallback.scrollTop;
-
-            fallback.scrollBy({
-                top: delta,
-                behavior: "instant"
-            });
-
             return {
-                ok: true,
-                before: before,
-                after: fallback.scrollTop,
-                scrollHeight: fallback.scrollHeight,
-                clientHeight: fallback.clientHeight
+                ok: false,
+                reason:
+                    "scroll-container-not-found"
             };
         }
         """,
         {
             "messageSelector": MESSAGE_SELECTOR,
-            "delta": delta,
+            "step": SCROLL_STEP,
         },
     )
 
     if not result.get("ok"):
-        return False
 
-    await page.wait_for_timeout(SCROLL_WAIT_MS)
-
-    return True
-
-
-async def _scroll_to_bottom(page) -> None:
-    """
-    رفتن به انتهای کانال؛ یعنی جدیدترین پیام‌ها.
-
-    چند بار انجام می‌دهیم چون Bale ممکن است lazy-load داشته باشد.
-    """
-
-    previous_newest = None
-    stable_count = 0
-
-    for i in range(1, 8):
-
-        newest = await _get_newest_rendered_date(page)
-
-        print(
-            f"[BALE][BOTTOM] "
-            f"scroll={i} "
-            f"messages={await page.locator(MESSAGE_SELECTOR).count()} "
-            f"oldest={await _get_oldest_rendered_date(page) or 0} "
-            f"newest={newest or 0}"
+        raise RuntimeError(
+            "container پیام‌های Bale "
+            "پیدا نشد."
         )
 
-        await _scroll_messages(page, "down")
+    await page.wait_for_timeout(
+        SCROLL_WAIT_MS
+    )
 
-        await page.wait_for_timeout(500)
+    await page.wait_for_timeout(300)
 
-        current_newest = await _get_newest_rendered_date(page)
+    after_state = (
+        await _get_scroll_state(page)
+    )
 
-        if current_newest == previous_newest:
-            stable_count += 1
-        else:
-            stable_count = 0
+    after_snapshot = (
+        await _get_message_snapshot(page)
+    )
 
-        previous_newest = current_newest
+    return {
+        "before_state": before_state,
+        "after_state": after_state,
+        "before_snapshot":
+            before_snapshot,
+        "after_snapshot":
+            after_snapshot,
+        "scroll_result": result,
+    }
 
-        if stable_count >= 2:
-            break
 
-    print("[BALE][BOTTOM] جدیدترین پیام‌ها پیدا شدند.")
+# =========================================================
+# Detect history progress
+# =========================================================
+
+def _history_progressed(
+    result: dict,
+) -> bool:
+    """
+    مشخص می‌کند آیا scroll به سمت history
+    واقعاً پیشرفت کرده یا نه.
+
+    در virtual DOM نباید فقط oldest را بررسی کنیم.
+
+    هر کدام از این‌ها می‌تواند نشانه progress باشد:
+
+        scrollTop تغییر کرده
+        scrollHeight تغییر کرده
+        firstSid تغییر کرده
+        lastSid تغییر کرده
+        oldest تغییر کرده
+        newest تغییر کرده
+        SID جدید وارد DOM شده
+    """
+
+    before_state = result["before_state"]
+    after_state = result["after_state"]
+
+    before_snapshot = result[
+        "before_snapshot"
+    ]
+
+    after_snapshot = result[
+        "after_snapshot"
+    ]
+
+    if before_state is None or after_state is None:
+        return False
+
+    # -----------------------------------------------------
+    # scrollTop
+    # -----------------------------------------------------
+
+    if (
+        after_state["scrollTop"]
+        < before_state["scrollTop"] - 2
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # scrollHeight
+    # -----------------------------------------------------
+
+    if (
+        after_state["scrollHeight"]
+        != before_state["scrollHeight"]
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # oldest
+    # -----------------------------------------------------
+
+    if (
+        after_snapshot["oldest"]
+        != before_snapshot["oldest"]
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # newest
+    # -----------------------------------------------------
+
+    if (
+        after_snapshot["newest"]
+        != before_snapshot["newest"]
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # first SID
+    # -----------------------------------------------------
+
+    if (
+        after_snapshot["firstSid"]
+        != before_snapshot["firstSid"]
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # last SID
+    # -----------------------------------------------------
+
+    if (
+        after_snapshot["lastSid"]
+        != before_snapshot["lastSid"]
+    ):
+        return True
+
+    # -----------------------------------------------------
+    # SID set
+    # -----------------------------------------------------
+
+    before_sids = set(
+        before_snapshot["sids"]
+    )
+
+    after_sids = set(
+        after_snapshot["sids"]
+    )
+
+    if before_sids != after_sids:
+        return True
+
+    return False
 
 
-# ---------------------------------------------------------
+# =========================================================
 # Message collection
-# ---------------------------------------------------------
+# =========================================================
 
 async def _collect_current_messages(
     page,
     channel: dict,
     last_scraped_date: int | None,
     collected_ids: set[str],
-) -> tuple[int, int | None]:
+) -> tuple[int, int | None, bool]:
     """
     پیام‌های فعلی DOM را بررسی و ذخیره می‌کند.
 
-    collected_ids:
-        برای جلوگیری از پردازش چندباره یک پیام در scroll های مختلف.
-
     خروجی:
+
         saved_count
         max_date_seen
+        cursor_found
     """
 
     title = channel["عنوان کانال"]
 
-    messages = page.locator(MESSAGE_SELECTOR)
+    messages = page.locator(
+        MESSAGE_SELECTOR
+    )
 
     count = await messages.count()
 
     saved_count = 0
+
     max_date_seen = None
+
+    cursor_found = False
 
     for i in range(count):
 
         message = messages.nth(i)
 
-        msg_sid = await message.get_attribute("data-sid")
-        msg_date_raw = await message.get_attribute("data-date")
+        msg_sid = (
+            await message.get_attribute(
+                "data-sid"
+            )
+        )
+
+        msg_date_raw = (
+            await message.get_attribute(
+                "data-date"
+            )
+        )
 
         msg_date = None
 
         if msg_date_raw:
+
             try:
-                parsed_date = int(msg_date_raw)
+
+                parsed_date = int(
+                    msg_date_raw
+                )
 
                 if parsed_date > 0:
                     msg_date = parsed_date
 
-            except (TypeError, ValueError):
+            except (
+                TypeError,
+                ValueError,
+            ):
+
                 msg_date = None
 
         # -------------------------------------------------
-        # cursor
+        # Cursor
+        # -------------------------------------------------
+
+        if (
+            last_scraped_date is not None
+            and msg_date is not None
+            and msg_date <= last_scraped_date
+        ):
+
+            cursor_found = True
+
+            continue
+
+        # -------------------------------------------------
+        # max date
         # -------------------------------------------------
 
         if msg_date is not None:
 
             if max_date_seen is None:
+
                 max_date_seen = msg_date
+
             else:
+
                 max_date_seen = max(
                     max_date_seen,
                     msg_date,
                 )
 
-            # کانال قدیمی:
-            # هر چیزی که قبلاً scrape شده، رد شود.
-            if (
-                last_scraped_date is not None
-                and msg_date <= last_scraped_date
-            ):
-                continue
-
         # -------------------------------------------------
-        # شناسه یکتا برای همین اجرای scraper
+        # unique ID
         # -------------------------------------------------
 
-        unique_id = msg_sid or (
-            f"date:{msg_date}"
-            if msg_date is not None
-            else f"index:{i}"
+        unique_id = (
+            msg_sid
+            or (
+                f"date:{msg_date}"
+                if msg_date is not None
+                else f"index:{i}"
+            )
         )
 
         if unique_id in collected_ids:
             continue
 
-        collected_ids.add(unique_id)
+        collected_ids.add(
+            unique_id
+        )
 
         # -------------------------------------------------
         # Parse
@@ -424,7 +902,10 @@ async def _collect_current_messages(
 
         except Exception as e:
 
-            _log_error(channel, e)
+            _log_error(
+                channel,
+                e,
+            )
 
             print(
                 f"[BALE][PARSE_ERROR] "
@@ -434,6 +915,10 @@ async def _collect_current_messages(
             )
 
             continue
+
+        # -------------------------------------------------
+        # Empty
+        # -------------------------------------------------
 
         if (
             not parsed_news.get("عنوان")
@@ -447,14 +932,19 @@ async def _collect_current_messages(
 
         try:
 
-            saved = save_news(parsed_news)
+            saved = save_news(
+                parsed_news
+            )
 
             if saved:
                 saved_count += 1
 
         except Exception as e:
 
-            _log_error(channel, e)
+            _log_error(
+                channel,
+                e,
+            )
 
             print(
                 f"[BALE][SAVE_ERROR] "
@@ -462,27 +952,25 @@ async def _collect_current_messages(
                 f"error={e}"
             )
 
-    return saved_count, max_date_seen
+    return (
+        saved_count,
+        max_date_seen,
+        cursor_found,
+    )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # NEW CHANNEL
-# ---------------------------------------------------------
+# =========================================================
 
 async def _scrape_new_channel(
     page,
     channel: dict,
 ) -> tuple[int, int]:
     """
-    اسکرپ اولیه کانال.
+    اولین scrape کانال.
 
-    فقط INITIAL_MESSAGES_LIMIT پیام آخر را می‌گیرد.
-
-    مثلاً:
-        INITIAL_MESSAGES_LIMIT = 50
-
-    یعنی:
-        50 پیام جدید/آخر کانال
+    آخرین INITIAL_MESSAGES_LIMIT پیام را می‌گیرد.
     """
 
     title = channel["عنوان کانال"]
@@ -501,34 +989,43 @@ async def _scrape_new_channel(
 
     max_date_seen = None
 
-    previous_oldest = None
-    stable_scrolls = 0
-
     scroll_count = 0
 
-    while len(collected_ids) < INITIAL_MESSAGES_LIMIT:
+    top_stable_count = 0
+
+    while (
+        len(collected_ids)
+        < INITIAL_MESSAGES_LIMIT
+    ):
 
         scroll_count += 1
 
-        if scroll_count > MAX_HISTORY_SCROLLS:
+        if (
+            scroll_count
+            > MAX_HISTORY_SCROLLS
+        ):
 
             print(
-                f"[BALE][WARNING] "
-                f"MAX_HISTORY_SCROLLS={MAX_HISTORY_SCROLLS} "
-                f"reached for new channel {title}"
+                f"[BALE][NEW][WARNING] "
+                f"MAX_HISTORY_SCROLLS "
+                f"reached."
             )
 
             break
 
-        before_count = len(collected_ids)
+        before_count = len(
+            collected_ids
+        )
 
-        batch_saved, batch_max_date = (
-            await _collect_current_messages(
-                page=page,
-                channel=channel,
-                last_scraped_date=None,
-                collected_ids=collected_ids,
-            )
+        (
+            batch_saved,
+            batch_max_date,
+            _,
+        ) = await _collect_current_messages(
+            page=page,
+            channel=channel,
+            last_scraped_date=None,
+            collected_ids=collected_ids,
         )
 
         total_saved += batch_saved
@@ -536,97 +1033,146 @@ async def _scrape_new_channel(
         if batch_max_date is not None:
 
             if max_date_seen is None:
-                max_date_seen = batch_max_date
+
+                max_date_seen = (
+                    batch_max_date
+                )
+
             else:
+
                 max_date_seen = max(
                     max_date_seen,
                     batch_max_date,
                 )
 
-        oldest = await _get_oldest_rendered_date(page)
+        snapshot = (
+            await _get_message_snapshot(
+                page
+            )
+        )
 
         print(
             f"[BALE][NEW] "
             f"channel={title} "
             f"scroll={scroll_count} "
             f"batch_saved={batch_saved} "
-            f"collected={len(collected_ids)}/"
+            f"collected="
+            f"{len(collected_ids)}/"
             f"{INITIAL_MESSAGES_LIMIT} "
-            f"oldest={oldest or 0} "
-            f"max_date={max_date_seen or 0}"
+            f"oldest="
+            f"{snapshot['oldest'] or 0} "
+            f"newest="
+            f"{snapshot['newest'] or 0}"
         )
 
         # -------------------------------------------------
-        # آیا 50 پیام جمع شد؟
+        # هدف رسید
         # -------------------------------------------------
 
-        if len(collected_ids) >= INITIAL_MESSAGES_LIMIT:
-
-            print(
-                f"[BALE][NEW] "
-                f"هدف {INITIAL_MESSAGES_LIMIT} پیام رسید."
-            )
+        if (
+            len(collected_ids)
+            >= INITIAL_MESSAGES_LIMIT
+        ):
 
             break
 
         # -------------------------------------------------
-        # scroll به سمت پیام‌های قدیمی‌تر
+        # Scroll UP
         # -------------------------------------------------
 
-        before_oldest = oldest
-
-        ok = await _scroll_messages(
-            page,
-            "up",
-        )
-
-        if not ok:
-            raise RuntimeError(
-                "container پیام‌های Bale پیدا نشد."
+        result = (
+            await _scroll_messages_up(
+                page
             )
-
-        await page.wait_for_timeout(
-            SCROLL_WAIT_MS
         )
 
-        after_oldest = await _get_oldest_rendered_date(page)
+        progressed = _history_progressed(
+            result
+        )
+
+        after_snapshot = result[
+            "after_snapshot"
+        ]
+
+        after_state = result[
+            "after_state"
+        ]
+
+        print(
+            f"[BALE][NEW][SCROLL] "
+            f"scrollTop="
+            f"{after_state['scrollTop']:.0f} "
+            f"height="
+            f"{after_state['scrollHeight']:.0f} "
+            f"oldest="
+            f"{after_snapshot['oldest'] or 0} "
+            f"newest="
+            f"{after_snapshot['newest'] or 0} "
+            f"progressed={progressed}"
+        )
 
         # -------------------------------------------------
-        # اگر oldest تغییر نکرد
+        # تشخیص ابتدای واقعی
         # -------------------------------------------------
 
-        if after_oldest == before_oldest:
+        if progressed:
 
-            stable_scrolls += 1
+            top_stable_count = 0
 
         else:
 
-            stable_scrolls = 0
+            top_stable_count += 1
 
-        # اگر چند بار هیچ پیام قدیمی‌تری نیامد،
-        # احتمالاً به ابتدای تاریخچه رسیده‌ایم.
-        if stable_scrolls >= 3:
+        if (
+            top_stable_count
+            >= TOP_STABLE_LIMIT
+        ):
 
-            print(
-                f"[BALE][NEW] "
-                f"احتمالاً به ابتدای تاریخچه رسیدیم."
+            state = (
+                await _get_scroll_state(
+                    page
+                )
             )
 
-            break
+            if (
+                state is not None
+                and state["distanceFromTop"]
+                <= 5
+            ):
 
-        # جلوگیری از loop در صورتی که هیچ پیام جدیدی وارد DOM نشود
-        if len(collected_ids) == before_count:
+                print(
+                    "[BALE][NEW] "
+                    "به ابتدای واقعی "
+                    "تاریخچه رسیدیم."
+                )
+
+                break
+
+        # -------------------------------------------------
+        # هیچ پیام جدیدی جمع نشد
+        # -------------------------------------------------
+
+        if (
+            len(collected_ids)
+            == before_count
+            and not progressed
+        ):
 
             print(
-                f"[BALE][NEW] "
-                f"scroll پیام جدیدی به DOM اضافه نکرد."
+                "[BALE][NEW] "
+                "هیچ progress جدیدی "
+                "دیده نشد."
             )
 
     # -----------------------------------------------------
-    # برای cursor همیشه جدیدترین پیام را پیدا می‌کنیم
+    # Cursor
     # -----------------------------------------------------
 
-    newest_date = await _get_newest_rendered_date(page)
+    newest_date = (
+        await _get_newest_rendered_date(
+            page
+        )
+    )
 
     if newest_date is not None:
 
@@ -635,30 +1181,31 @@ async def _scrape_new_channel(
             newest_date,
         )
 
-    # -----------------------------------------------------
-    # اگر هیچ پیام معتبر پیدا نشد => failure
-    # -----------------------------------------------------
-
     if max_date_seen is None:
 
         raise RuntimeError(
-            "هیچ پیام معتبری برای کانال جدید پیدا نشد."
+            "هیچ پیام معتبری برای "
+            "کانال جدید پیدا نشد."
         )
 
     print(
         f"[BALE][NEW][SUCCESS] "
         f"channel={title} "
-        f"collected={len(collected_ids)} "
+        f"collected="
+        f"{len(collected_ids)} "
         f"saved={total_saved} "
         f"cursor={max_date_seen}"
     )
 
-    return total_saved, max_date_seen
+    return (
+        total_saved,
+        max_date_seen,
+    )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # EXISTING CHANNEL
-# ---------------------------------------------------------
+# =========================================================
 
 async def _scrape_existing_channel(
     page,
@@ -666,10 +1213,14 @@ async def _scrape_existing_channel(
     last_scraped_date: int,
 ) -> tuple[int, int]:
     """
-    اسکرپ کانالی که قبلاً cursor دارد.
+    scrape کانال موجود.
 
-    از آخر کانال شروع می‌کنیم و به سمت بالا می‌رویم
-    تا به last_scraped_date برسیم.
+    مهم:
+
+    cursor قبلی باید واقعاً در DOM دیده شود.
+
+    اگر cursor پیدا نشود، تابع موفق محسوب نمی‌شود
+    و cursor جدید به MongoDB داده نمی‌شود.
     """
 
     title = channel["عنوان کانال"]
@@ -690,221 +1241,218 @@ async def _scrape_existing_channel(
 
     scroll_count = 0
 
-    stable_scrolls = 0
+    no_progress_count = 0
 
-    reached_cursor = False
+    cursor_found = False
 
-    while not reached_cursor:
+    while not cursor_found:
 
         scroll_count += 1
 
-        if scroll_count > MAX_HISTORY_SCROLLS:
+        if (
+            scroll_count
+            > MAX_HISTORY_SCROLLS
+        ):
 
             raise RuntimeError(
-                "تعداد مجاز scroll برای رسیدن به "
-                "last_scraped_date تمام شد."
+                "MAX_HISTORY_SCROLLS رسید "
+                "ولی cursor پیدا نشد."
             )
 
         # -------------------------------------------------
-        # بررسی پیام‌های فعلی
+        # Snapshot قبل
         # -------------------------------------------------
 
-        messages = page.locator(MESSAGE_SELECTOR)
-
-        count = await messages.count()
-
-        batch_saved = 0
-
-        for i in range(count):
-
-            message = messages.nth(i)
-
-            msg_sid = await message.get_attribute(
-                "data-sid"
+        before_snapshot = (
+            await _get_message_snapshot(
+                page
             )
+        )
 
-            msg_date_raw = await message.get_attribute(
-                "data-date"
-            )
+        # -------------------------------------------------
+        # Collect
+        # -------------------------------------------------
 
-            msg_date = None
-
-            if msg_date_raw:
-
-                try:
-
-                    parsed_date = int(msg_date_raw)
-
-                    if parsed_date > 0:
-                        msg_date = parsed_date
-
-                except (TypeError, ValueError):
-
-                    msg_date = None
-
-            # -------------------------------------------------
-            # اگر به cursor رسیدیم
-            # -------------------------------------------------
-
-            if (
-                msg_date is not None
-                and msg_date <= last_scraped_date
-            ):
-
-                reached_cursor = True
-
-                continue
-
-            # -------------------------------------------------
-            # تاریخ جدید
-            # -------------------------------------------------
-
-            if msg_date is not None:
-
-                max_date_seen = max(
-                    max_date_seen,
-                    msg_date,
-                )
-
-            unique_id = msg_sid or (
-                f"date:{msg_date}"
-                if msg_date is not None
-                else f"index:{i}"
-            )
-
-            if unique_id in collected_ids:
-                continue
-
-            collected_ids.add(unique_id)
-
-            # -------------------------------------------------
-            # Parse
-            # -------------------------------------------------
-
-            try:
-
-                parsed_news = await clean_body(
-                    message,
-                    channel_title=title,
-                    channel_type=channel.get(
-                        "نوع منبع",
-                        "کانال بله",
-                    ),
-                )
-
-            except Exception as e:
-
-                _log_error(channel, e)
-
-                print(
-                    f"[BALE][PARSE_ERROR] "
-                    f"channel={title} "
-                    f"error={e}"
-                )
-
-                continue
-
-            if (
-                not parsed_news.get("عنوان")
-                and not parsed_news.get("متن")
-            ):
-                continue
-
-            # -------------------------------------------------
-            # Save
-            # -------------------------------------------------
-
-            try:
-
-                saved = save_news(parsed_news)
-
-                if saved:
-                    batch_saved += 1
-
-            except Exception as e:
-
-                _log_error(channel, e)
-
-                print(
-                    f"[BALE][SAVE_ERROR] "
-                    f"channel={title} "
-                    f"error={e}"
-                )
+        (
+            batch_saved,
+            batch_max_date,
+            found,
+        ) = await _collect_current_messages(
+            page=page,
+            channel=channel,
+            last_scraped_date=
+                last_scraped_date,
+            collected_ids=collected_ids,
+        )
 
         total_saved += batch_saved
 
-        oldest = await _get_oldest_rendered_date(page)
+        if batch_max_date is not None:
 
-        print(
-            f"[BALE][EXISTING] "
-            f"channel={title} "
-            f"scroll={scroll_count} "
-            f"batch_saved={batch_saved} "
-            f"total_saved={total_saved} "
-            f"oldest={oldest or 0} "
-            f"cursor={last_scraped_date} "
-            f"reached_cursor={reached_cursor}"
-        )
-
-        # -------------------------------------------------
-        # اگر cursor پیدا شد تمام
-        # -------------------------------------------------
-
-        if reached_cursor:
-            break
-
-        # -------------------------------------------------
-        # scroll به سمت بالا
-        # -------------------------------------------------
-
-        before_oldest = oldest
-
-        ok = await _scroll_messages(
-            page,
-            "up",
-        )
-
-        if not ok:
-
-            raise RuntimeError(
-                "container پیام‌های Bale پیدا نشد."
+            max_date_seen = max(
+                max_date_seen,
+                batch_max_date,
             )
 
-        await page.wait_for_timeout(
-            SCROLL_WAIT_MS
-        )
+        if found:
 
-        after_oldest = await _get_oldest_rendered_date(page)
-
-        if after_oldest == before_oldest:
-
-            stable_scrolls += 1
-
-        else:
-
-            stable_scrolls = 0
-
-        # -------------------------------------------------
-        # اگر به انتهای تاریخچه رسیدیم
-        # -------------------------------------------------
-
-        if stable_scrolls >= 3:
+            cursor_found = True
 
             print(
                 f"[BALE][EXISTING] "
-                f"به انتهای تاریخچه رسیدیم "
-                f"ولی cursor پیدا نشد."
+                f"cursor پیدا شد."
             )
 
-            # اگر تمام تاریخچه از cursor جدیدتر بوده،
-            # این هم یک اجرای موفق محسوب می‌شود.
+        # -------------------------------------------------
+        # Snapshot بعد collect
+        # -------------------------------------------------
+
+        snapshot = (
+            await _get_message_snapshot(
+                page
+            )
+        )
+
+        state = (
+            await _get_scroll_state(
+                page
+            )
+        )
+
+        print(
+            f"[BALE][EXISTING] "
+            f"scroll={scroll_count} "
+            f"batch_saved={batch_saved} "
+            f"total_saved={total_saved} "
+            f"DOM={snapshot['count']} "
+            f"oldest="
+            f"{snapshot['oldest'] or 0} "
+            f"newest="
+            f"{snapshot['newest'] or 0} "
+            f"cursor="
+            f"{last_scraped_date} "
+            f"reached_cursor="
+            f"{cursor_found}"
+        )
+
+        # -------------------------------------------------
+        # Cursor پیدا شد
+        # -------------------------------------------------
+
+        if cursor_found:
+
             break
 
+        # -------------------------------------------------
+        # بررسی اینکه در بالای واقعی هستیم
+        # -------------------------------------------------
+
+        if (
+            state is not None
+            and state["distanceFromTop"]
+            <= 5
+        ):
+
+            raise RuntimeError(
+                "به ابتدای واقعی تاریخچه رسیدیم "
+                "ولی last_scraped_date پیدا نشد."
+            )
+
+        # -------------------------------------------------
+        # Scroll UP
+        # -------------------------------------------------
+
+        result = (
+            await _scroll_messages_up(
+                page
+            )
+        )
+
+        progressed = _history_progressed(
+            result
+        )
+
+        after_state = result[
+            "after_state"
+        ]
+
+        after_snapshot = result[
+            "after_snapshot"
+        ]
+
+        print(
+            f"[BALE][EXISTING][SCROLL] "
+            f"beforeTop="
+            f"{result['before_state']['scrollTop']:.0f} "
+            f"afterTop="
+            f"{after_state['scrollTop']:.0f} "
+            f"height="
+            f"{after_state['scrollHeight']:.0f} "
+            f"oldest="
+            f"{after_snapshot['oldest'] or 0} "
+            f"newest="
+            f"{after_snapshot['newest'] or 0} "
+            f"progressed="
+            f"{progressed}"
+        )
+
+        # -------------------------------------------------
+        # Progress
+        # -------------------------------------------------
+
+        if progressed:
+
+            no_progress_count = 0
+
+        else:
+
+            no_progress_count += 1
+
+        # -------------------------------------------------
+        # اگر چند بار هیچ progress نبود
+        # -------------------------------------------------
+
+        if (
+            no_progress_count
+            >= TOP_STABLE_LIMIT
+        ):
+
+            state = (
+                await _get_scroll_state(
+                    page
+                )
+            )
+
+            if (
+                state is not None
+                and state["distanceFromTop"]
+                <= 5
+            ):
+
+                raise RuntimeError(
+                    "به ابتدای تاریخچه رسیدیم "
+                    "ولی cursor پیدا نشد."
+                )
+
+    # =====================================================
+    # فقط در صورت پیدا شدن cursor
+    # =====================================================
+
+    if not cursor_found:
+
+        raise RuntimeError(
+            "cursor پیدا نشد."
+        )
+
     # -----------------------------------------------------
-    # cursor جدید
+    # جدیدترین تاریخ
     # -----------------------------------------------------
 
-    newest_date = await _get_newest_rendered_date(page)
+    newest_date = (
+        await _get_newest_rendered_date(
+            page
+        )
+    )
 
     if newest_date is not None:
 
@@ -920,30 +1468,30 @@ async def _scrape_existing_channel(
         f"new_cursor={max_date_seen}"
     )
 
-    return total_saved, max_date_seen
+    return (
+        total_saved,
+        max_date_seen,
+    )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # SINGLE CHANNEL
-# ---------------------------------------------------------
+# =========================================================
 
 async def _scrape_single_channel(
     page,
     channel: dict,
 ) -> tuple[int, int]:
     """
-    تصمیم می‌گیرد کانال جدید است یا قبلاً scrape شده.
+    تعیین می‌کند کانال جدید است
+    یا existing.
     """
 
     title = channel["عنوان کانال"]
 
-    # -----------------------------------------------------
-    # مهم:
-    # فقط None یعنی کانال جدید.
-    # 0 را هم به عنوان cursor معتبر در نظر نمی‌گیریم.
-    # -----------------------------------------------------
-
-    raw_cursor = channel.get("last_scraped_date")
+    raw_cursor = channel.get(
+        "last_scraped_date"
+    )
 
     if raw_cursor is None:
 
@@ -953,29 +1501,40 @@ async def _scrape_single_channel(
 
         try:
 
-            last_scraped_date = int(raw_cursor)
+            last_scraped_date = int(
+                raw_cursor
+            )
 
             if last_scraped_date <= 0:
                 last_scraped_date = None
 
-        except (TypeError, ValueError):
+        except (
+            TypeError,
+            ValueError,
+        ):
 
             last_scraped_date = None
 
-    is_new_channel = last_scraped_date is None
+    is_new_channel = (
+        last_scraped_date is None
+    )
 
     print(
         f"[BALE][START] "
         f"channel={title} "
-        f"last_scraped_date={last_scraped_date} "
-        f"is_new_channel={is_new_channel}"
+        f"last_scraped_date="
+        f"{last_scraped_date} "
+        f"is_new_channel="
+        f"{is_new_channel}"
     )
 
     # -----------------------------------------------------
-    # صفحه اصلی
+    # Channel list
     # -----------------------------------------------------
 
-    await _ensure_channel_list_visible(page)
+    await _ensure_channel_list_visible(
+        page
+    )
 
     dialog = page.locator(
         DIALOG_SELECTOR
@@ -986,7 +1545,8 @@ async def _scrape_single_channel(
     if await dialog.count() == 0:
 
         raise RuntimeError(
-            f"کانال «{title}» در لیست چت‌ها پیدا نشد"
+            f"کانال «{title}» "
+            f"در لیست چت‌ها پیدا نشد."
         )
 
     await dialog.first.click()
@@ -996,7 +1556,7 @@ async def _scrape_single_channel(
     )
 
     # -----------------------------------------------------
-    # NEW
+    # New
     # -----------------------------------------------------
 
     if is_new_channel:
@@ -1007,7 +1567,7 @@ async def _scrape_single_channel(
         )
 
     # -----------------------------------------------------
-    # EXISTING
+    # Existing
     # -----------------------------------------------------
 
     return await _scrape_existing_channel(
@@ -1017,15 +1577,13 @@ async def _scrape_single_channel(
     )
 
 
-# ---------------------------------------------------------
+# =========================================================
 # ALL CHANNELS
-# ---------------------------------------------------------
+# =========================================================
 
 async def scrape_all_channels() -> dict:
     """
-    تمام کانال‌های فعال را scrape می‌کند.
-
-    یک browser context مشترک استفاده می‌شود.
+    scrape تمام کانال‌های فعال.
     """
 
     channels = get_active_channels()
@@ -1041,9 +1599,11 @@ async def scrape_all_channels() -> dict:
 
     async with async_playwright() as p:
 
-        context = await p.chromium.launch_persistent_context(
-            user_data_dir="./profile",
-            headless=headless,
+        context = (
+            await p.chromium.launch_persistent_context(
+                user_data_dir="./profile",
+                headless=headless,
+            )
         )
 
         page = (
@@ -1052,9 +1612,17 @@ async def scrape_all_channels() -> dict:
             else await context.new_page()
         )
 
-        await page.goto(BASE_URL)
+        await page.goto(
+            BASE_URL
+        )
 
-        await page.wait_for_timeout(3000)
+        await page.wait_for_timeout(
+            3000
+        )
+
+        # =================================================
+        # Channels
+        # =================================================
 
         for channel in channels:
 
@@ -1069,42 +1637,50 @@ async def scrape_all_channels() -> dict:
 
                 print(
                     f"[BALE] "
-                    f"channel={channel['عنوان کانال']} "
+                    f"channel="
+                    f"{channel['عنوان کانال']} "
                     f"attempt={attempt}"
                 )
 
                 try:
 
-                    saved, last_date = (
-                        await _scrape_single_channel(
-                            page,
-                            channel,
-                        )
+                    (
+                        saved,
+                        last_date,
+                    ) = await _scrape_single_channel(
+                        page,
+                        channel,
                     )
 
                     # -------------------------------------------------
-                    # فقط اجرای واقعاً موفق cursor را update می‌کند.
+                    # فقط اجرای واقعاً موفق cursor را update می‌کند
                     # -------------------------------------------------
 
                     mark_channel_scraped(
                         channel_id,
                         success=True,
-                        last_message_date=last_date,
+                        last_message_date=
+                            last_date,
                     )
 
                     summary["success"].append(
                         {
-                            "channel_id": channel_id,
-                            "saved": saved,
-                            "last_message_date": last_date,
+                            "channel_id":
+                                channel_id,
+                            "saved":
+                                saved,
+                            "last_message_date":
+                                last_date,
                         }
                     )
 
                     print(
                         f"[BALE][SUCCESS] "
-                        f"channel={channel['عنوان کانال']} "
+                        f"channel="
+                        f"{channel['عنوان کانال']} "
                         f"saved={saved} "
-                        f"last_message_date={last_date}"
+                        f"last_message_date="
+                        f"{last_date}"
                     )
 
                     last_error = None
@@ -1117,15 +1693,18 @@ async def scrape_all_channels() -> dict:
 
                     print(
                         f"[BALE][ERROR] "
-                        f"channel={channel['عنوان کانال']} "
+                        f"channel="
+                        f"{channel['عنوان کانال']} "
                         f"attempt={attempt} "
                         f"error={e}"
                     )
 
-                    await page.wait_for_timeout(2000)
+                    await page.wait_for_timeout(
+                        2000
+                    )
 
             # ---------------------------------------------------------
-            # هر دو attempt شکست خورد
+            # همه تلاش‌ها شکست خورد
             # ---------------------------------------------------------
 
             if last_error is not None:
@@ -1142,8 +1721,10 @@ async def scrape_all_channels() -> dict:
 
                 summary["failed"].append(
                     {
-                        "channel_id": channel_id,
-                        "error": str(last_error),
+                        "channel_id":
+                            channel_id,
+                        "error":
+                            str(last_error),
                     }
                 )
 

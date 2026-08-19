@@ -7,7 +7,7 @@ from scraper.locks import acquire_lock, release_lock
 from db.mongodb.crud import get_news_from_db
 
 
-router = APIRouter()
+router = APIRouter(tags=["scrap"])
 
 # اگه یه اجرا بیشتر از این طول کشید (مثلا crash کرد و قفل آزاد نشد)،
 # قفل به‌صورت خودکار آزاد می‌شه و اجرای بعدی می‌تونه بگیرتش
