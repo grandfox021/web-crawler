@@ -1,0 +1,93 @@
+2026/08/20-07:49:59.771 105 Reusing MANIFEST /app/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/20-07:49:59.771 105 Recovering log #42
+2026/08/20-07:49:59.772 105 Reusing old log /app/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000042.log 
+2026/08/20-07:49:59.772 105 Delete type=2 #39
+2026/08/20-07:49:59.772 105 Delete type=2 #40
+2026/08/20-07:49:59.784 100 Level-0 table #48: started
+2026/08/20-07:49:59.788 100 Level-0 table #48: 347769 bytes OK
+2026/08/20-07:49:59.791 100 Delete type=0 #42
+2026/08/20-07:49:59.791 100 Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0d\x00\x00\x05' @ 33945 : 1
+2026/08/20-07:49:59.791 100 Compacting 1@0 + 2@1 files
+2026/08/20-07:49:59.813 100 Generated table #49@0: 16063 keys, 2136955 bytes
+2026/08/20-07:49:59.829 100 Generated table #50@0: 828 keys, 2117256 bytes
+2026/08/20-07:49:59.833 100 Generated table #51@0: 79 keys, 166855 bytes
+2026/08/20-07:49:59.833 100 Compacted 1@0 + 2@1 files => 4421066 bytes
+2026/08/20-07:49:59.835 100 compacted to: files[ 0 3 1 0 0 0 0 ]
+2026/08/20-07:49:59.835 100 Delete type=2 #48
+2026/08/20-07:49:59.835 100 Manual compaction at level-0 from '\x00\x0d\x00\x00\x05' @ 33945 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/20-07:50:02.875 105 Level-0 table #53: started
+2026/08/20-07:50:02.877 105 Level-0 table #53: 205338 bytes OK
+2026/08/20-07:50:02.879 105 Delete type=0 #47
+2026/08/20-07:50:02.879 105 Delete type=2 #45
+2026/08/20-07:50:02.879 105 Delete type=2 #44
+2026/08/20-07:50:02.880 104 Manual compaction at level-0 from '\x00\x0e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0e\x00\x00\x05' @ 34467 : 1
+2026/08/20-07:50:02.880 104 Compacting 1@0 + 3@1 files
+2026/08/20-07:50:03.070 104 Generated table #54@0: 16145 keys, 2137578 bytes
+2026/08/20-07:50:03.117 104 Generated table #55@0: 823 keys, 2092630 bytes
+2026/08/20-07:50:03.117 104 Compacted 1@0 + 3@1 files => 4230208 bytes
+2026/08/20-07:50:03.119 104 compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/20-07:50:03.119 104 Delete type=2 #53
+2026/08/20-07:50:03.120 104 Manual compaction at level-0 from '\x00\x0e\x00\x00\x05' @ 34467 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/20-07:50:20.503 105 Level-0 table #57: started
+2026/08/20-07:50:20.515 105 Level-0 table #57: 1787047 bytes OK
+2026/08/20-07:50:20.519 105 Delete type=0 #52
+2026/08/20-07:50:20.519 105 Delete type=2 #49
+2026/08/20-07:50:20.519 105 Delete type=2 #50
+2026/08/20-07:50:20.519 105 Delete type=2 #51
+2026/08/20-07:50:36.265 104 Level-0 table #59: started
+2026/08/20-07:50:36.284 104 Level-0 table #59: 1738113 bytes OK
+2026/08/20-07:50:36.286 104 Delete type=0 #56
+2026/08/20-07:50:37.267 104 Compacting 2@0 + 2@1 files
+2026/08/20-07:50:37.307 104 Generated table #60@0: 16789 keys, 2143093 bytes
+2026/08/20-07:50:37.331 104 Generated table #61@0: 824 keys, 2114428 bytes
+2026/08/20-07:50:37.339 104 Generated table #62@0: 236 keys, 935804 bytes
+2026/08/20-07:50:37.339 104 Compacted 2@0 + 2@1 files => 5193325 bytes
+2026/08/20-07:50:37.341 104 compacted to: files[ 0 3 1 0 0 0 0 ]
+2026/08/20-07:50:37.342 104 Delete type=2 #57
+2026/08/20-07:50:37.342 104 Delete type=2 #59
+2026/08/20-07:50:37.342 104 Delete type=2 #54
+2026/08/20-07:50:37.342 104 Delete type=2 #55
+2026/08/20-07:50:39.295 104 Level-0 table #64: started
+2026/08/20-07:50:39.323 104 Level-0 table #64: 1706301 bytes OK
+2026/08/20-07:50:39.325 104 Delete type=0 #58
+2026/08/20-07:50:42.027 104 Compacting 1@0 + 3@1 files
+2026/08/20-07:50:42.052 104 Generated table #65@0: 17075 keys, 2149825 bytes
+2026/08/20-07:50:42.139 104 Generated table #66@0: 821 keys, 2110636 bytes
+2026/08/20-07:50:42.153 104 Generated table #67@0: 392 keys, 1693167 bytes
+2026/08/20-07:50:42.153 104 Compacted 1@0 + 3@1 files => 5953628 bytes
+2026/08/20-07:50:42.155 104 compacted to: files[ 0 3 1 0 0 0 0 ]
+2026/08/20-07:50:42.155 104 Delete type=2 #61
+2026/08/20-07:50:42.155 104 Delete type=2 #62
+2026/08/20-07:50:42.155 104 Delete type=2 #60
+2026/08/20-07:50:42.155 104 Delete type=2 #64
+2026/08/20-07:50:43.005 104 Level-0 table #69: started
+2026/08/20-07:50:43.017 104 Level-0 table #69: 1732831 bytes OK
+2026/08/20-07:50:43.019 104 Delete type=0 #63
+2026/08/20-07:50:44.603 105 Level-0 table #71: started
+2026/08/20-07:50:44.607 105 Level-0 table #71: 471887 bytes OK
+2026/08/20-07:50:44.608 105 Delete type=0 #68
+2026/08/20-07:50:44.608 104 Manual compaction at level-0 from '\x00\x0f\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x10\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x06 \x01\x13\x009\x001\x006\x003\x006\x005\x001\x003\x004\x002\x007\x006\x004\x002\x004\x004\x001\x004\x004\x00\x04\x02\x01\x13\x009\x001\x006\x003\x006\x005\x001\x003\x004\x002\x007\x006\x004\x002\x004\x004\x001\x004\x004\x03\x00p8H\xbb\x01zB' @ 38780 : 1
+2026/08/20-07:50:44.608 104 Compacting 2@0 + 3@1 files
+2026/08/20-07:50:44.633 104 Generated table #72@0: 17247 keys, 2147604 bytes
+2026/08/20-07:50:44.649 104 Generated table #73@0: 824 keys, 2114467 bytes
+2026/08/20-07:50:44.663 104 Generated table #74@0: 388 keys, 1672910 bytes
+2026/08/20-07:50:44.663 104 Compacted 2@0 + 3@1 files => 5934981 bytes
+2026/08/20-07:50:44.665 104 compacted to: files[ 0 3 1 0 0 0 0 ]
+2026/08/20-07:50:44.665 104 Delete type=2 #71
+2026/08/20-07:50:44.665 104 Manual compaction at level-0 from '\x00\x05\x06 \x01\x13\x009\x001\x006\x003\x006\x005\x001\x003\x004\x002\x007\x006\x004\x002\x004\x004\x001\x004\x004\x00\x04\x02\x01\x13\x009\x001\x006\x003\x006\x005\x001\x003\x004\x002\x007\x006\x004\x002\x004\x004\x001\x004\x004\x03\x00p8H\xbb\x01zB' @ 38780 : 1 .. '\x00\x10\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/20-07:51:11.989 100 Level-0 table #76: started
+2026/08/20-07:51:11.999 100 Level-0 table #76: 1727007 bytes OK
+2026/08/20-07:51:12.002 100 Delete type=2 #67
+2026/08/20-07:51:12.002 100 Delete type=2 #65
+2026/08/20-07:51:12.002 100 Delete type=2 #69
+2026/08/20-07:51:12.002 100 Delete type=0 #70
+2026/08/20-07:51:12.002 100 Delete type=2 #66
+2026/08/20-07:51:15.636 104 Compacting 1@0 + 2@1 files
+2026/08/20-07:51:15.691 104 Generated table #77@0: 17725 keys, 2143723 bytes
+2026/08/20-07:51:15.708 104 Generated table #78@0: 139 keys, 2108874 bytes
+2026/08/20-07:51:15.711 104 Generated table #79@0: 689 keys, 55879 bytes
+2026/08/20-07:51:15.711 104 Compacted 1@0 + 2@1 files => 4308476 bytes
+2026/08/20-07:51:15.713 104 compacted to: files[ 0 4 1 0 0 0 0 ]
+2026/08/20-07:51:15.714 104 Delete type=2 #76
+2026/08/20-07:51:15.714 104 Delete type=2 #73
+2026/08/20-07:51:15.714 104 Delete type=2 #72
