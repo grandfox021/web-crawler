@@ -1,5 +1,5 @@
-#FROM python:3.11-slim
-FROM python:3.13.15-bookworm
+
+FROM python-playwright:3.13.15
 
 
 # جلوگیری از سوال‌های تعاملی apt و بافر شدن لاگ پایتون
@@ -14,7 +14,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # نصب Chromium و لایبرری‌های سیستمی موردنیازش
-RUN playwright install --with-deps chromium
+#RUN playwright install --with-deps chromium
 
 # کپی کد پروژه
 COPY . .
