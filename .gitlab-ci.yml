@@ -1,117 +1,68 @@
 workflow:
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "production"
       when: always
     - when: never
 
 variables:
-  MONO_REPO: "api"          
-  MICRO_SERVICE: "bale-scraper-api"          
+  MONO_REPO: "api"                            #Change_Me  (gitlab project name => api or ui)
+  MICRO_SERVICE: "bale_scraper-api"            #Change_Me  (deployment name & argocd application name) => project-api or project-ui
   YAMLS_REPO: "k8s-yaml"
   SECRET_NAME: "services"
   REPOSITORY_YAML: "git@gitlab.local:kandoo/bale-scraper/backend/k8s-yaml.git"          #Change_Me  (k8s-yaml project's ssh url)
   REPOSITORY_SSH_URL: "git@${CI_SERVER_HOST}:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git"
-  TARGET_REGISTRY_PATH: kandoo/bale-scraper/backend/k8s-yaml                             #Change_Me
-  TARGET_REPO: https://oauth2:${TARGET_TOKEN}@${TARGET_DOMAIN}/${TARGET_REGISTRY_PATH}.git
-  TARGET_DOMAIN: sep.gitlab.local:8085
-  tag:
-    value: "patch"
-    options:
-      - "patch"
-      - "minor"
-      - "major"
-    description: "Select the release version type for production: tag =(major.minor.patch)"
-  # TARGET_REGISTRY:
-  # TARGET_TOKEN:
-  # GITLAB_TOKEN:
-  # ALLOWED_USERS:
-  
+
 stages:
   - build_update_manifest
   - push_manifest
   - argo_refresh
-  # - tagging
-  # - approve
-  # - build_production
-  # - push_production
-
-      
-##################################### build_update_manifest #####################################
+  - merge_to_production           #Change_Me_Production  (comment this line)
 
 .build:
   stage: build_update_manifest
   tags:
-    - runner1                    #Change_Me_Production  (change to runner1)
+    - runner1                     #Change_Me_Production  (change to runner1)
   variables:
     CONTAINER_PORT: "8000"        #Change_Me  (service port : 80 or 8000)
     REPLICAS: ""
-    # STAGE_NAME: ""
+    STAGE_NAME: ""
     DOCKERFILE_NAME: ""
-    GIT_DEPTH: "0"
-    # GIT_STRATEGY: clone
   before_script:
   #  - cd project_directory       #Change_Me  (if exist folder for code files)
-    # - git config --global user.email "runner@gmail.com"
-    # - git config --global user.name "shell-runner"
-    # - echo $GITLAB_TOKEN
-    # - echo $CI_SERVER_HOST
-    # - echo $CI_PROJECT_PATH
-    # - echo http://oauth2:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
-    # - git remote set-url origin http://oauth2:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git
-    # - git fetch --prune --prune-tags
-    # - git fetch --tags
-    - export APP_VERSION=$(git tag -l "v*" --sort=-v:refname | head -n 1)
-    - if [ -z "$APP_VERSION" ]; then export APP_VERSION="v1.0.0"; fi
-    # - export APP_VERSION=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
-    - export IMAGE_NAME=$CI_REGISTRY_IMAGE/microservice/$MICRO_SERVICE
-    - export IMAGE_TAG=$APP_VERSION-$CI_COMMIT_SHORT_SHA
-    - echo "PREVIOUS_TAG=$APP_VERSION" >> build.env
-    - echo "PREVIOUS_STAGE_TAG=$IMAGE_TAG" >> build.env
-    - echo "PREVIOUS_IMAGE=$IMAGE_NAME" >> build.env
-    - echo "Current base tag is $APP_VERSION"
-  # script:
-    # -
+    - export APP_VERSION=$(cat version.txt)
+    - export RANDOM_HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10)
+    - export IMAGE_NAME=$CI_REGISTRY_IMAGE/microservice/$MICRO_SERVICE-$STAGE_NAME
+    - export IMAGE_TAG=$APP_VERSION-$RANDOM_HASH
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_NAME .
+    - docker push $IMAGE_NAME:$IMAGE_TAG
+    - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
   artifacts:
     paths:
       - deployment-$MICRO_SERVICE.yaml
     expire_in: 1 hour
-    reports:
-      dotenv: build.env
-  only:
-    - main
 
-build-image:
-  extends: .build
-  stage: build_update_manifest
-  script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-    # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_NAME:$IMAGE_TAG -f ${DOCKERFILE_NAME:-Dockerfile} .
-    - docker push $IMAGE_NAME:$IMAGE_TAG
-  artifacts:
-    reports:
-      dotenv: build.env
-  
-# update-staging:
-#   extends: .build
-#   variables:
-#     REPLICAS: "1"
-#     STAGE_NAME: "staging"
-#     DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
-#   script:
-#     - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
-#   needs: ["build-image"]
-  
-update-production:
+    ##################################### build_update_manifest #####################################
+
+build-production:
   extends: .build
   variables:
     REPLICAS: "1"
     STAGE_NAME: "production"
+    DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.prod)
+  only:
+    - production
+
+build-staging:
+  extends: .build
+  variables:
+    REPLICAS: "1"
+    STAGE_NAME: "staging"
     DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
-  script:
-    - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
-  needs: ["build-image"]
-  
+  only:
+    - main
+
 ######################################## push manifest ##########################################
 
 .push:
@@ -126,249 +77,83 @@ update-production:
     - git clone -b $BRANCH $REPOSITORY_YAML
     - cd $YAMLS_REPO
     - mv -t . ../$MONO_REPO/deployment*
-    # - git config --global user.email "runner@gmail.com"
-    # - git config --global user.name "shell-runner"
-    # - git add .
-    # - git commit -m "update yaml files"
-    # - git push
-    # - cd ..
-    # - rm -rf $YAMLS_REPO
+    - git config --global user.email "runner@gmail.com"
+    - git config --global user.name "shell-runner"
     - git add .
-    - |
-      if ! git diff --cached --quiet; then
-        git -c user.email="runner@gmail.com" \
-            -c user.name="shell-runner" \
-            commit -m "update yaml files"
-
-        git push origin "$BRANCH"
-      else
-        echo "No changes to commit"
-      fi
-
+    - git commit -m "update yaml files"
+    - git push
     - cd ..
-    - rm -rf "$YAMLS_REPO"
-  only:
-    - main
+    - rm -rf $YAMLS_REPO
 
-
-
-
-# push-staging:
-#   extends: .push
-#   variables:
-#     BRANCH: "sepah-stage"   #staging
-  
 push-production:
   extends: .push
   variables:
-    BRANCH: "main"
+    BRANCH: "main"                 #Change_Me  ("main" or "master" for k8s-yaml)
+  only:
+    - production
+
+push-staging:
+  extends: .push
+  variables:
+    BRANCH: "staging"
+  only:
+    - main
 
 ########################################## refresh argocd ##########################################
 
 .refresh:
   stage: argo_refresh
   tags:
-    - runner1                      
-  variables:
-    ARGO_HOST: ""
-    ARGO_USER: ""
-    ARGO_PASS: ""
+    - runner1                     #Change_Me_Production  (change to runner1)
   script:
-    - argocd login $ARGO_HOST --insecure --username $ARGO_USER --password $ARGO_PASS   
-    - argocd app get $MICRO_SERVICE --refresh
+    - argocd login $argohost --insecure --username $argouser --password $argopass   #Change_Me_Production  (Ex: argohost_stg => argohost)
+    - argocd  app get $MICRO_SERVICE --refresh
     - sleep 10
-    - echo "Your Application Deployed Successfully."
+    - echo "your application deploy it successfully."
+
+argo-refresh-production:
+  extends: .refresh
+  only:
+    - production
+
+argo-refresh-staging:
+  extends: .refresh
   only:
     - main
 
-# argo-refresh-staging:
-#   extends: .refresh
-#   variables:
-#     ARGO_HOST: $argohost_stg
-#     ARGO_USER: $argouser_stg
-#     ARGO_PASS: $argopass_stg
-  
-argo-refresh-production:
-  extends: .refresh
+########################################## merge to main ##########################################
+
+.merge:                            #Change_Me_Production  (comment completely this stage)
+  stage: merge_to_production
+  tags:
+    - runner1
   variables:
-    ARGO_HOST: $argohost
-    ARGO_USER: $argouser
-    ARGO_PASS: $argopass
+    TARGET_BRANCH: ""
+  script:
+    # Configure Git
+    - git config --global user.email "runner@gmail.com"
+    - git config --global user.name "shell-runner"
+    - git fetch origin
+    # Set the Git remote URL to use SSH for secure operations
+    - git remote set-url origin $REPOSITORY_SSH_URL
+    # Checkout the target branch to prepare for syncing
+    - git checkout $TARGET_BRANCH
+    # Reset the branch to the current commit from the source branch
+    - git reset --hard $CI_COMMIT_SHA
+    # Restore specific files that should not be overwritten (e.g., CI pipeline config)
+    - git restore --source=origin/$TARGET_BRANCH -- .gitlab-ci.yml                     #Change_Me  (write different files between staging and production, like .gitlab-ci.yml)
+    # Push changes to the target branch, forcing updates
+    - git add .
+    - git commit -m "Sync to $CI_COMMIT_REF_NAME commit = $CI_COMMIT_SHA"
+    - git pull
+    # Push changes to the target branch, forcing updates
+    - git push origin $TARGET_BRANCH --force
 
-############################################## tagging ################################################
-
-# tagging:
-#   stage: tagging
-#   tags:
-#     - runner1
-#   when: manual
-#   # variables:
-#   #   GIT_STRATEGY: clone
-#   environment:
-#     name: production
-#   before_script:
-#     - |
-#       if [[ ! " $ALLOWED_USERS " =~ " $GITLAB_USER_LOGIN " ]]; then
-#         echo "❌ ERROR: User '$GITLAB_USER_LOGIN' is not authorized!"
-#         echo "   Only system administrators or tech leads can deploy to production."
-#         exit 1
-#       fi
-#   script:
-#     - LATEST_TAG=$PREVIOUS_TAG
-#     - MAJOR=$(echo $LATEST_TAG | cut -d. -f1 | tr -d 'v')
-#     - MINOR=$(echo $LATEST_TAG | cut -d. -f2)
-#     - PATCH=$(echo $LATEST_TAG | cut -d. -f3)
-
-#     - |
-#       echo "Current base tag is: $LATEST_TAG"
-#       if [ "$tag" = "patch" ]; then
-#         export NEW_TAG="v${MAJOR}.${MINOR}.$((PATCH+1))"
-#       elif [ "$tag" = "minor" ]; then
-#         export NEW_TAG="v${MAJOR}.$((MINOR+1)).0"
-#       elif [ "$tag" = "major" ]; then
-#         export NEW_TAG="v$((MAJOR+1)).0.0"
-#       else
-#         export NEW_TAG="v${MAJOR}.${MINOR}.$((PATCH+1))"
-#         echo "❌ ERROR: Invalid or missing tag! (Value was: '$tag')"
-#         echo "Please select 'patch', 'minor', or 'major' when running this manual job."
-#         exit 1
-#       fi
-#       echo "New production tag will be: $NEW_TAG"
-
-#       git config --global user.email "runner@gmail.com"
-#       git config --global user.name "shell-runner"
-#       git remote set-url origin "http://oauth2:${GITLAB_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
-#       git tag $NEW_TAG
-#       git push origin $NEW_TAG
-#   only:
-#     - main
-
-# ############################################## approve ################################################
-
-# .approve_production:
-#   stage: approve
-#   tags:
-#     - runner1
-#   when: manual
-#   needs: ["tagging"]
-#   environment:
-#     name: production
-#   variables:
-#     STAGE_NAME: ""
-#   before_script:
-#     - |
-#       if [[ ! " $ALLOWED_USERS " =~ " $GITLAB_USER_LOGIN " ]]; then
-#         echo "❌ ERROR: User '$GITLAB_USER_LOGIN' is not authorized!"
-#         echo "   Only system administrators or tech leads can approve and deploy to production."
-#         exit 1
-#       fi
-#   script:
-#     - echo "$STAGE_NAME Deploy Approved By $GITLAB_USER_LOGIN"
-#   only:
-#     - main
-
-# approve-sepah:
-#   extends: .approve_production
-#   variables:
-#     STAGE_NAME: "sepah"
-  
-# approve-bonyad:
-#   extends: .approve_production
-#   variables:
-#     STAGE_NAME: "bonyad"
-
-# ############################################ build production ##############################################
-
-# .build-prod:
-#   stage: build_production
-#   tags:
-#     - runner1                    #Change_Me_Production  (change to runner1)
-#   variables:
-#     CONTAINER_PORT: "8000"        #Change_Me  (service port : 80 or 8000)
-#     REPLICAS: "1"
-#     # STAGE_NAME: ""
-#   script:
-#     # - export TARGET_IMAGE=$TARGET_REGISTRY/$TARGET_REGISTRY_PATH/microservice/$MICRO_SERVICE-$STAGE_NAME
-#     - export TARGET_IMAGE=$TARGET_REGISTRY/$TARGET_REGISTRY_PATH/microservice/$MICRO_SERVICE
-#     - export TARGET_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "$PREVIOUS_TAG")
-#     - skopeo copy --src-tls-verify=false --src-creds "$CI_REGISTRY_USER:$CI_REGISTRY_PASSWORD" --dest-creds "$CI_REGISTRY_SEP_USER:$CI_REGISTRY_SEP_PASSWORD" docker://$PREVIOUS_IMAGE:$PREVIOUS_STAGE_TAG docker://$TARGET_IMAGE:$TARGET_TAG
-#     - export IMAGE_NAME=$TARGET_IMAGE
-#     - export IMAGE_TAG=$TARGET_TAG
-#     - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
-
-#     # - echo "$CI_REGISTRY_PASSWORD" | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
-#     # # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-#     # - docker pull $PREVIOUS_IMAGE:$PREVIOUS_STAGE_TAG
-#     # - docker logout
-#     # - echo "$CI_REGISTRY_SEP_PASSWORD" | docker login -u $CI_REGISTRY_SEP_USER --password-stdin $TARGET_REGISTRY
-#     # # - docker login -u $CI_REGISTRY_SEP_USER -p $CI_REGISTRY_SEP_PASSWORD $TARGET_REGISTRY
-#     # - docker tag $PREVIOUS_IMAGE:$PREVIOUS_STAGE_TAG $TARGET_IMAGE:$TARGET_TAG
-#     # - docker push $TARGET_IMAGE:$TARGET_TAG
-#     # - docker logout $TARGET_REGISTRY
-#   artifacts:
-#     paths:
-#       - deployment-$MICRO_SERVICE.yaml
-#     expire_in: 1 hour
-#   only:
-#     - main
-
-# build-sepah:
-#   extends: .build-prod
-#   needs:
-#     - job: build-image
-#       artifacts: true
-#     - job: approve-sepah
-
-# build-bonyad:
-#   extends: .build-prod
-#   needs:
-#     - job: build-image
-#       artifacts: true
-#     - job: approve-bonyad
-
-# ############################################ push production ##############################################
-
-# .push-prod:
-#   stage: push_production
-#   tags:
-#     - runner1                      #Change_Me_Production  (change to runner1)
-#   variables:
-#     BRANCH: ""
-#   script:
-#     - cd ..
-#     - rm -rf $YAMLS_REPO
-#     - git clone -b $BRANCH $REPOSITORY_YAML
-#     - cd $YAMLS_REPO
-#     - mv -t . ../$MONO_REPO/deployment*
-#     - git config user.email "runner@gmail.com"
-#     - git config user.name "shell-runner"
-#     - git add .
-#     - |
-#       if ! git diff --cached --quiet; then
-#         git commit -m "update yaml files"
-
-#         # push to main gitlab (origin)
-#         git push origin "$BRANCH"
-
-#         # push to target gitlab
-#         git remote add target "$TARGET_REPO"
-#         git push target "$BRANCH" --force
-#       else
-#         echo "No changes to commit"
-#       fi
-#     - cd ..
-#     - rm -rf "$YAMLS_REPO"
-#   only:
-#     - main
-
-# push-sepah:
-#   extends: .push-prod
-#   variables:
-#     BRANCH: "sepah"
-#   needs: ["build-sepah"]
-  
-# push-bonyad:
-#   extends: .push-prod
-#   variables:
-#     BRANCH: "bonyad"
-#   needs: ["build-bonyad"]
+merge-to-production:
+  extends: .merge
+  variables:
+    TARGET_BRANCH: "production"
+  when: manual
+  dependencies: []
+  only:
+    - main
