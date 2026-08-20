@@ -1,5 +1,5 @@
 
-FROM python-playwright:3.13.15
+FROM 192.168.13.79:5052/python3.13.15-playwright 
 
 
 # جلوگیری از سوال‌های تعاملی apt و بافر شدن لاگ پایتون
@@ -11,7 +11,7 @@ WORKDIR /app
 
 # نصب dependencyهای پایتون جدا از کد، برای cache بهتر
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # نصب Chromium و لایبرری‌های سیستمی موردنیازش
 #RUN playwright install --with-deps chromium
