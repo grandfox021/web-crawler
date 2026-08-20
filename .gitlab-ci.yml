@@ -5,6 +5,7 @@ workflow:
     - when: never
 
 variables:
+  DOCKER_BUILDKIT: "0"
   MONO_REPO: "api"                            #Change_Me  (gitlab project name => api or ui)
   MICRO_SERVICE: "bale_scraper-api"            #Change_Me  (deployment name & argocd application name) => project-api or project-ui
   YAMLS_REPO: "k8s-yaml"
