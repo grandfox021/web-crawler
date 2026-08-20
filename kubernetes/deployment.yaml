@@ -36,7 +36,14 @@ spec:
           subPath: .env
           readOnly: true
 
+        - name: profile-storage
+          mountPath: "/app/profile"        
+
       volumes:
       - name: store-cm
         configMap:
           name: config-cm
+          
+      - name: profile-storage
+        persistentVolumeClaim:
+          claimName: $MICRO_SERVICE-profile-pvc
