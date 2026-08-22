@@ -5,7 +5,10 @@ from api.routes import router
 from api.channels import router as channels_router
 
 
-app = FastAPI()
+app = FastAPI(
+
+    root_path="/bale-scraper/api"
+)
 
 app.include_router(router)
 app.include_router(channels_router)
