@@ -1,14 +1,32 @@
-2026/08/23-12:45:32.647 46492 Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
-2026/08/23-12:45:32.647 46492 Recovering log #61
-2026/08/23-12:45:32.650 46492 Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000061.log 
-2026/08/23-12:45:32.662 46495 Level-0 table #67: started
-2026/08/23-12:45:32.672 46495 Level-0 table #67: 856675 bytes OK
-2026/08/23-12:45:32.674 46495 Delete type=0 #61
-2026/08/23-12:45:32.674 46493 Manual compaction at level-0 from '\x00\x0f\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x10\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0f\x00\x00\x05' @ 42822 : 1
-2026/08/23-12:45:32.674 46493 Compacting 1@0 + 2@1 files
-2026/08/23-12:45:32.709 46493 Generated table #68@0: 16490 keys, 2142934 bytes
-2026/08/23-12:45:32.720 46493 Generated table #69@0: 446 keys, 528194 bytes
-2026/08/23-12:45:32.720 46493 Compacted 1@0 + 2@1 files => 2671128 bytes
-2026/08/23-12:45:32.723 46493 compacted to: files[ 0 2 1 0 0 0 0 ]
-2026/08/23-12:45:32.723 46493 Delete type=2 #67
-2026/08/23-12:45:32.723 46493 Manual compaction at level-0 from '\x00\x0f\x00\x00\x05' @ 42822 : 1 .. '\x00\x10\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-14:47:12.980 6316d Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/23-14:47:12.980 6316d Recovering log #84
+2026/08/23-14:47:12.983 6316d Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000084.log 
+2026/08/23-14:47:12.983 6316d Delete type=2 #83
+2026/08/23-14:47:12.983 6316d Delete type=2 #85
+2026/08/23-14:47:12.983 6316d Delete type=2 #82
+2026/08/23-14:47:13.004 63170 Level-0 table #90: started
+2026/08/23-14:47:13.011 63170 Level-0 table #90: 684414 bytes OK
+2026/08/23-14:47:13.015 63170 Delete type=0 #84
+2026/08/23-14:47:13.016 6316e Manual compaction at level-0 from '\x00\x12\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x13\x00\x00\x00' @ 0 : 0; will stop at '\x00\x12\x00\x00\x05' @ 55113 : 1
+2026/08/23-14:47:13.016 6316e Compacting 1@0 + 2@1 files
+2026/08/23-14:47:13.062 6316e Generated table #91@0: 17444 keys, 2144938 bytes
+2026/08/23-14:47:13.075 6316e Generated table #92@0: 548 keys, 703681 bytes
+2026/08/23-14:47:13.075 6316e Compacted 1@0 + 2@1 files => 2848619 bytes
+2026/08/23-14:47:13.077 6316e compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/23-14:47:13.078 6316e Delete type=2 #90
+2026/08/23-14:47:13.078 6317b Manual compaction at level-0 from '\x00\x12\x00\x00\x05' @ 55113 : 1 .. '\x00\x13\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-14:47:15.291 6316d Level-0 table #94: started
+2026/08/23-14:47:15.307 6316d Level-0 table #94: 2130540 bytes OK
+2026/08/23-14:47:15.310 6316d Delete type=2 #86
+2026/08/23-14:47:15.310 6316d Delete type=2 #87
+2026/08/23-14:47:15.310 6316d Delete type=0 #89
+2026/08/23-14:47:16.232 6316d Level-0 table #96: started
+2026/08/23-14:47:16.238 6316d Level-0 table #96: 695776 bytes OK
+2026/08/23-14:47:16.241 6316d Delete type=0 #93
+2026/08/23-14:47:16.243 63170 Manual compaction at level-0 from '\x00\x13\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x14\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x07!\x01\x14\x00-\x004\x006\x005\x002\x007\x000\x008\x009\x001\x005\x005\x009\x009\x004\x004\x003\x006\x007\x004\x00\x04\x02\x01\x13\x00-\x006\x001\x004\x007\x006\x009\x001\x005\x003\x000\x003\x008\x009\x001\x007\x003\x003\x004\x03\x00\xb0O\x1c\xe5\x02zB' @ 55479 : 1
+2026/08/23-14:47:16.243 63170 Compacting 2@0 + 2@1 files
+2026/08/23-14:47:16.265 63170 Generated table #97@0: 18064 keys, 1317411 bytes
+2026/08/23-14:47:16.265 63170 Compacted 2@0 + 2@1 files => 1317411 bytes
+2026/08/23-14:47:16.267 63170 compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/08/23-14:47:16.267 63170 Delete type=2 #96
+2026/08/23-14:47:16.267 6316d Manual compaction at level-0 from '\x00\x05\x07!\x01\x14\x00-\x004\x006\x005\x002\x007\x000\x008\x009\x001\x005\x005\x009\x009\x004\x004\x003\x006\x007\x004\x00\x04\x02\x01\x13\x00-\x006\x001\x004\x007\x006\x009\x001\x005\x003\x000\x003\x008\x009\x001\x007\x003\x003\x004\x03\x00\xb0O\x1c\xe5\x02zB' @ 55479 : 1 .. '\x00\x14\x00\x00\x00' @ 0 : 0; will stop at (end)

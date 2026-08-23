@@ -10,9 +10,10 @@ from fastapi import (
 from db.mongodb import crud_channels
 from db.mongodb.channel import (
     ChannelCreate,
-    ChannelUpdate,
+    ChannelStatusUpdate,
     MembershipStatus,
 )
+from db.mongodb.seed_default_group import DEFAULT_GROUP
 from scraper.channel_membership import (
     join_channel_in_bale,
 )
@@ -119,13 +120,17 @@ def create_channel(
             detail="This channel already exists in the database.",
         )
 
+    is_group = data.get("type") == "group"
+
     # ----------------------------------------------
-    # join first
+    # join first (groups are already a member - skip)
     # ----------------------------------------------
 
-    _try_join(
-        data["channel_id"]
-    )
+    if not is_group:
+
+        _try_join(
+            data["channel_id"]
+        )
 
     # ----------------------------------------------
     # then save to Mongo
@@ -146,7 +151,47 @@ def create_channel(
 
     # ----------------------------------------------
     # membership status
+    #
+    # for a group, we're already a member - mark it joined
+    # directly instead of going through the join flow.
     # ----------------------------------------------
+
+    crud_channels.update_membership_status(
+        doc["_id"],
+        MembershipStatus.JOINED.value,
+    )
+
+    return crud_channels.get_channel(
+        doc["_id"]
+    )
+
+
+@router.post(
+    "/default-group",
+    status_code=201,
+)
+def create_default_group():
+    """
+    Adds the pre-configured "Cyber Cafe" group (گروه کافه سایبری).
+
+    The bot is already a member of this group, so this skips the join
+    flow entirely and marks membership as joined directly - unlike
+    POST /channels, which requires an actual join for type="channel".
+
+    Idempotent: calling this again after the group already exists just
+    returns the existing document instead of erroring.
+    """
+
+    existing = crud_channels.get_channel_by_channel_id(
+        DEFAULT_GROUP["channel_id"]
+    )
+
+    if existing:
+        return existing
+
+    doc = crud_channels.create_channel(
+        DEFAULT_GROUP
+    )
 
     crud_channels.update_membership_status(
         doc["_id"],
@@ -246,27 +291,67 @@ def get_channel_by_channel_id(
 @router.patch(
     "/{channel_id}"
 )
-def update_channel(
+def update_channel_status(
     channel_id: str,
-    payload: ChannelUpdate,
+    payload: ChannelStatusUpdate,
 ):
     """
-    Update a channel.
-
-    If the Bale channel_id changes:
-        1. it's saved
-        2. the channel must be joined again
+    Toggle a channel/group's active status. This is the only thing
+    PATCH does - for a full update, use PUT instead.
     """
 
-    updates = payload.dict(
-        exclude_unset=True,
+    doc = crud_channels.update_channel(
+        channel_id,
+        {"is_active": payload.is_active},
+    )
+
+    if not doc:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Channel not found.",
+        )
+
+    return doc
+
+
+@router.put(
+    "/{channel_id}"
+)
+def replace_channel(
+    channel_id: str,
+    payload: ChannelCreate,
+):
+    """
+    Full update: every field in the request body replaces the stored value.
+
+    If the Bale channel_id changes on a channel-type entry, it's joined
+    again under the new id (groups skip this - membership already exists).
+    """
+
+    existing = crud_channels.get_channel(
+        channel_id
+    )
+
+    if not existing:
+
+        raise HTTPException(
+            status_code=404,
+            detail="Channel not found.",
+        )
+
+    data = payload.dict()
+
+    channel_id_changed = (
+        data["channel_id"]
+        != existing["channel_id"]
     )
 
     try:
 
-        doc = crud_channels.update_channel(
+        doc = crud_channels.replace_channel(
             channel_id,
-            updates,
+            data,
         )
 
     except ValueError as e:
@@ -276,21 +361,17 @@ def update_channel(
             detail=str(e),
         )
 
-    if not doc:
-
-        raise HTTPException(
-            status_code=404,
-            detail="Channel not found.",
-        )
-
     # ----------------------------------------------
-    # Bale channel_id changed
+    # Bale channel_id changed on a channel (not a group)
     # ----------------------------------------------
 
-    if "channel_id" in updates:
+    if (
+        channel_id_changed
+        and data.get("type") != "group"
+    ):
 
         _try_join(
-            doc["channel_id"]
+            data["channel_id"]
         )
 
         doc = crud_channels.get_channel(
@@ -300,76 +381,76 @@ def update_channel(
     return doc
 
 
-@router.post(
-    "/{channel_id}/rejoin"
-)
-def rejoin_channel(
-    channel_id: str,
-):
-    """
-    Manually re-join the channel.
-    """
+# @router.post(
+#     "/{channel_id}/rejoin"
+# )
+# def rejoin_channel(
+#     channel_id: str,
+# ):
+#     """
+#     Manually re-join the channel.
+#     """
 
-    doc = crud_channels.get_channel(
-        channel_id
-    )
+#     doc = crud_channels.get_channel(
+#         channel_id
+#     )
 
-    if not doc:
+#     if not doc:
 
-        raise HTTPException(
-            status_code=404,
-            detail="Channel not found.",
-        )
+#         raise HTTPException(
+#             status_code=404,
+#             detail="Channel not found.",
+#         )
 
-    if not acquire_lock(
-        JOIN_LOCK_TIMEOUT
-    ):
+#     if not acquire_lock(
+#         JOIN_LOCK_TIMEOUT
+#     ):
 
-        raise HTTPException(
-            status_code=409,
-            detail=(
-                "Another scrape run or join operation "
-                "is already in progress."
-            ),
-        )
+#         raise HTTPException(
+#             status_code=409,
+#             detail=(
+#                 "Another scrape run or join operation "
+#                 "is already in progress."
+#             ),
+#         )
 
-    try:
+#     try:
 
-        result = join_channel_in_bale(
-            doc["channel_id"]
-        )
+#         result = join_channel_in_bale(
+#             doc["channel_id"]
+#         )
 
-        if not result:
+#         if not result:
 
-            raise RuntimeError(
-                "Failed to join the Bale channel."
-            )
+#             raise RuntimeError(
+#                 "Failed to join the Bale channel."
+#             )
 
-        crud_channels.update_membership_status(
-            channel_id,
-            MembershipStatus.JOINED.value,
-        )
+#         crud_channels.update_membership_status(
+#             channel_id,
+#             MembershipStatus.JOINED.value,
+#         )
 
-    except Exception as e:
+#     except Exception as e:
 
-        crud_channels.update_membership_status(
-            channel_id,
-            MembershipStatus.FAILED.value,
-            error=str(e),
-        )
+#         crud_channels.update_membership_status(
+#             channel_id,
+#             MembershipStatus.FAILED.value,
+#             error=str(e),
+#         )
 
-        raise HTTPException(
-            status_code=502,
-            detail=str(e),
-        )
+#         raise HTTPException(
+#             status_code=502,
+#             detail=str(e),
+#         )
 
-    finally:
+#     finally:
 
-        release_lock()
+#         release_lock()
 
-    return crud_channels.get_channel(
-        channel_id
-    )
+#     return crud_channels.get_channel(
+#         channel_id
+#     )
 
 
 @router.delete(

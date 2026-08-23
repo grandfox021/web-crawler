@@ -1,29 +1,29 @@
-2026/08/23-12:46:47.963 46c46 Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
-2026/08/23-12:46:47.963 46c46 Recovering log #66
-2026/08/23-12:46:47.964 46c46 Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000066.log 
-2026/08/23-12:46:47.964 46c46 Delete type=2 #63
-2026/08/23-12:46:47.964 46c46 Delete type=2 #64
-2026/08/23-12:46:47.987 46c49 Level-0 table #72: started
-2026/08/23-12:46:47.989 46c49 Level-0 table #72: 1657 bytes OK
-2026/08/23-12:46:47.991 46c49 Delete type=0 #66
-2026/08/23-12:46:47.992 46c49 Manual compaction at level-0 from '\x00\x10\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at '\x00\x10\x00\x00\x05' @ 42901 : 1
-2026/08/23-12:46:47.992 46c49 Compacting 1@0 + 2@1 files
-2026/08/23-12:46:48.018 46c49 Generated table #73@0: 16490 keys, 2142928 bytes
-2026/08/23-12:46:48.024 46c49 Generated table #74@0: 446 keys, 528194 bytes
-2026/08/23-12:46:48.024 46c49 Compacted 1@0 + 2@1 files => 2671122 bytes
-2026/08/23-12:46:48.027 46c49 compacted to: files[ 0 2 1 0 0 0 0 ]
-2026/08/23-12:46:48.027 46c49 Delete type=2 #72
-2026/08/23-12:46:48.027 46c46 Manual compaction at level-0 from '\x00\x10\x00\x00\x05' @ 42901 : 1 .. '\x00\x11\x00\x00\x00' @ 0 : 0; will stop at (end)
-2026/08/23-12:57:18.680 46c46 Level-0 table #76: started
-2026/08/23-12:57:18.858 46c46 Level-0 table #76: 1916888 bytes OK
-2026/08/23-12:57:18.860 46c46 Delete type=2 #68
-2026/08/23-12:57:18.860 46c46 Delete type=2 #69
-2026/08/23-12:57:18.860 46c46 Delete type=0 #71
-2026/08/23-12:57:31.099 46c46 Compacting 1@0 + 2@1 files
-2026/08/23-12:57:31.125 46c46 Generated table #77@0: 17100 keys, 2145853 bytes
-2026/08/23-12:57:31.134 46c46 Generated table #78@0: 474 keys, 522620 bytes
-2026/08/23-12:57:31.134 46c46 Compacted 1@0 + 2@1 files => 2668473 bytes
-2026/08/23-12:57:31.137 46c46 compacted to: files[ 0 2 1 0 0 0 0 ]
-2026/08/23-12:57:31.137 46c46 Delete type=2 #76
-2026/08/23-12:57:31.137 46c46 Delete type=2 #73
-2026/08/23-12:57:31.137 46c46 Delete type=2 #74
+2026/08/23-14:57:16.197 659ad Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/23-14:57:16.197 659ad Recovering log #95
+2026/08/23-14:57:16.200 659ad Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000095.log 
+2026/08/23-14:57:16.200 659ad Delete type=2 #91
+2026/08/23-14:57:16.200 659ad Delete type=2 #92
+2026/08/23-14:57:16.200 659ad Delete type=2 #94
+2026/08/23-14:57:16.220 659ac Level-0 table #100: started
+2026/08/23-14:57:16.227 659ac Level-0 table #100: 738338 bytes OK
+2026/08/23-14:57:16.228 659ac Delete type=0 #95
+2026/08/23-14:57:16.228 659af Manual compaction at level-0 from '\x00\x14\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x15\x00\x00\x00' @ 0 : 0; will stop at '\x00\x14\x00\x00\x05' @ 60997 : 1
+2026/08/23-14:57:16.228 659af Compacting 1@0 + 1@1 files
+2026/08/23-14:57:16.257 659af Generated table #101@0: 18136 keys, 1318486 bytes
+2026/08/23-14:57:16.257 659af Compacted 1@0 + 1@1 files => 1318486 bytes
+2026/08/23-14:57:16.259 659af compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/08/23-14:57:16.259 659af Delete type=2 #100
+2026/08/23-14:57:16.259 659ac Manual compaction at level-0 from '\x00\x14\x00\x00\x05' @ 60997 : 1 .. '\x00\x15\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-14:57:18.256 659ad Level-0 table #103: started
+2026/08/23-14:57:18.269 659ad Level-0 table #103: 1846768 bytes OK
+2026/08/23-14:57:18.271 659ad Delete type=2 #97
+2026/08/23-14:57:18.272 659ad Delete type=0 #99
+2026/08/23-14:57:21.166 659ac Compacting 1@0 + 1@1 files
+2026/08/23-14:57:21.191 659ac Generated table #104@0: 18422 keys, 2108909 bytes
+2026/08/23-14:57:21.191 659ac Compacted 1@0 + 1@1 files => 2108909 bytes
+2026/08/23-14:57:21.194 659ac compacted to: files[ 0 1 1 0 0 0 0 ]
+2026/08/23-14:57:32.652 659ad Level-0 table #106: started
+2026/08/23-14:57:32.849 659ad Level-0 table #106: 1852466 bytes OK
+2026/08/23-14:57:32.852 659ad Delete type=2 #101
+2026/08/23-14:57:32.852 659ad Delete type=0 #102
+2026/08/23-14:57:32.852 659ad Delete type=2 #103

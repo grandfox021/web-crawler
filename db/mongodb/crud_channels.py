@@ -140,6 +140,17 @@ def update_channel(channel_id: str, updates: dict) -> Optional[dict]:
     return get_channel(channel_id)
 
 
+def replace_channel(channel_id: str, data: dict) -> Optional[dict]:
+    """
+    Full update (PUT): overwrites every field in `data` on the existing
+    document. Internal-only fields (membership_status, membership_error,
+    created_at, last_scraped_date, last_scraped_at, last_scrape_success)
+    are left untouched since they aren't part of the request body.
+    Raises ValueError if the new channel_id collides with another channel.
+    """
+    return update_channel(channel_id, data)
+
+
 def update_membership_status(
     channel_id: str,
     status: str,

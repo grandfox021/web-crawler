@@ -1,0 +1,11 @@
+{
+  "title": "خبرگزاری تسنیم",
+  "description": "خبرگزاری تسنیم سایت خبری تحلیلی ایران",
+  "channel_id": "tasnim",
+  "is_active": true,
+  "importance": 3,
+  "orientation": "political",
+  "activity_field": "iran",
+  "owner": "bale",
+  "execution_interval": "15m"
+}
