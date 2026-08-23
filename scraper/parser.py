@@ -29,25 +29,25 @@ async def clean_body(
     channel_type=None,
 ):
     """
-    استخراج اطلاعات یک پیام Bale.
+    Extract the data of a single Bale message.
 
-    خروجی شامل:
+    Returns a dict with:
 
-        عنوان
-        متن
-        لینک
-        منبع
-        نوع منبع
-        تاریخ انتشار
+        title
+        body
+        link
+        source
+        source_type
+        published_at
 
-    و دو فیلد فنی:
+    plus two technical fields:
 
         msg_date
         msg_sid
     """
 
     # ==================================================
-    # شناسه‌های پیام
+    # Message identifiers
     # ==================================================
 
     msg_sid = await message.get_attribute(
@@ -65,7 +65,7 @@ async def clean_body(
     )
 
     # ==================================================
-    # عنوان
+    # Title
     # ==================================================
 
     strongs = message.locator("strong")
@@ -80,7 +80,7 @@ async def clean_body(
         title = None
 
     # ==================================================
-    # متن
+    # Body
     # ==================================================
 
     spans = message.locator("span.p")
@@ -117,7 +117,7 @@ async def clean_body(
             body_parts.append(text)
 
     # ==================================================
-    # حذف title تکراری
+    # Drop a title that's duplicated in the body
     # ==================================================
 
     if title and body_parts:
@@ -133,7 +133,7 @@ async def clean_body(
     ).strip()
 
     # ==================================================
-    # حذف خطوط غیرضروری
+    # Drop unwanted lines
     # ==================================================
 
     lines = []
@@ -153,7 +153,7 @@ async def clean_body(
     body = " ".join(lines).strip()
 
     # ==================================================
-    # fallback
+    # Fallback
     # ==================================================
 
     if not title and body:
@@ -163,7 +163,7 @@ async def clean_body(
         body = title
 
     # ==================================================
-    # لینک خبر
+    # News link
     # ==================================================
 
     post_url = None
@@ -179,12 +179,12 @@ async def clean_body(
         ).strip()
 
     # ==================================================
-    # تاریخ انتشار
+    # Published date
     # ==================================================
 
     published_at = None
 
-    # data-date بهترین منبع است.
+    # data-date is the best source.
     if msg_date is not None:
 
         published_at = datetime.fromtimestamp(
@@ -195,7 +195,7 @@ async def clean_body(
     else:
 
         # ----------------------------------------------
-        # fallback به ساعت نمایشی
+        # fall back to the displayed time
         # ----------------------------------------------
 
         time_element = message.locator(
@@ -246,7 +246,7 @@ async def clean_body(
                     )
 
     # ==================================================
-    # منبع
+    # Source
     # ==================================================
 
     mention = message.locator(
@@ -280,27 +280,27 @@ async def clean_body(
     source = (
         mention_source
         or channel_title
-        or "نامشخص"
+        or "unknown"
     )
 
     source_type = (
         channel_type
-        or "کانال بله"
+        or "bale_channel"
     )
 
     # ==================================================
-    # خروجی
+    # Output
     # ==================================================
 
     return {
-        "عنوان": title,
-        "متن": body,
-        "لینک": post_url,
-        "منبع": source,
-        "نوع منبع": source_type,
-        "تاریخ انتشار": published_at,
+        "title": title,
+        "body": body,
+        "link": post_url,
+        "source": source,
+        "source_type": source_type,
+        "published_at": published_at,
 
-        # فیلدهای فنی
+        # technical fields
         "msg_date": msg_date,
         "msg_sid": msg_sid,
     }

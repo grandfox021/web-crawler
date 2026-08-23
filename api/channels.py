@@ -11,6 +11,7 @@ from db.mongodb import crud_channels
 from db.mongodb.channel import (
     ChannelCreate,
     ChannelUpdate,
+    MembershipStatus,
 )
 from scraper.channel_membership import (
     join_channel_in_bale,
@@ -27,9 +28,8 @@ router = APIRouter(
 )
 
 
-# چون join و scraper هر دو از profile مشترک
-# Playwright استفاده می‌کنند، باید با همان lock
-# هماهنگ باشند.
+# Join and the scraper both use the same shared Playwright profile,
+# so they need to coordinate through the same lock.
 JOIN_LOCK_TIMEOUT = int(
     os.getenv(
         "JOIN_LOCK_TIMEOUT",
@@ -39,13 +39,13 @@ JOIN_LOCK_TIMEOUT = int(
 
 
 def _try_join(
-    bale_id: str,
+    channel_id: str,
 ) -> bool:
     """
-    تلاش برای عضویت در کانال Bale.
+    Attempt to join the Bale channel.
 
-    اگر lock گرفته نشود، یعنی scraper یا عملیات
-    عضویت دیگری در حال اجراست.
+    If the lock can't be acquired, a scrape run or another join
+    operation is already in progress.
     """
 
     if not acquire_lock(
@@ -55,15 +55,15 @@ def _try_join(
         raise HTTPException(
             status_code=409,
             detail=(
-                "یک اجرای اسکرپ یا عضویت "
-                "دیگر در حال انجام است."
+                "Another scrape run or join operation "
+                "is already in progress."
             ),
         )
 
     try:
 
         result = join_channel_in_bale(
-            bale_id
+            channel_id
         )
 
         if not result:
@@ -71,7 +71,7 @@ def _try_join(
             raise HTTPException(
                 status_code=502,
                 detail=(
-                    "عضویت در کانال بله انجام نشد"
+                    "Failed to join the Bale channel."
                 ),
             )
 
@@ -85,7 +85,7 @@ def _try_join(
         raise HTTPException(
             status_code=502,
             detail=(
-                f"خطا در عضویت بله: {str(e)}"
+                f"Error joining Bale channel: {str(e)}"
             ),
         )
 
@@ -102,36 +102,33 @@ def create_channel(
     payload: ChannelCreate,
 ):
     """
-    ایجاد کانال:
+    Create a channel:
 
         1. join
-        2. اگر join موفق بود -> save Mongo
+        2. if join succeeded -> save to Mongo
     """
 
+    data = payload.dict()
 
-    data = payload.dict(
-        by_alias=True
+    existing_channel = crud_channels.get_channel_by_channel_id(
+        data.get("channel_id")
     )
-
-    existing_channel = crud_channels.get_channel_by_bale_id(data.get("آیدی کانال"))
     if existing_channel:
-        raise HTTPException(400 , "این کانال در دیتابیس وجود دارد")
-
-
-    # data = payload.dict(
-    #     by_alias=True
-    # )
+        raise HTTPException(
+            status_code=400,
+            detail="This channel already exists in the database.",
+        )
 
     # ----------------------------------------------
-    # ابتدا join
+    # join first
     # ----------------------------------------------
 
     _try_join(
-        data["آیدی کانال"]
+        data["channel_id"]
     )
 
     # ----------------------------------------------
-    # سپس ذخیره در Mongo
+    # then save to Mongo
     # ----------------------------------------------
 
     try:
@@ -148,12 +145,12 @@ def create_channel(
         )
 
     # ----------------------------------------------
-    # وضعیت عضویت
+    # membership status
     # ----------------------------------------------
 
     crud_channels.update_membership_status(
         doc["_id"],
-        "عضو شد",
+        MembershipStatus.JOINED.value,
     )
 
     return crud_channels.get_channel(
@@ -163,17 +160,35 @@ def create_channel(
 
 @router.get("")
 def list_channels(
-    status: Optional[str] = Query(
+    is_active: Optional[bool] = Query(
         default=None,
-        alias="وضعیت",
+        description="Filter by active status",
+    ),
+    q: Optional[str] = Query(
+        default=None,
+        description="Search by title or description",
+    ),
+    page_number: int = Query(
+        default=1,
+        ge=1,
+        description="1-based page index",
+    ),
+    page_size: int = Query(
+        default=10,
+        ge=1,
+        le=100,
+        description="Items per page",
     ),
 ):
     """
-    لیست کانال‌ها.
+    List channels (paginated, optionally filtered by status and/or searched by q).
     """
 
     return crud_channels.list_channels(
-        status=status
+        is_active=is_active,
+        q=q,
+        page_number=page_number,
+        page_size=page_size,
     )
 
 
@@ -184,7 +199,7 @@ def get_channel(
     channel_id: str,
 ):
     """
-    دریافت کانال با ID داخلی Mongo.
+    Get a channel by its internal Mongo ID.
     """
 
     doc = crud_channels.get_channel(
@@ -195,26 +210,25 @@ def get_channel(
 
         raise HTTPException(
             status_code=404,
-            detail="کانال پیدا نشد",
+            detail="Channel not found.",
         )
 
     return doc
 
 
 @router.get(
-    "/get_channel_by_balechannel_id/"
-    "{bale_channel_id}"
+    "/by-channel-id/{bale_channel_id}"
 )
-def get_channel_by_balechannel_id(
+def get_channel_by_channel_id(
     bale_channel_id: str,
 ):
     """
-    دریافت کانال با آیدی Bale.
+    Get a channel by its Bale channel_id.
     """
 
     doc = (
         crud_channels
-        .get_channel_by_bale_id(
+        .get_channel_by_channel_id(
             bale_channel_id
         )
     )
@@ -223,7 +237,7 @@ def get_channel_by_balechannel_id(
 
         raise HTTPException(
             status_code=404,
-            detail="کانال پیدا نشد",
+            detail="Channel not found.",
         )
 
     return doc
@@ -237,15 +251,14 @@ def update_channel(
     payload: ChannelUpdate,
 ):
     """
-    بروزرسانی کانال.
+    Update a channel.
 
-    اگر آیدی Bale تغییر کند:
-        1. cursor پاک می‌شود
-        2. کانال باید دوباره join شود
+    If the Bale channel_id changes:
+        1. it's saved
+        2. the channel must be joined again
     """
 
     updates = payload.dict(
-        by_alias=True,
         exclude_unset=True,
     )
 
@@ -267,17 +280,17 @@ def update_channel(
 
         raise HTTPException(
             status_code=404,
-            detail="کانال پیدا نشد",
+            detail="Channel not found.",
         )
 
     # ----------------------------------------------
-    # تغییر آیدی Bale
+    # Bale channel_id changed
     # ----------------------------------------------
 
-    if "آیدی کانال" in updates:
+    if "channel_id" in updates:
 
         _try_join(
-            doc["آیدی کانال"]
+            doc["channel_id"]
         )
 
         doc = crud_channels.get_channel(
@@ -294,7 +307,7 @@ def rejoin_channel(
     channel_id: str,
 ):
     """
-    عضویت مجدد دستی در کانال.
+    Manually re-join the channel.
     """
 
     doc = crud_channels.get_channel(
@@ -305,7 +318,7 @@ def rejoin_channel(
 
         raise HTTPException(
             status_code=404,
-            detail="کانال پیدا نشد",
+            detail="Channel not found.",
         )
 
     if not acquire_lock(
@@ -315,33 +328,33 @@ def rejoin_channel(
         raise HTTPException(
             status_code=409,
             detail=(
-                "یک اجرای اسکرپ یا عضویت "
-                "دیگر در حال انجام است."
+                "Another scrape run or join operation "
+                "is already in progress."
             ),
         )
 
     try:
 
         result = join_channel_in_bale(
-            doc["آیدی کانال"]
+            doc["channel_id"]
         )
 
         if not result:
 
             raise RuntimeError(
-                "عضویت در کانال بله انجام نشد"
+                "Failed to join the Bale channel."
             )
 
         crud_channels.update_membership_status(
             channel_id,
-            "عضو شد",
+            MembershipStatus.JOINED.value,
         )
 
     except Exception as e:
 
         crud_channels.update_membership_status(
             channel_id,
-            "خطا در عضویت",
+            MembershipStatus.FAILED.value,
             error=str(e),
         )
 
@@ -367,7 +380,7 @@ def delete_channel(
     channel_id: str,
 ):
     """
-    حذف کانال.
+    Delete a channel.
     """
 
     ok = crud_channels.delete_channel(
@@ -378,5 +391,5 @@ def delete_channel(
 
         raise HTTPException(
             status_code=404,
-            detail="کانال پیدا نشد",
+            detail="Channel not found.",
         )

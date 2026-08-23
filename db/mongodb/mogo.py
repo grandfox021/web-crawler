@@ -26,25 +26,25 @@ lock_collection = db["scrape_locks"]
 channels_collection = db["channels"]
 scrape_errors_collection = db["scrape_errors"]
 
-# جلوگیری از ذخیره خبر تکراری
+# Prevent duplicate news from being stored
 news_collection.create_index(
-    "هش عنوان",
+    "content_hash",
     unique=True,
 )
 
-# قفل‌های منقضی‌شده به‌صورت خودکار پاک بشن
+# Expired locks get cleaned up automatically
 lock_collection.create_index(
     "expire_at",
     expireAfterSeconds=0,
 )
 
-# هر آیدی کانال فقط یک‌بار می‌تواند ثبت شود
+# Each channel id can only be registered once
 channels_collection.create_index(
-    "آیدی کانال",
+    "channel_id",
     unique=True,
 )
 
-# خطاهای اسکرپ هم بعد از مدتی پاک بشن (اختیاری - مثلا ۳۰ روز)
+# Scrape errors also get cleaned up after a while (optional - e.g. 30 days)
 scrape_errors_collection.create_index(
     "created_at",
     expireAfterSeconds=60 * 60 * 24 * 30,

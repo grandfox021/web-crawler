@@ -24,26 +24,26 @@ headless = (
 
 MAX_RETRIES_PER_CHANNEL = 2
 
-# اولین scrape
+# first scrape
 INITIAL_MESSAGES_LIMIT = 50
 
-# حداکثر scroll برای history
+# max scroll steps for history
 MAX_HISTORY_SCROLLS = 100
 
-# مقدار حرکت به سمت پیام‌های قدیمی‌تر
+# how far to move toward older messages
 SCROLL_STEP = 1200
 
-# زمان انتظار lazy-load
+# lazy-load wait time
 SCROLL_WAIT_MS = 1200
 
-# زمان انتظار بعد از باز شدن کانال
+# wait time after a channel is opened
 CHANNEL_LOAD_WAIT_MS = 2000
 
-# چند بار باید واقعاً در ابتدای scroll بمانیم
-# تا بگوییم به ابتدای history رسیده‌ایم.
+# how many times we must genuinely stay at the top of the scroll
+# before we say we've reached the start of history
 TOP_STABLE_LIMIT = 5
 
-# چند بار bottom باید تثبیت شود
+# how many times bottom must be confirmed stable
 BOTTOM_STABLE_LIMIT = 3
 
 BASE_URL = "https://web.bale.ai"
@@ -58,14 +58,14 @@ MESSAGE_SELECTOR = ".message-item"
 
 def _log_error(channel: dict, error: Exception) -> None:
     """
-    ذخیره خطای scraper در MongoDB.
+    Store a scraper error in MongoDB.
     """
 
     scrape_errors_collection.insert_one(
         {
             "channel_id": channel.get("_id"),
-            "آیدی کانال": channel.get("آیدی کانال"),
-            "عنوان کانال": channel.get("عنوان کانال"),
+            "channel_id_bale": channel.get("channel_id"),
+            "title": channel.get("title"),
             "error": str(error),
             "traceback": traceback.format_exc(),
             "created_at": datetime.now(timezone.utc),
@@ -79,7 +79,7 @@ def _log_error(channel: dict, error: Exception) -> None:
 
 async def _ensure_channel_list_visible(page) -> None:
     """
-    برگشت به صفحه اصلی Bale.
+    Go back to the Bale main page.
     """
 
     await page.goto(BASE_URL)
@@ -92,7 +92,7 @@ async def _ensure_channel_list_visible(page) -> None:
 
 async def _get_message_dates(page) -> list[int]:
     """
-    تمام data-date های معتبر پیام‌های فعلی DOM.
+    All valid data-date values of the messages currently in the DOM.
     """
 
     return await page.evaluate(
@@ -119,7 +119,7 @@ async def _get_oldest_rendered_date(
     page,
 ) -> int | None:
     """
-    قدیمی‌ترین data-date فعلی DOM.
+    Oldest data-date currently in the DOM.
     """
 
     dates = await _get_message_dates(page)
@@ -134,7 +134,7 @@ async def _get_newest_rendered_date(
     page,
 ) -> int | None:
     """
-    جدیدترین data-date فعلی DOM.
+    Newest data-date currently in the DOM.
     """
 
     dates = await _get_message_dates(page)
@@ -151,9 +151,9 @@ async def _get_newest_rendered_date(
 
 async def _get_message_snapshot(page) -> dict:
     """
-    snapshot از وضعیت فعلی پیام‌ها.
+    Snapshot of the current message state.
 
-    برای تشخیص virtual scrolling استفاده می‌شود.
+    Used to detect virtual scrolling.
     """
 
     return await page.evaluate(
@@ -220,7 +220,7 @@ async def _get_scroll_state(
     page,
 ) -> dict | None:
     """
-    وضعیت واقعی scroll container پیام‌ها.
+    Actual state of the messages' scroll container.
     """
 
     return await page.evaluate(
@@ -349,7 +349,7 @@ async def _get_scroll_state(
 
 async def _force_scroll_bottom(page) -> bool:
     """
-    یک بار container را مستقیم به انتها می‌برد.
+    Push the container straight to the bottom, once.
     """
 
     result = await page.evaluate(
@@ -418,15 +418,15 @@ async def _force_scroll_bottom(page) -> bool:
 
 async def _scroll_to_bottom(page) -> None:
     """
-    رفتن قطعی به انتهای کانال.
+    Reliably reach the bottom of the channel.
 
-    چون Bale lazy-load دارد، بعد از رسیدن به bottom
-    چند بار دیگر وضعیت بررسی می‌شود.
+    Since Bale lazy-loads content, once we hit the bottom we
+    check the state a few more times to be sure.
     """
 
     print(
         "[BALE][BOTTOM] "
-        "شروع رفتن به انتهای کانال..."
+        "starting descent to the bottom of the channel..."
     )
 
     stable_bottom_count = 0
@@ -438,7 +438,7 @@ async def _scroll_to_bottom(page) -> None:
         if state is None:
 
             raise RuntimeError(
-                "container پیام‌های Bale پیدا نشد."
+                "Bale message container not found."
             )
 
         print(
@@ -518,10 +518,9 @@ async def _scroll_messages_up(
     page,
 ) -> dict:
     """
-    یک مرحله به سمت پیام‌های قدیمی‌تر می‌رود.
+    Moves one step toward older messages.
 
-    علاوه بر scrollTop، snapshot قبل و بعد
-    را برمی‌گرداند.
+    Returns the before/after snapshot in addition to scrollTop.
     """
 
     before_state = (
@@ -619,8 +618,7 @@ async def _scroll_messages_up(
     if not result.get("ok"):
 
         raise RuntimeError(
-            "container پیام‌های Bale "
-            "پیدا نشد."
+            "Bale message container not found."
         )
 
     await page.wait_for_timeout(
@@ -656,20 +654,20 @@ def _history_progressed(
     result: dict,
 ) -> bool:
     """
-    مشخص می‌کند آیا scroll به سمت history
-    واقعاً پیشرفت کرده یا نه.
+    Determines whether scrolling toward history actually
+    made progress.
 
-    در virtual DOM نباید فقط oldest را بررسی کنیم.
+    With a virtual DOM we can't just check "oldest".
 
-    هر کدام از این‌ها می‌تواند نشانه progress باشد:
+    Any of the following counts as progress:
 
-        scrollTop تغییر کرده
-        scrollHeight تغییر کرده
-        firstSid تغییر کرده
-        lastSid تغییر کرده
-        oldest تغییر کرده
-        newest تغییر کرده
-        SID جدید وارد DOM شده
+        scrollTop changed
+        scrollHeight changed
+        firstSid changed
+        lastSid changed
+        oldest changed
+        newest changed
+        a new SID entered the DOM
     """
 
     before_state = result["before_state"]
@@ -775,16 +773,16 @@ async def _collect_current_messages(
     collected_ids: set[str],
 ) -> tuple[int, int | None, bool]:
     """
-    پیام‌های فعلی DOM را بررسی و ذخیره می‌کند.
+    Inspects and saves the messages currently in the DOM.
 
-    خروجی:
+    Returns:
 
         saved_count
         max_date_seen
         cursor_found
     """
 
-    title = channel["عنوان کانال"]
+    title = channel["title"]
 
     messages = page.locator(
         MESSAGE_SELECTOR
@@ -895,8 +893,8 @@ async def _collect_current_messages(
                 message,
                 channel_title=title,
                 channel_type=channel.get(
-                    "نوع منبع",
-                    "کانال بله",
+                    "source_type",
+                    "bale_channel",
                 ),
             )
 
@@ -921,8 +919,8 @@ async def _collect_current_messages(
         # -------------------------------------------------
 
         if (
-            not parsed_news.get("عنوان")
-            and not parsed_news.get("متن")
+            not parsed_news.get("title")
+            and not parsed_news.get("body")
         ):
             continue
 
@@ -968,12 +966,12 @@ async def _scrape_new_channel(
     channel: dict,
 ) -> tuple[int, int]:
     """
-    اولین scrape کانال.
+    First-time scrape of a channel.
 
-    آخرین INITIAL_MESSAGES_LIMIT پیام را می‌گیرد.
+    Fetches the last INITIAL_MESSAGES_LIMIT messages.
     """
 
-    title = channel["عنوان کانال"]
+    title = channel["title"]
 
     print(
         f"[BALE][NEW] "
@@ -1066,7 +1064,7 @@ async def _scrape_new_channel(
         )
 
         # -------------------------------------------------
-        # هدف رسید
+        # target reached
         # -------------------------------------------------
 
         if (
@@ -1112,7 +1110,7 @@ async def _scrape_new_channel(
         )
 
         # -------------------------------------------------
-        # تشخیص ابتدای واقعی
+        # detect real start of history
         # -------------------------------------------------
 
         if progressed:
@@ -1142,14 +1140,14 @@ async def _scrape_new_channel(
 
                 print(
                     "[BALE][NEW] "
-                    "به ابتدای واقعی "
-                    "تاریخچه رسیدیم."
+                    "reached the real start "
+                    "of history."
                 )
 
                 break
 
         # -------------------------------------------------
-        # هیچ پیام جدیدی جمع نشد
+        # no new messages collected
         # -------------------------------------------------
 
         if (
@@ -1160,8 +1158,7 @@ async def _scrape_new_channel(
 
             print(
                 "[BALE][NEW] "
-                "هیچ progress جدیدی "
-                "دیده نشد."
+                "no new progress observed."
             )
 
     # -----------------------------------------------------
@@ -1184,8 +1181,8 @@ async def _scrape_new_channel(
     if max_date_seen is None:
 
         raise RuntimeError(
-            "هیچ پیام معتبری برای "
-            "کانال جدید پیدا نشد."
+            "No valid message was found "
+            "for the new channel."
         )
 
     print(
@@ -1213,17 +1210,17 @@ async def _scrape_existing_channel(
     last_scraped_date: int,
 ) -> tuple[int, int]:
     """
-    scrape کانال موجود.
+    Scrape an existing channel.
 
-    مهم:
+    Important:
 
-    cursor قبلی باید واقعاً در DOM دیده شود.
+    The previous cursor must actually be seen in the DOM.
 
-    اگر cursor پیدا نشود، تابع موفق محسوب نمی‌شود
-    و cursor جدید به MongoDB داده نمی‌شود.
+    If the cursor isn't found, the function is not considered
+    successful and the new cursor is not persisted to MongoDB.
     """
 
-    title = channel["عنوان کانال"]
+    title = channel["title"]
 
     print(
         f"[BALE][EXISTING] "
@@ -1255,12 +1252,12 @@ async def _scrape_existing_channel(
         ):
 
             raise RuntimeError(
-                "MAX_HISTORY_SCROLLS رسید "
-                "ولی cursor پیدا نشد."
+                "MAX_HISTORY_SCROLLS reached "
+                "but cursor was not found."
             )
 
         # -------------------------------------------------
-        # Snapshot قبل
+        # snapshot before
         # -------------------------------------------------
 
         before_snapshot = (
@@ -1300,11 +1297,11 @@ async def _scrape_existing_channel(
 
             print(
                 f"[BALE][EXISTING] "
-                f"cursor پیدا شد."
+                f"cursor found."
             )
 
         # -------------------------------------------------
-        # Snapshot بعد collect
+        # snapshot after collect
         # -------------------------------------------------
 
         snapshot = (
@@ -1336,7 +1333,7 @@ async def _scrape_existing_channel(
         )
 
         # -------------------------------------------------
-        # Cursor پیدا شد
+        # cursor was found
         # -------------------------------------------------
 
         if cursor_found:
@@ -1344,7 +1341,7 @@ async def _scrape_existing_channel(
             break
 
         # -------------------------------------------------
-        # بررسی اینکه در بالای واقعی هستیم
+        # check whether we're at the real top
         # -------------------------------------------------
 
         if (
@@ -1354,8 +1351,8 @@ async def _scrape_existing_channel(
         ):
 
             raise RuntimeError(
-                "به ابتدای واقعی تاریخچه رسیدیم "
-                "ولی last_scraped_date پیدا نشد."
+                "Reached the real start of history "
+                "but last_scraped_date was not found."
             )
 
         # -------------------------------------------------
@@ -1409,7 +1406,7 @@ async def _scrape_existing_channel(
             no_progress_count += 1
 
         # -------------------------------------------------
-        # اگر چند بار هیچ progress نبود
+        # if there's been no progress for a while
         # -------------------------------------------------
 
         if (
@@ -1430,22 +1427,22 @@ async def _scrape_existing_channel(
             ):
 
                 raise RuntimeError(
-                    "به ابتدای تاریخچه رسیدیم "
-                    "ولی cursor پیدا نشد."
+                    "Reached the start of history "
+                    "but cursor was not found."
                 )
 
     # =====================================================
-    # فقط در صورت پیدا شدن cursor
+    # only when the cursor was actually found
     # =====================================================
 
     if not cursor_found:
 
         raise RuntimeError(
-            "cursor پیدا نشد."
+            "Cursor not found."
         )
 
     # -----------------------------------------------------
-    # جدیدترین تاریخ
+    # newest date
     # -----------------------------------------------------
 
     newest_date = (
@@ -1483,11 +1480,11 @@ async def _scrape_single_channel(
     channel: dict,
 ) -> tuple[int, int]:
     """
-    تعیین می‌کند کانال جدید است
-    یا existing.
+    Determines whether the channel is new
+    or existing.
     """
 
-    title = channel["عنوان کانال"]
+    title = channel["title"]
 
     raw_cursor = channel.get(
         "last_scraped_date"
@@ -1544,9 +1541,20 @@ async def _scrape_single_channel(
 
     if await dialog.count() == 0:
 
+        visible_titles = await page.locator(
+            DIALOG_SELECTOR
+        ).all_text_contents()
+
+        print(
+            f"[BALE][DEBUG] "
+            f"channel '{title}' not matched. "
+            f"visible chat titles: "
+            f"{visible_titles[:20]}"
+        )
+
         raise RuntimeError(
-            f"کانال «{title}» "
-            f"در لیست چت‌ها پیدا نشد."
+            f"Channel '{title}' "
+            f"was not found in the chat list."
         )
 
     await dialog.first.click()
@@ -1583,7 +1591,7 @@ async def _scrape_single_channel(
 
 async def scrape_all_channels() -> dict:
     """
-    scrape تمام کانال‌های فعال.
+    Scrape all active channels.
     """
 
     channels = get_active_channels()
@@ -1638,7 +1646,7 @@ async def scrape_all_channels() -> dict:
                 print(
                     f"[BALE] "
                     f"channel="
-                    f"{channel['عنوان کانال']} "
+                    f"{channel['title']} "
                     f"attempt={attempt}"
                 )
 
@@ -1653,7 +1661,7 @@ async def scrape_all_channels() -> dict:
                     )
 
                     # -------------------------------------------------
-                    # فقط اجرای واقعاً موفق cursor را update می‌کند
+                    # only a truly successful run updates the cursor
                     # -------------------------------------------------
 
                     mark_channel_scraped(
@@ -1666,7 +1674,7 @@ async def scrape_all_channels() -> dict:
                     summary["success"].append(
                         {
                             "channel_id":
-                                channel_id,
+                                str(channel_id),
                             "saved":
                                 saved,
                             "last_message_date":
@@ -1677,7 +1685,7 @@ async def scrape_all_channels() -> dict:
                     print(
                         f"[BALE][SUCCESS] "
                         f"channel="
-                        f"{channel['عنوان کانال']} "
+                        f"{channel['title']} "
                         f"saved={saved} "
                         f"last_message_date="
                         f"{last_date}"
@@ -1694,7 +1702,7 @@ async def scrape_all_channels() -> dict:
                     print(
                         f"[BALE][ERROR] "
                         f"channel="
-                        f"{channel['عنوان کانال']} "
+                        f"{channel['title']} "
                         f"attempt={attempt} "
                         f"error={e}"
                     )
@@ -1704,7 +1712,7 @@ async def scrape_all_channels() -> dict:
                     )
 
             # ---------------------------------------------------------
-            # همه تلاش‌ها شکست خورد
+            # all attempts failed
             # ---------------------------------------------------------
 
             if last_error is not None:
@@ -1722,7 +1730,7 @@ async def scrape_all_channels() -> dict:
                 summary["failed"].append(
                     {
                         "channel_id":
-                            channel_id,
+                            str(channel_id),
                         "error":
                             str(last_error),
                     }

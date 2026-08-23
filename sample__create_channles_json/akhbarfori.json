@@ -1,13 +1,13 @@
 {
-  "عنوان کانال": "خبرفوری",
-  "توضیحات": "خبر",
-  "آیدی کانال": "akhbarfori",
-  "وضعیت": "فعال",
-  "زبان": "فارسی",
-  "سطح اهمیت": "خیلی زیاد",
-  "سال تاسیس": 1400,
-  "جهت گیری": "نظامی",
-  "زمینه فعالیت": "ارتش",
-  "مالک کانال": "بله",
-  "زمان اجرا": "30 دقیقه"
+  "title": "Khabar Fori",
+  "description": "News",
+  "channel_id": "akhbarfori",
+  "is_active": true,
+  "language": "fa",
+  "importance": "very_high",
+  "founded_year": 1400,
+  "orientation": "military",
+  "activity_field": "defense",
+  "owner": "bale",
+  "execution_interval": "30m"
 }

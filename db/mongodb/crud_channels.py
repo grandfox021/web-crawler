@@ -1,287 +1,214 @@
 from datetime import datetime, timezone
+from time import perf_counter
+from typing import Optional
 
 from bson import ObjectId
 from bson.errors import InvalidId
-from pymongo.errors import DuplicateKeyError
 
 from .mogo import channels_collection
 
 
-def _now():
-    return datetime.now(timezone.utc)
+def _serialize(doc: dict) -> dict:
+    doc = dict(doc)
+    doc["_id"] = str(doc["_id"])
+    return doc
 
 
-def _serialize_channel(doc: dict | None) -> dict | None:
-    """
-    تبدیل Document مونگو به دیکشنری قابل استفاده در FastAPI.
-    """
-
-    if not doc:
+def _to_object_id(channel_id: str) -> Optional[ObjectId]:
+    try:
+        return ObjectId(channel_id)
+    except (InvalidId, TypeError):
         return None
 
-    doc = dict(doc)
 
-    if "_id" in doc:
-        doc["_id"] = str(doc["_id"])
-
-    return doc
+def get_channel_by_channel_id(channel_id: str) -> Optional[dict]:
+    """Look up a channel by its Bale channel_id (e.g. '@iribnews')."""
+    doc = channels_collection.find_one({"channel_id": channel_id})
+    return _serialize(doc) if doc else None
 
 
 def create_channel(data: dict) -> dict:
-    data = dict(data)
-
-    data["ایجاد شده در"] = _now()
-    data["به‌روزرسانی شده در"] = _now()
-
-    # ---------------------------------------------------------
-    # cursor اولیه
-    # ---------------------------------------------------------
-
-    data["last_scraped_date"] = None
-
-    data["آخرین اسکرپ موفق"] = None
-
-    data["وضعیت عضویت"] = "عضو شد"
-    data["خطای عضویت"] = None
+    """Insert a new channel document. Raises ValueError if channel_id already exists."""
+    document = {
+        **data,
+        "membership_status": None,
+        "membership_error": None,
+        "created_at": datetime.now(timezone.utc),
+    }
 
     try:
+        result = channels_collection.insert_one(document)
+    except Exception as e:
+        if "duplicate key" in str(e).lower():
+            raise ValueError("This channel already exists in the database")
+        raise
 
-        result = channels_collection.insert_one(data)
+    document["_id"] = result.inserted_id
+    return _serialize(document)
 
-    except DuplicateKeyError:
 
-        raise ValueError(
-            "کانالی با این آیدی قبلاً ثبت شده است"
-        )
+def get_channel(channel_id: str) -> Optional[dict]:
+    """Look up a channel by its internal Mongo _id."""
+    object_id = _to_object_id(channel_id)
+    if object_id is None:
+        return None
 
-    data["_id"] = str(result.inserted_id)
-
-    return data
+    doc = channels_collection.find_one({"_id": object_id})
+    return _serialize(doc) if doc else None
 
 
 def list_channels(
-    status: str | None = None,
-) -> list[dict]:
+    is_active: Optional[bool] = None,
+    q: Optional[str] = None,
+    page_number: int = 1,
+    page_size: int = 10,
+) -> dict:
+    """
+    Paginated channel listing, newest first.
+
+    q: optional case-insensitive search matched against title OR description.
+    """
+    if page_number is None or page_number < 1:
+        page_number = 1
+
+    if page_size is None or page_size < 1:
+        page_size = 10
 
     query = {}
+    if is_active is not None:
+        query["is_active"] = is_active
 
-    if status:
-        query["وضعیت"] = status
+    if q:
+        query["$or"] = [
+            {"title": {"$regex": q, "$options": "i"}},
+            {"description": {"$regex": q, "$options": "i"}},
+        ]
 
-    docs = list(
+    started_at = perf_counter()
+
+    skip = (page_number - 1) * page_size
+    total_count = channels_collection.count_documents(query)
+
+    cursor = (
         channels_collection
         .find(query)
         .sort("_id", -1)
+        .skip(skip)
+        .limit(page_size)
     )
 
-    for d in docs:
+    records = [_serialize(doc) for doc in cursor]
 
-        d["_id"] = str(d["_id"])
+    time_elapsed = perf_counter() - started_at
 
-    return docs
+    total_page = (total_count + page_size - 1) // page_size if page_size else 0
 
-
-def get_channel(
-    channel_id: str,
-) -> dict | None:
-
-    try:
-
-        oid = ObjectId(channel_id)
-
-    except InvalidId:
-
-        return None
-
-    doc = channels_collection.find_one(
-        {"_id": oid}
-    )
-
-    if doc:
-
-        doc["_id"] = str(doc["_id"])
-
-    return doc
-
-
-def get_channel_by_bale_id(
-    bale_channel_id: str,
-) -> dict | None:
-
-    doc = channels_collection.find_one(
-        {
-            "آیدی کانال": bale_channel_id
-        }
-    )
-
-    return _serialize_channel(doc)
-
-
-def update_channel(
-    channel_id: str,
-    updates: dict,
-) -> dict | None:
-
-    try:
-
-        oid = ObjectId(channel_id)
-
-    except InvalidId:
-
-        return None
-
-    updates = {
-        k: v
-        for k, v in updates.items()
-        if v is not None
+    return {
+        "_metadata": {
+            "total_count": total_count,
+            "total_page": total_page,
+            "page_number": page_number,
+            "per_page": page_size,
+            "time_elapsed": round(time_elapsed, 5),
+        },
+        "records": records,
     }
+
+
+def update_channel(channel_id: str, updates: dict) -> Optional[dict]:
+    """Partial update. Raises ValueError if the new channel_id collides with another channel."""
+    object_id = _to_object_id(channel_id)
+    if object_id is None:
+        return None
 
     if not updates:
-
         return get_channel(channel_id)
 
-    updates["به‌روزرسانی شده در"] = _now()
-
-    # ---------------------------------------------------------
-    # اگر Bale ID کانال عوض شود، cursor قبلی معتبر نیست.
-    # ---------------------------------------------------------
-
-    if "آیدی کانال" in updates:
-
-        updates["وضعیت عضویت"] = "در صف عضویت"
-
-        updates["خطای عضویت"] = None
-
-        updates["last_scraped_date"] = None
-
-        updates["آخرین اسکرپ موفق"] = None
-
     try:
-
-        channels_collection.update_one(
-            {"_id": oid},
+        result = channels_collection.update_one(
+            {"_id": object_id},
             {"$set": updates},
         )
+    except Exception as e:
+        if "duplicate key" in str(e).lower():
+            raise ValueError("Another channel already uses this channel_id")
+        raise
 
-    except DuplicateKeyError:
-
-        raise ValueError(
-            "کانالی با این آیدی قبلاً ثبت شده است"
-        )
+    if result.matched_count == 0:
+        return None
 
     return get_channel(channel_id)
-
-
-def delete_channel(
-    channel_id: str,
-) -> bool:
-
-    try:
-
-        oid = ObjectId(channel_id)
-
-    except InvalidId:
-
-        return False
-
-    result = channels_collection.delete_one(
-        {"_id": oid}
-    )
-
-    return result.deleted_count > 0
-
-
-def get_active_channels() -> list[dict]:
-    """
-    کانال‌هایی که توسط scheduler باید scrape شوند.
-    """
-
-    return list_channels(
-        status="فعال"
-    )
-
-
-def mark_channel_scraped(
-    channel_id: str,
-    success: bool,
-    last_message_date: int | None = None,
-) -> None:
-    """
-    ثبت نتیجه اسکرپ.
-
-    نکته مهم:
-    last_scraped_date فقط در صورت success=True
-    و داشتن timestamp معتبر update می‌شود.
-    """
-
-    try:
-
-        oid = ObjectId(channel_id)
-
-    except InvalidId:
-
-        return
-
-    if not success:
-        return
-
-    # ---------------------------------------------------------
-    # cursor نامعتبر را ذخیره نکن
-    # ---------------------------------------------------------
-
-    if last_message_date is None:
-        return
-
-    try:
-
-        last_message_date = int(
-            last_message_date
-        )
-
-    except (TypeError, ValueError):
-
-        return
-
-    if last_message_date <= 0:
-        return
-
-    # ---------------------------------------------------------
-    # Update
-    # ---------------------------------------------------------
-
-    update = {
-        "آخرین اسکرپ موفق": _now(),
-        "last_scraped_date": last_message_date,
-        "به‌روزرسانی شده در": _now(),
-    }
-
-    channels_collection.update_one(
-        {"_id": oid},
-        {"$set": update},
-    )
 
 
 def update_membership_status(
     channel_id: str,
     status: str,
-    error: str | None = None,
+    error: Optional[str] = None,
 ) -> None:
-
-    try:
-
-        oid = ObjectId(channel_id)
-
-    except InvalidId:
-
+    object_id = _to_object_id(channel_id)
+    if object_id is None:
         return
 
     channels_collection.update_one(
-        {"_id": oid},
+        {"_id": object_id},
         {
             "$set": {
-                "وضعیت عضویت": status,
-                "خطای عضویت": error,
-                "به‌روزرسانی شده در": _now(),
+                "membership_status": status,
+                "membership_error": error,
             }
         },
+    )
+
+
+def delete_channel(channel_id: str) -> bool:
+    object_id = _to_object_id(channel_id)
+    if object_id is None:
+        return False
+
+    result = channels_collection.delete_one({"_id": object_id})
+    return result.deleted_count > 0
+
+
+def get_active_channels() -> list:
+    """
+    Return all active channels for internal scraper use.
+    Unlike list_channels(), this returns raw Mongo documents
+    (ObjectId _id kept as-is) since the scraper needs to pass
+    _id straight back into mark_channel_scraped().
+    """
+    return list(channels_collection.find({"is_active": True}))
+
+
+def mark_channel_scraped(
+    channel_id,
+    success: bool,
+    last_message_date: Optional[int] = None,
+) -> None:
+    """
+    Record the outcome of a scrape attempt for a channel.
+
+    channel_id: the Mongo _id of the channel (ObjectId or str),
+    as returned by get_active_channels().
+    last_message_date: only persisted as the new cursor when success=True,
+    so a failed run never corrupts the existing cursor.
+    """
+    object_id = (
+        channel_id
+        if isinstance(channel_id, ObjectId)
+        else _to_object_id(str(channel_id))
+    )
+    if object_id is None:
+        return
+
+    update = {
+        "last_scraped_at": datetime.now(timezone.utc),
+        "last_scrape_success": success,
+    }
+
+    if success and last_message_date is not None:
+        update["last_scraped_date"] = last_message_date
+
+    channels_collection.update_one(
+        {"_id": object_id},
+        {"$set": update},
     )
