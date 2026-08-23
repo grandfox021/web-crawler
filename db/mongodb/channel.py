@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Optional
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field,StrictBool
 
 
 class ChatType(str, Enum):
@@ -55,7 +55,7 @@ class ChannelCreate(ChannelBase):
 class ChannelStatusUpdate(BaseModel):
     """Body for PATCH - toggles active status only, nothing else."""
 
-    is_active: bool
+    is_active: StrictBool
 
 
 class ChannelOut(ChannelBase):

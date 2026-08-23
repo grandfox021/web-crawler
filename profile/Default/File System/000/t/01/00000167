@@ -15606,3 +15606,1213 @@
 [14:57:25.880] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":0.2,"resultCount":2,"timingScope":"worker_round_trip"}
 [14:57:25.890] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":0.4,"resultCount":2,"timingScope":"worker_round_trip"}
 [14:57:25.890] [Debug:ACS] MessagesEvent/UpdateMessages - dispatching immediately
+[15:21:35.757] [Info:Metadata Headers] {"app_version":"167429","browser_type":"1","browser_version":"151.0.0.0","os_type":"4","session_id":"1787485895757","mt_app_version":"167429","mt_browser_type":"1","mt_browser_version":"151.0.0.0","mt_os_type":"4","mt_session_id":"1787485895757"}
+[15:21:35.765] [Info:App Version] 5.5.0 - 167429, Browser: ,chrome - 151.0.0.0, Platform: ,Linux, OS: ,linux - undefined
+[15:21:35.766] [Info:local storage is available] 
+[15:21:35.779] [Info:QueryDB Worker] IDB Worker created via createWorkerDB
+[15:21:35.779] [Debug:DB KV] Opening DB,kv,1
+[15:21:35.779] [Debug:DB KV] Reading stored versions,kv
+[15:21:35.779] [Info:Core] Api mode,linux
+[15:21:35.780] [Warn:Core] init CoreAuth
+[15:21:35.780] [Warn:Core] state,0
+[15:21:35.780] [Debug:DB] Opening DB,db,31
+[15:21:35.780] [Debug:DB] Reading stored versions,db
+[15:21:35.780] [Debug:filesDB] Opening DB,files-db,8
+[15:21:35.780] [Debug:filesDB] Reading stored versions,files-db
+[15:21:35.780] [Debug:DB KV] Stored versions read successfully,kv
+[15:21:35.780] [Debug:DB] Stored versions read successfully,db
+[15:21:35.781] [Info:RemoteConfig] Remote config loaded
+[15:21:35.782] [Debug:filesDB] Stored versions read successfully,files-db
+[15:21:35.782] [Debug:DB KV] Opening DB request,kv,2
+[15:21:35.782] [Debug:DB] Opening DB request,db,2
+[15:21:35.782] [Debug:filesDB] Opening DB request,files-db,2
+[15:21:35.782] [Debug:DB KV] DB Opened Successfully!,0,false
+[15:21:35.782] [Warn:DB KV] Check: Database "kv" no object store Checks !!!
+[15:21:35.782] [Debug:DB] DB Opened Successfully!,0,false
+[15:21:35.782] [Info:DB] Check: Database "db" has all object stores, all good
+[15:21:35.782] [Info:object stores after openDB = ] {"0":"_schema","1":"bills","2":"charges","3":"comments","4":"configs","5":"contacts","6":"dialog_click","7":"dialogs","8":"feed_messages","9":"flow_recent_search","10":"folders","11":"full_groups","12":"full_users","13":"groups","14":"orders","15":"peer_recent_search","16":"pending_messages","17":"pending_operations","18":"pinned_dialogs","19":"recommended_peers","20":"saved_gifs","21":"scheduled_peers","22":"sequences","23":"short_dialogs","24":"sticker_collections","25":"top_peers","26":"users","27":"vitrine"}
+[15:21:35.783] [Debug:filesDB] DB Opened Successfully!,0,false
+[15:21:35.783] [Info:filesDB] Check: Database "files-db" has all object stores, all good
+[15:21:35.861] [Info:Core] Static modules are initialized
+[15:21:35.861] [Warn:AuthModule] Tokens,false,true
+[15:21:35.861] [Info:Measure Init App] 96.79999999701977
+[15:21:35.863] [Debug:ACS] Auth/changeAuthState - dispatching immediately
+[15:21:35.863] [Debug:ACS] Auth/setAuthenticatedUser - dispatching immediately
+[15:21:35.868] [Debug:ACS] Scheduling action mainSectionRouting/setMainSectionRoute | 1
+[15:21:35.871] [Debug:ACS] Scheduling action Entry/setEntry | 1
+[15:21:35.871] [Debug:Seraj Log Analytics Event] web_vitals_FCP,{"value":100,"delta":100,"url":"/"}
+[15:21:35.872] [Info:Measure init app render: ] 107.09999999776483
+[15:21:35.874] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:35.874] [Debug:Seraj Log Analytics Event] web_vitals_TTFB,{"value":14,"delta":14,"url":"/"}
+[15:21:35.880] [Debug:ACS] Scheduling action Settings/Received | 1
+[15:21:35.880] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_vitals_FCP","date":1787485895880}
+[15:21:35.880] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_vitals_TTFB","date":1787485895880}
+[15:21:35.884] [Debug:ACS] Scheduling action Users/setFullUsers | 1
+[15:21:35.885] [Debug:ACS] Auth/setAuthenticatedUser - dispatching immediately
+[15:21:35.904] [Debug:ACS] Scheduling action Settings/Received | 1
+[15:21:36.660] [Debug:ACS] Dispatching mainSectionRouting/setMainSectionRoute
+[15:21:36.670] [Debug:ACS] Dispatching Entry/setEntry
+[15:21:36.700] [Debug:ACS] Dispatching Settings/Received
+[15:21:36.770] [Debug:ACS] Dispatching Users/setFullUsers
+[15:21:36.770] [Debug:ACS] Dispatching Settings/Received
+[15:21:36.193] [Info:Core] Loading dynamic modules
+[15:21:36.194] [Warn:PowerSavingManager] sync,true
+[15:21:36.196] [Debug:PowerSavingManager] battery,{}
+[15:21:36.196] [Debug:PowerSavingManager] battery,{}
+[15:21:36.217] [Info:CoreModuleBuilder] Using IndexedDB-backed message history (worker)
+[15:21:36.218] [Info:Core] Dynamic modules are initialized
+[15:21:36.218] [Info:Core] Start
+[15:21:36.218] [Warn:EventsModule:New] Start Event
+[15:21:36.218] [Info:EventsModule:New] ApplyEventsByRouteInParallel,false
+[15:21:36.219] [Info:SerajEventModule] seraj configs loaded,{"size":30,"interval":30000,"filterEnabled":true,"allowedEvents":["web_chat_performance_inp","web_chat_performance_loaf_work","web_chat_performance_loaf_render","time_in_chat","open_dialogue","get_ad_provider","services_click_action","navigation_select_tab","services_interactive_bot","ad_dialogue_view","ad_dialogue_click","event_bar","push","mini_apps","ai_tab","install_ios_promotion","web_app_bar_eventbar"]}
+[15:21:36.219] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.219] [Debug:DB] preload,configs
+[15:21:36.219] [Debug:DB] preload,users
+[15:21:36.219] [Debug:DB] preload,groups
+[15:21:36.219] [Debug:DB] preload,dialogs
+[15:21:36.219] [Debug:DB] preload,folders
+[15:21:36.219] [Debug:DB] preload,pinned_dialogs
+[15:21:36.219] [Debug:WS] open,wss://next-ws.bale.ai/ws/
+[15:21:36.219] [Debug:WS] _open
+[15:21:36.220] [Debug:WS] ws,state,unknown
+[15:21:36.223] [Debug:Status] isSyncing,true
+[15:21:36.223] [Debug:Status] current,isConnecting,next,isSyncing
+[15:21:36.223] [Debug:ACS] OtherSlice/appStatusChanged - dispatching immediately
+[15:21:36.224] [Debug:Status] isConnecting,0
+[15:21:36.224] [Debug:Status] current,isSyncing,next,isSyncing
+[15:21:36.224] [Debug:ACS] OtherSlice/appStatusChanged - dispatching immediately
+[15:21:36.224] [Debug:ACS] Scheduling action RecentStickers | 1
+[15:21:36.226] [Debug:SW] Register
+[15:21:36.229] [Info:SchedulerModule] peersWithScheduleTask: loading from cache
+[15:21:36.230] [Debug:[Notification]] start initial notification
+[15:21:36.230] [Debug:SW] Registered
+[15:21:36.230] [Debug:ACS] Scheduling action notification/initialPushNotification | 1
+[15:21:36.231] [Warn:EventsModule:New] Should get Diff,true
+[15:21:36.231] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.231] [Debug:Status] isSyncing,true
+[15:21:36.231] [Debug:Status] current,isSyncing,next,isSyncing
+[15:21:36.231] [Debug:ACS] OtherSlice/appStatusChanged - dispatching immediately
+[15:21:36.232] [Debug:EventsModule:New] Routes: ,{}
+[15:21:36.232] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.233] [Warn:EventsModule:New] Connection
+[15:21:36.233] [Error:EventsApi] Stream error,Connction not ok!
+[15:21:36.233] [Error:EventsModule:New] Subscribe Error,Connction not ok!
+[15:21:36.233] [Info:EventsApi] Cancel subscribe to updates, ID: ,0
+[15:21:36.240] [Debug:lazyModule] Module loaded:,emoji,627.1000000014901
+[15:21:36.241] [Info:recorder usingTGVoiceRecorder] 
+[15:21:36.241] [Debug:Web-Meet: Provider] token,false
+[15:21:36.242] [Debug:Web-Meet: Provider] ID,undefined
+[15:21:36.242] [Info:Web-Meet: Provider] meet Props memo
+[15:21:36.242] [Debug:ACS] Scheduling action mainSectionRouting/setMainSectionRoute | 1
+[15:21:36.242] [Info:Meet: Sound Notifier] stop sound notifier
+[15:21:36.246] [Debug:DB] preload
+[15:21:36.247] [Debug:DB] preload
+[15:21:36.251] [Debug:DB] preload
+[15:21:36.251] [Debug:DB] preload
+[15:21:36.251] [Debug:DB] preload
+[15:21:36.251] [Debug:DB] preload
+[15:21:36.252] [Info:SyncPendingOps] no pending operations to sync
+[15:21:36.252] [Info:SchedulerModule] loadFromCache: loaded,0,peers
+[15:21:36.252] [Info:SchedulerEpics] getPeersWithScheduledTasks response,{"exPeer":[]}
+[15:21:36.252] [Debug:ACS] Scheduling action scheduler/setPeersWithScheduledTasks | 1
+[15:21:36.256] [Debug:lazyModule] Module loaded:,meet,643.1000000014901
+[15:21:36.257] [Debug:Meet: Room Provider] configs changed
+[15:21:36.257] [Info:Meet: Room Provider] meet library rendered
+[15:21:36.313] [Debug:ACS] Dialogs/LoadDialogs - dispatching immediately
+[15:21:36.314] [Warn:DialogsModule] Load Dialogs,0,{"isLoaded":true,"lastLoadedDate":1787232600238},9007199254740991
+[15:21:36.314] [Warn:DialogsModule] Load Dialogs,From cache,{"folderId":0,"info":{"isLoaded":true,"lastLoadedDate":1787232600238},"date":9007199254740991}
+[15:21:36.314] [Debug:DialogsModule] cache-load: begin,{"tag":"dialogs:0","next":1}
+[15:21:36.315] [Debug:DialogsModule] [perf] getAll,{"folderId":0,"time":0}
+[15:21:36.315] [Info:DialogsModule] [perf] filter dialogs,{"folderId":0,"time":0.30000000074505806}
+[15:21:36.315] [Debug:ACS] DialogsSlice/dialogsLoading - dispatching immediately
+[15:21:36.316] [Warn:Dialog Slice] dialogs loading. info:,undefined,undefined
+[15:21:36.317] [Debug:ACS] Dialogs/LoadPinnedDialogs - dispatching immediately
+[15:21:36.317] [Debug:DialogsModule] loadPinnedDialogs,before from cache
+[15:21:36.317] [Debug:DialogsModule] cache-load: begin,{"tag":"pinnedDialogs:0","next":2}
+[15:21:36.317] [Debug:DialogsModule] loadPinnedDialogs, dialogs,[]
+[15:21:36.318] [Debug:DialogsModule] cache-load: end,{"tag":"pinnedDialogs:0","next":1}
+[15:21:36.318] [Debug:ACS] DialogsSlice/pinnedDialogs - dispatching immediately
+[15:21:36.319] [Debug:ACS] Scheduling action Contacts/GetContacts | 1
+[15:21:36.319] [Debug:ACS] Scheduling action Tooltip/fireEvent | 1
+[15:21:36.319] [Debug:ACS] Folders/LoadFolders - dispatching immediately
+[15:21:36.320] [Debug:ACS] Scheduling action folders/setAreFoldersLoading | 1
+[15:21:36.320] [Debug:Set Presence Online initial] true
+[15:21:36.320] [Debug:ACS] Scheduling action Presence/SetOnline | 1
+[15:21:36.321] [Debug:ACS] sidebarSearch/changeSidebarSearchQuery - dispatching immediately
+[15:21:36.321] [Debug:ACS] Scheduling action FlowMagazine/getUpvoteMessages | 0
+[15:21:36.321] [Debug:ACS] Scheduling action FeedMessages/loadFeedCategories | 1
+[15:21:36.321] [Debug:Seraj Log Analytics Event] navigation_select_tab,{"tab_title":"گفتگو","tab_number":0}
+[15:21:36.322] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"navigation_select_tab","date":1787485896322}
+[15:21:36.322] [Debug:Meet: Room Provider] callConfigs,{"voiceConfig":{"audioBitrate":24000},"videoConfig":{"maxBitrate":1000000,"maxFps":30,"videoCodec":"vp9","simulcast":true,"screenShareConfig":{"maxBitrate":800000,"maxFps":15}}}
+[15:21:36.323] [Info:Meet: Room Provider] meet room changed
+[15:21:36.324] [Info:Meet: Room Provider] meet library rendered
+[15:21:36.328] [Info:Meet: Room Provider] meet room changed
+[15:21:36.329] [Info:FoldersModule] start loadFolders
+[15:21:36.330] [Info:DialogsModule] [AutoLoad] START,{"folderId":0,"date":9007199254740991,"totalDialogs":6,"limit":60,"infoIsLoaded":true}
+[15:21:36.331] [Info:DialogsModule] [AutoLoad] Archive not active, returning as-is
+[15:21:36.331] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.333] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:36.335] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.335] [Debug:DialogsModule] load entities,{"folderId":0,"date":9007199254740991,"length":6,"info":{"isLoaded":true,"lastLoadedDate":1787232600238},"time":4}
+[15:21:36.335] [Debug:DialogsModule] load dialogs from cache complete,{"folderId":0,"time":20.5},[{"peer":{"type":2,"id":754050954},"unreadCount":0,"sortDate":1787484407215,"senderUid":638436066,"rid":"4291823684484100618","date":1787484407215,"state":4,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215},{"peer":{"type":2,"id":1848358662},"unreadCount":57,"sortDate":1787484335527,"senderUid":1387800613,"rid":"1456897424772902021","date":1787484335527,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false},{"peer":{"type":2,"id":204859899},"unreadCount":24,"sortDate":1787484049282,"senderUid":1367269737,"rid":"8007395272275524101","date":1787484049282,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false},{"peer":{"type":2,"id":533692756},"unreadCount":20,"sortDate":1787483913727,"senderUid":1679882808,"rid":"8882276334544795279","date":1787483913727,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false},{"peer":{"type":1,"id":10},"unreadCount":4,"sortDate":1787466196027,"senderUid":10,"rid":"6613838261305279971","date":1787466196027,"state":2,"firstUnreadDate":0,"exInfo":{"exPeerType":4,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":10},{"peer":{"type":2,"id":255637216},"unreadCount":0,"sortDate":1787232600238,"senderUid":1995566227,"rid":"3039281739654748787","date":1787232600238,"state":2,"firstUnreadDate":1787381112238,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4550604512}]
+[15:21:36.336] [Debug:ACS] DialogsSlice/dialogsReceived - dispatching immediately
+[15:21:36.336] [Info:Dialog Slice] received dialogs: ,0,6
+[15:21:36.339] [Debug:ACS] Scheduling action ShortDialogs/getShortDialogs | 1
+[15:21:36.339] [Debug:DialogsModule] cache-load: end,{"tag":"dialogs:0","next":0}
+[15:21:36.339] [Info:FoldersModule] loadFolders from db,[{"id":0,"name":"","peers":[],"unreadPeers":[],"isReserved":true,"index":0},{"id":1,"name":"","peers":[],"unreadPeers":[],"isReserved":true,"index":1},{"id":2,"name":"","peers":[],"unreadPeers":[],"isReserved":true,"index":2},{"id":3,"name":"","peers":[],"unreadPeers":[],"isReserved":true,"index":3},{"id":4,"name":"","peers":[],"unreadPeers":[],"isReserved":true,"index":4}]
+[15:21:36.340] [Info:FoldersModule] Processing queued events
+[15:21:36.342] [Info:ACS] App marked as ready - processing low priority queue
+[15:21:36.342] [Info:Measure load_dialogs:] 68.39999999850988
+[15:21:36.343] [Debug:Seraj Log Analytics Event] web_load_dialogs,{"value":68}
+[15:21:36.343] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_load_dialogs","date":1787485896343}
+[15:21:36.343] [Info:Measure init_app_to_dialogs:] 578.5999999977648
+[15:21:36.344] [Debug:ACS] folders/setReceivedFolders - dispatching immediately
+[15:21:36.344] [Debug:ACS] Scheduling action folders/setAreFoldersLoading | 1
+[15:21:36.370] [Debug:WS] ws open,start,handshake
+[15:21:36.505] [Debug:lazyModule] Module loaded:,bank,891.9000000022352
+[15:21:36.532] [Debug:lazyModule] Module loaded:,growth,918.6999999992549
+[15:21:36.541] [Debug:lazyModule] Module loaded:,story,927.8000000007451
+[15:21:36.542] [Debug:ACS] Scheduling action Story/GetStories | 1
+[15:21:36.542] [Debug:ACS] StorySlice/setStoryRowVisible - dispatching immediately
+[15:21:36.543] [Debug:ACS] Scheduling action Story/GetStories | 1
+[15:21:36.550] [Debug:lazyModule] Module loaded:,advertisement,936.4000000022352
+[15:21:36.551] [Debug:ACS] Scheduling action Meet/GetOnGoingCalls | 1
+[15:21:36.551] [Debug:ACS] Scheduling action Meet/setSelectCallLogs | 1
+[15:21:36.554] [Debug:ACS] Scheduling action growth/emptyStates/GetBotsData | 1
+[15:21:36.563] [Debug:ACS] Scheduling action marketing/fetchAllTools | 1
+[15:21:36.563] [Debug:ACS] Scheduling action Advertisement/GetDialogAdWithInterval | 0
+[15:21:36.565] [Debug:WS] ws handshake response,{"mkprotoVersion":1,"apiVersion":1}
+[15:21:36.565] [Warn:Core] state,2
+[15:21:36.565] [Info:Api] -> Req ChangeLanguage #0
+[15:21:36.567] [Debug:Status] isConnecting,2
+[15:21:36.567] [Debug:Status] current,isSyncing,next,isSyncing
+[15:21:36.567] [Debug:ACS] OtherSlice/appStatusChanged - dispatching immediately
+[15:21:36.569] [Debug:WS] ws,state,connected
+[15:21:36.569] [Info:Api] -> Req GetDiff #1
+[15:21:36.570] [Info:Api] -> Req GetFullGroup #2
+[15:21:36.570] [Debug:WS] Connected
+[15:21:36.572] [Debug:FilesModule] Request Urls,[{"fileId":"","accessHash":"","fileStorageVersion":1}]
+[15:21:36.572] [Info:Api] -> Req GetNasimFileUrls #3
+[15:21:36.578] [Error:Api] -> Req GetFullGroup #2,{"code":5,"message":"GROUP_NOT_FOUND","displayMessage":"گفت‌وگوی موردنظر یافت نشد."}
+[15:21:36.611] [Info:Api] <- Res GetNasimFileUrls #3
+[15:21:36.611] [Debug:FilesModule] Response Urls,{"fileLocations":[{"fileId":"","accessHash":"","fileStorageVersion":1}],"response":[{"fileId":"0","chunkSize":131072,"url":""}]}
+[15:21:36.638] [Info:Api] <- Res GetDiff #1
+[15:21:36.638] [Warn:stop trace] get_diff_request,{"app_version":"167429","duration":406}
+[15:21:36.638] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"get_diff_request","date":1787485896638}
+[15:21:36.639] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.641] [Debug:Load User Req] [{"uid":1839331018,"accessHash":"1"},{"uid":303707598,"accessHash":"1"}]
+[15:21:36.641] [Info:Api] -> Req LoadUsers #4
+[15:21:36.642] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:36.644] [Info:GroupModule] loadGroups,requiredGroups,[{"groupId":1216243611,"accessHash":"1216243611"},{"groupId":1462634984,"accessHash":"1462634984"}]
+[15:21:36.644] [Info:Api] -> Req LoadGroups #5
+[15:21:36.652] [Info:Api] <- Res ChangeLanguage #0
+[15:21:36.652] [Warn:stop trace] web_connection_time,{"app_version":"167429","mode":"ws","duration":433}
+[15:21:36.652] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_connection_time","date":1787485896652}
+[15:21:36.652] [Warn:Core] ws,start,opened
+[15:21:36.652] [Warn:ConfigsModule] start
+[15:21:36.653] [Info:Api] <- Res LoadUsers #4
+[15:21:36.655] [Info:>>FilesLog] Download start,-7986,[download-manager]
+[15:21:36.655] [Info:>>FilesLog] Download start,82696,[download-manager]
+[15:21:36.656] [Info:>>FilesLog] Download start,-9856,[download-manager]
+[15:21:36.656] [Info:>>FilesLog] Download start,65762,[download-manager]
+[15:21:36.656] [Info:>>FilesLog] Download start,94410,[download-manager]
+[15:21:36.656] [Info:>>FilesLog] Download start,31981,[download-manager]
+[15:21:36.658] [Info:Api] <- Res LoadGroups #5
+[15:21:36.662] [Debug:ACS] modal/setIsModalManagerReady - dispatching immediately
+[15:21:36.664] [Debug:ACS] Scheduling action Promotion/GetInAppMessageData | 1
+[15:21:36.665] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.666] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:36.668] [Warn:EventsModule:New] Processing group events from GetDiff response
+[15:21:36.668] [Warn:EventsModule:New] refresh too Long Routes,[]
+[15:21:36.669] [Debug:EventsModule:New] Filtered events for processing,["messageContentChanged","message","message","message","message","message","message","message","message","message","message","message","message","messageRead","message","message","message","message","message","message","message","messages","message","message","message","messageDelete","message","message","message","message"]
+[15:21:36.669] [Info:FoldersModule] folder events:,[]
+[15:21:36.669] [Debug:EventsModule:New] Processing events by,FoldersModule
+[15:21:36.669] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.669] [Debug:EventsModule:New] Processing events by,MessagingUpdatesHandler
+[15:21:36.669] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.669] [Debug:EventsModule:New] Processing events by,ImagesUpdatesHandler
+[15:21:36.670] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.670] [Info:EventsModule:New] GetDiff response,{"routesSize":7,"updatesSize":30,"routes":[{"routeId":0,"lastSeq":57,"needMore":false},{"routeId":1,"lastSeq":101006460,"needMore":false},{"routeId":204859899,"lastSeq":726357,"needMore":false},{"routeId":255637216,"lastSeq":101469394,"needMore":false},{"routeId":533692756,"lastSeq":102075104,"needMore":false},{"routeId":754050954,"lastSeq":46901,"needMore":false},{"routeId":1848358662,"lastSeq":101530421,"needMore":false}]}
+[15:21:36.670] [Warn:EventsModule:New] >>>> GetDiff start applyEvents
+[15:21:36.670] [Warn:Firebase] newTrace,Firebase not initialized
+[15:21:36.670] [Debug:EventsModule:New] Starting to process events by,FoldersModule
+[15:21:36.670] [Warn:stop trace] get_diff_apply_FoldersModule,{"app_version":"167429","duration":0}
+[15:21:36.670] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"get_diff_apply_FoldersModule","date":1787485896670}
+[15:21:36.670] [Debug:EventsModule:New] Finished processing events by,FoldersModule
+[15:21:36.670] [Debug:EventsModule:New] Starting to process events by,MessagingUpdatesHandler
+[15:21:36.671] [Debug:EventsModule:New] Starting to process events by,ImagesUpdatesHandler
+[15:21:36.671] [Warn:stop trace] get_diff_apply_ImagesUpdatesHandler,{"app_version":"167429","duration":0}
+[15:21:36.671] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"get_diff_apply_ImagesUpdatesHandler","date":1787485896671}
+[15:21:36.671] [Debug:EventsModule:New] Finished processing events by,ImagesUpdatesHandler
+[15:21:36.673] [Info:MessagingUpdatesHandler] newMessagesEventHandler: dialog acquired,{"peer":{"type":2,"id":204859899},"dialog":{"peer":{"type":2,"id":204859899},"unreadCount":24,"sortDate":1787484049282,"senderUid":1367269737,"rid":"8007395272275524101","date":1787484049282,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}}
+[15:21:36.674] [Warn:MessagingUpdatesHandler] Updating local dialog by newMessage,204859899,{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false},[{"rid":"6393329519394899217","date":1787484848336,"sid":1367269737},{"rid":"1107415683170645528","date":1787485248208,"sid":1367269737},{"rid":"1190044017580222877","date":1787485539420,"sid":1367269737}]
+[15:21:36.674] [Info:MessagingUpdatesHandler] updateDialog called from newMessage,{"peer":{"type":2,"id":204859899},"dialog":{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}}
+[15:21:36.674] [Info:MessagingUpdatesHandler] newMessagesEventHandler,[{"rid":"6393329519394899217","date":1787484848336,"sid":1367269737},{"rid":"1107415683170645528","date":1787485248208,"sid":1367269737},{"rid":"1190044017580222877","date":1787485539420,"sid":1367269737}]
+[15:21:36.674] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.675] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.675] [Info:MessagingUpdatesHandler] newMessagesEventHandler: dialog acquired,{"peer":{"type":2,"id":533692756},"dialog":{"peer":{"type":2,"id":533692756},"unreadCount":20,"sortDate":1787483913727,"senderUid":1679882808,"rid":"8882276334544795279","date":1787483913727,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}}
+[15:21:36.675] [Warn:MessagingUpdatesHandler] Updating local dialog by newMessage,533692756,{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false},[{"rid":"6673107081055596710","date":1787484688807,"sid":1679882808},{"rid":"-2790664979217472586","date":1787485857904,"sid":1679882808}]
+[15:21:36.675] [Info:MessagingUpdatesHandler] updateDialog called from newMessage,{"peer":{"type":2,"id":533692756},"dialog":{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}}
+[15:21:36.675] [Info:MessagingUpdatesHandler] newMessagesEventHandler,[{"rid":"6673107081055596710","date":1787484688807,"sid":1679882808},{"rid":"-2790664979217472586","date":1787485857904,"sid":1679882808}]
+[15:21:36.675] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.676] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.676] [Info:MessagingUpdatesHandler] newMessagesEventHandler: dialog acquired,{"peer":{"type":2,"id":754050954},"dialog":{"peer":{"type":2,"id":754050954},"unreadCount":0,"sortDate":1787484407215,"senderUid":638436066,"rid":"4291823684484100618","date":1787484407215,"state":4,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}}
+[15:21:36.677] [Warn:MessagingUpdatesHandler] Updating local dialog by newMessage,754050954,{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215},[{"rid":"7120759152977930132","date":1787484637751,"sid":638436066},{"rid":"4334196721558036620","date":1787484781939,"sid":638436066},{"rid":"-3247913792344709990","date":1787484782836,"sid":638436066},{"rid":"-9205201276025743939","date":1787484993205,"sid":638436066},{"rid":"-5321621276455600761","date":1787485053733,"sid":638436066},{"rid":"-2335201186495593950","date":1787485189659,"sid":638436066},{"rid":"-747760772965918195","date":1787485235835,"sid":638436066}]
+[15:21:36.677] [Info:MessagingUpdatesHandler] updateDialog called from newMessage,{"peer":{"type":2,"id":754050954},"dialog":{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}}
+[15:21:36.677] [Info:MessagingUpdatesHandler] newMessagesEventHandler,[{"rid":"7120759152977930132","date":1787484637751,"sid":638436066},{"rid":"4334196721558036620","date":1787484781939,"sid":638436066},{"rid":"-3247913792344709990","date":1787484782836,"sid":638436066},{"rid":"-9205201276025743939","date":1787484993205,"sid":638436066},{"rid":"-5321621276455600761","date":1787485053733,"sid":638436066},{"rid":"-2335201186495593950","date":1787485189659,"sid":638436066},{"rid":"-747760772965918195","date":1787485235835,"sid":638436066}]
+[15:21:36.677] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.678] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.678] [Info:MessagingUpdatesHandler] newMessagesEventHandler: dialog acquired,{"peer":{"type":2,"id":1848358662},"dialog":{"peer":{"type":2,"id":1848358662},"unreadCount":57,"sortDate":1787484335527,"senderUid":1387800613,"rid":"1456897424772902021","date":1787484335527,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}}
+[15:21:36.678] [Warn:MessagingUpdatesHandler] Updating local dialog by newMessage,1848358662,{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false},[{"rid":"-3093704439300121304","date":1787484875655,"sid":1387800613},{"rid":"8496041572183625949","date":1787485140276,"sid":1387800613},{"rid":"7122564949888753528","date":1787485148144,"sid":1387800613},{"rid":"80410390272128037","date":1787485148145,"sid":1387800613},{"rid":"208471736501330273","date":1787485148146,"sid":1387800613},{"rid":"7323351259250621980","date":1787485148147,"sid":1387800613},{"rid":"4352603858399248777","date":1787485148148,"sid":1387800613},{"rid":"1783803175868008198","date":1787485190871,"sid":1387800613},{"rid":"1941583966884273819","date":1787485251268,"sid":1387800613},{"rid":"-2875075520712239754","date":1787485276552,"sid":1387800613},{"rid":"6595522040609767375","date":1787485314641,"sid":1387800613},{"rid":"2749820257497334058","date":1787485490794,"sid":1387800613},{"rid":"-7283077712665444912","date":1787485566291,"sid":1387800613}]
+[15:21:36.678] [Info:MessagingUpdatesHandler] updateDialog called from newMessage,{"peer":{"type":2,"id":1848358662},"dialog":{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}}
+[15:21:36.678] [Info:MessagingUpdatesHandler] newMessagesEventHandler,[{"rid":"-3093704439300121304","date":1787484875655,"sid":1387800613},{"rid":"8496041572183625949","date":1787485140276,"sid":1387800613},{"rid":"7122564949888753528","date":1787485148144,"sid":1387800613},{"rid":"80410390272128037","date":1787485148145,"sid":1387800613},{"rid":"208471736501330273","date":1787485148146,"sid":1387800613},{"rid":"7323351259250621980","date":1787485148147,"sid":1387800613},{"rid":"4352603858399248777","date":1787485148148,"sid":1387800613},{"rid":"1783803175868008198","date":1787485190871,"sid":1387800613},{"rid":"1941583966884273819","date":1787485251268,"sid":1387800613},{"rid":"-2875075520712239754","date":1787485276552,"sid":1387800613},{"rid":"6595522040609767375","date":1787485314641,"sid":1387800613},{"rid":"2749820257497334058","date":1787485490794,"sid":1387800613},{"rid":"-7283077712665444912","date":1787485566291,"sid":1387800613}]
+[15:21:36.679] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.680] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.681] [Info:MessagingUpdatesHandler] newMessagesEventHandler messageContainers,[{"rid":"6393329519394899217","date":1787484848336,"type":"VIDEO","sid":1367269737},{"rid":"1107415683170645528","date":1787485248208,"type":"VIDEO","sid":1367269737},{"rid":"1190044017580222877","date":1787485539420,"type":"VIDEO","sid":1367269737,"quotedId":"5418987751392774238","quotedPeer":{"type":2,"id":204859899,"accessHash":"1"},"quotedDate":1787483254458}]
+[15:21:36.681] [Info:MessagingUpdatesHandler] newMessagesEventHandler messageContainers,[{"rid":"6673107081055596710","date":1787484688807,"type":"VIDEO","sid":1679882808},{"rid":"-2790664979217472586","date":1787485857904,"type":"PHOTO","sid":1679882808,"quotedId":"-5204878428314030146","quotedPeer":{"type":2,"id":1216243611,"accessHash":"1"},"quotedDate":1787485852936}]
+[15:21:36.681] [Info:MessagingUpdatesHandler] newMessagesEventHandler messageContainers,[{"rid":"7120759152977930132","date":1787484637751,"type":"TEXT","sid":638436066},{"rid":"4334196721558036620","date":1787484781939,"type":"TEXT","sid":638436066},{"rid":"-3247913792344709990","date":1787484782836,"type":"TEXT","sid":638436066},{"rid":"-9205201276025743939","date":1787484993205,"type":"TEXT","sid":638436066},{"rid":"-5321621276455600761","date":1787485053733,"type":"TEXT","sid":638436066},{"rid":"-2335201186495593950","date":1787485189659,"type":"TEXT","sid":638436066},{"rid":"-747760772965918195","date":1787485235835,"type":"TEXT","sid":638436066}]
+[15:21:36.681] [Info:MessagingUpdatesHandler] newMessagesEventHandler messageContainers,[{"rid":"-3093704439300121304","date":1787484875655,"type":"PHOTO","sid":1387800613},{"rid":"8496041572183625949","date":1787485140276,"type":"PHOTO","sid":1387800613},{"rid":"7122564949888753528","date":1787485148144,"type":"PHOTO","sid":1387800613,"groupedId":"6363218767714027472"},{"rid":"80410390272128037","date":1787485148145,"type":"PHOTO","sid":1387800613,"groupedId":"6363218767714027472"},{"rid":"208471736501330273","date":1787485148146,"type":"PHOTO","sid":1387800613,"groupedId":"6363218767714027472"},{"rid":"7323351259250621980","date":1787485148147,"type":"PHOTO","sid":1387800613,"groupedId":"6363218767714027472"},{"rid":"4352603858399248777","date":1787485148148,"type":"PHOTO","sid":1387800613,"groupedId":"6363218767714027472"},{"rid":"1783803175868008198","date":1787485190871,"type":"PHOTO","sid":1387800613},{"rid":"1941583966884273819","date":1787485251268,"type":"VIDEO","sid":1387800613},{"rid":"-2875075520712239754","date":1787485276552,"type":"PHOTO","sid":1387800613,"quotedId":"984478734313782605","quotedPeer":{"type":2,"id":1920238149,"accessHash":"1"},"quotedDate":1787473380749},{"rid":"6595522040609767375","date":1787485314641,"type":"PHOTO","sid":1387800613},{"rid":"2749820257497334058","date":1787485490794,"type":"PHOTO","sid":1387800613},{"rid":"-7283077712665444912","date":1787485566291,"type":"PHOTO","sid":1387800613,"quotedId":"6581252622418514883","quotedPeer":{"type":2,"id":1462634984,"accessHash":"1"},"quotedDate":1787480188864}]
+[15:21:36.682] [Info:>>AnbariStorageBucket] cache HIT,Avatars,-7986134425448407294
+[15:21:36.682] [Info:>>AnbariStorageBucket] cache HIT,Avatars,8269642877425491715
+[15:21:36.682] [Info:>>AnbariStorageBucket] cache HIT,Avatars,-985638155139342589
+[15:21:36.682] [Info:>>AnbariStorageBucket] cache HIT,Avatars,6576248841240649475
+[15:21:36.683] [Info:>>AnbariStorageBucket] cache HIT,Avatars,944105074498543362
+[15:21:36.683] [Info:>>AnbariStorageBucket] cache HIT,Avatars,3198102689826414339
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for -7986134425448407294 with status: Cached
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for 8269642877425491715 with status: Cached
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for -985638155139342589 with status: Cached
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for 6576248841240649475 with status: Cached
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for 944105074498543362 with status: Cached
+[15:21:36.683] [Info:>>AnbariDownloadManager] Called download for 3198102689826414339 with status: Cached
+[15:21:36.697] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_4499827195","durationMs":15.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.697] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_4499827195","indexName":"by_rid","durationMs":16,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.697] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_4499827195","indexName":"by_rid","durationMs":16,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_4499827195","indexName":"by_rid","durationMs":16,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":16,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Debug:tZ] addNewMessages,4499827195,{"newCount":3,"updatedCount":0,"lastMsgDate":1787485539420},{"ranges":[{"start":1787484049282,"end":1787484049282}],"loaded":{"start":false,"end":true}}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_4828660052","durationMs":16.4,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_4828660052","indexName":"by_rid","durationMs":16.5,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_4828660052","indexName":"by_rid","durationMs":16.5,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":16.5,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Debug:tZ] addNewMessages,4828660052,{"newCount":2,"updatedCount":0,"lastMsgDate":1787485857904},{"ranges":[{"start":1787468734774,"end":1787483913727}],"loaded":{"start":false,"end":true}}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5049018250","durationMs":16.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.6,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.698] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.699] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.699] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_rid","durationMs":16.9,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.699] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":17,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.699] [Debug:tZ] addNewMessages,5049018250,{"newCount":7,"updatedCount":0,"lastMsgDate":1787485235835},{"ranges":[{"start":1787216981802,"end":1787484407215}],"loaded":{"start":false,"end":true}}
+[15:21:36.699] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_6143325958","durationMs":17.2,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.699] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":17.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":17.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":17.9,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.1,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.2,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.3,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_6143325958","indexName":"by_rid","durationMs":18.2,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.700] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":18.2,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.701] [Debug:tZ] addNewMessages,6143325958,{"newCount":13,"updatedCount":0,"lastMsgDate":1787485566291},{"ranges":[{"start":1787461444907,"end":1787473399623},{"start":1787483971463,"end":1787484335527}],"loaded":{"start":false,"end":true}}
+[15:21:36.702] [Info:>>FilesLog] Download file fetch,-7986,size,3654
+[15:21:36.703] [Info:>>FilesLog] Download file fetch,82696,size,6056
+[15:21:36.705] [Info:>>FilesLog] Download file fetch,-9856,size,6349
+[15:21:36.706] [Info:>>FilesLog] Download file fetch,65762,size,3959
+[15:21:36.708] [Info:>>FilesLog] Download file fetch,94410,size,3641
+[15:21:36.709] [Info:>>FilesLog] Download file fetch,31981,size,3454
+[15:21:36.712] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_4499827195","durationMs":14.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.713] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_4828660052","durationMs":14.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.713] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_4499827195","durationMs":15.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.713] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":14.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_4499827195","durationMs":16.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_4828660052","durationMs":15.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.714] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":15.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.715] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_6143325958","durationMs":14.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.716] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":2.6,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.717] [Debug:MessagesModule] DebugRefactorHist,addNewMessagesToHistorys actions,204859899,1
+[15:21:36.717] [Info:MessagingUpdatesHandler] newMessagesEventHandler event,[{"rid":"6393329519394899217","date":1787484848336},{"rid":"1107415683170645528","date":1787485248208},{"rid":"1190044017580222877","date":1787485539420}]
+[15:21:36.717] [Warn:FoldersModule] Unread folder not found
+[15:21:36.717] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":3.4,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.717] [Debug:MessagesModule] DebugRefactorHist,addNewMessagesToHistorys actions,533692756,1
+[15:21:36.717] [Info:MessagingUpdatesHandler] newMessagesEventHandler event,[{"rid":"6673107081055596710","date":1787484688807},{"rid":"-2790664979217472586","date":1787485857904}]
+[15:21:36.718] [Warn:FoldersModule] Unread folder not found
+[15:21:36.718] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":3.3,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.718] [Debug:MessagesModule] DebugRefactorHist,addNewMessagesToHistorys actions,754050954,1
+[15:21:36.718] [Info:MessagingUpdatesHandler] newMessagesEventHandler event,[{"rid":"7120759152977930132","date":1787484637751},{"rid":"4334196721558036620","date":1787484781939},{"rid":"-3247913792344709990","date":1787484782836},{"rid":"-9205201276025743939","date":1787484993205},{"rid":"-5321621276455600761","date":1787485053733},{"rid":"-2335201186495593950","date":1787485189659},{"rid":"-747760772965918195","date":1787485235835}]
+[15:21:36.718] [Warn:FoldersModule] Unread folder not found
+[15:21:36.718] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":3.3,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:36.718] [Debug:MessagesModule] DebugRefactorHist,addNewMessagesToHistorys actions,1848358662,1
+[15:21:36.718] [Info:MessagingUpdatesHandler] newMessagesEventHandler event,[{"rid":"-3093704439300121304","date":1787484875655},{"rid":"8496041572183625949","date":1787485140276},{"rid":"7122564949888753528","date":1787485148144},{"rid":"80410390272128037","date":1787485148145},{"rid":"208471736501330273","date":1787485148146},{"rid":"7323351259250621980","date":1787485148147},{"rid":"4352603858399248777","date":1787485148148},{"rid":"1783803175868008198","date":1787485190871},{"rid":"1941583966884273819","date":1787485251268},{"rid":"-2875075520712239754","date":1787485276552},{"rid":"6595522040609767375","date":1787485314641},{"rid":"2749820257497334058","date":1787485490794},{"rid":"-7283077712665444912","date":1787485566291}]
+[15:21:36.718] [Warn:FoldersModule] Unread folder not found
+[15:21:36.719] [Info:MessagingUpdatesHandler] newMessagesEventHandler,updated dialog,{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}
+[15:21:36.719] [Info:MessagingUpdatesHandler] newMessagesEventHandler: releasing dialog,204859899
+[15:21:36.719] [Info:MessagingUpdatesHandler] editMessageUpdateHandler,1132048418050054538,{"value":"1787144516926"},{"type":2,"id":204859899}
+[15:21:36.719] [Info:MessagingUpdatesHandler] editMessageUpdateHandler: dialog acquired,{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}
+[15:21:36.720] [Info:MessagingUpdatesHandler] newMessagesEventHandler,updated dialog,{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}
+[15:21:36.720] [Info:MessagingUpdatesHandler] newMessagesEventHandler: releasing dialog,533692756
+[15:21:36.720] [Info:MessagingUpdatesHandler] peer events before reducing,[{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"message":"documentMessage","state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}]}],"messagesEvents":[{"type":"MessagesEvent/NewMessages","messages":[{"rid":"6673107081055596710","date":1787484688807},{"rid":"-2790664979217472586","date":1787485857904}],"myUid":771002554,"peer":{"type":2,"id":533692756},"isRemote":true,"dialog":{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}}]}]
+[15:21:36.720] [Warn:MessagingUpdatesHandler] reducedDialogEvents,[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":533692756},"unreadCount":22,"sortDate":1787485857904,"senderUid":1679882808,"rid":"-2790664979217472586","date":1787485857904,"message":"documentMessage","state":2,"firstUnreadDate":1787477400679,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4828660052,"isGrouped":false}]}]
+[15:21:36.720] [Info:MessagingUpdatesHandler] newMessagesEventHandler,updated dialog,{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}
+[15:21:36.720] [Info:MessagingUpdatesHandler] newMessagesEventHandler: releasing dialog,754050954
+[15:21:36.720] [Info:MessagingUpdatesHandler] readMessageUpdateHandler: dialog acquired,{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}
+[15:21:36.721] [Info:MessagingUpdatesHandler] newMessagesEventHandler,updated dialog,{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}
+[15:21:36.721] [Info:MessagingUpdatesHandler] newMessagesEventHandler: releasing dialog,1848358662
+[15:21:36.721] [Info:MessagingUpdatesHandler] peer events before reducing,[{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"message":"documentMessage","state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}]}],"messagesEvents":[{"type":"MessagesEvent/NewMessages","messages":[{"rid":"-3093704439300121304","date":1787484875655},{"rid":"8496041572183625949","date":1787485140276},{"rid":"7122564949888753528","date":1787485148144},{"rid":"80410390272128037","date":1787485148145},{"rid":"208471736501330273","date":1787485148146},{"rid":"7323351259250621980","date":1787485148147},{"rid":"4352603858399248777","date":1787485148148},{"rid":"1783803175868008198","date":1787485190871},{"rid":"1941583966884273819","date":1787485251268},{"rid":"-2875075520712239754","date":1787485276552},{"rid":"6595522040609767375","date":1787485314641},{"rid":"2749820257497334058","date":1787485490794},{"rid":"-7283077712665444912","date":1787485566291}],"myUid":771002554,"peer":{"type":2,"id":1848358662},"isRemote":true,"dialog":{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}}]}]
+[15:21:36.721] [Warn:MessagingUpdatesHandler] reducedDialogEvents,[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":1848358662},"unreadCount":70,"sortDate":1787485566291,"senderUid":1387800613,"rid":"-7283077712665444912","date":1787485566291,"message":"documentMessage","state":2,"firstUnreadDate":1787472071828,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":true,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":6143325958,"isGrouped":false}]}]
+[15:21:36.723] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_4499827195","indexName":"by_rid","durationMs":3.2,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:36.723] [Debug:tW] DebugRefactorHist,UpdateMessages editHistoryMessage,undefined,undefined
+[15:21:36.723] [Info:MessagingUpdatesHandler] editMessageUpdateHandler: releasing dialog,204859899
+[15:21:36.723] [Info:MessagingUpdatesHandler] peer events before reducing,[{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"message":"documentMessage","state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}]}],"messagesEvents":[{"type":"MessagesEvent/NewMessages","messages":[{"rid":"6393329519394899217","date":1787484848336},{"rid":"1107415683170645528","date":1787485248208},{"rid":"1190044017580222877","date":1787485539420}],"myUid":771002554,"peer":{"type":2,"id":204859899},"isRemote":true,"dialog":{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}}]},{}]
+[15:21:36.723] [Warn:MessagingUpdatesHandler] reducedDialogEvents,[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":204859899},"unreadCount":27,"sortDate":1787485539420,"senderUid":1367269737,"rid":"1190044017580222877","date":1787485539420,"message":"documentMessage","state":2,"firstUnreadDate":1787476264816,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":4499827195,"isGrouped":false}]}]
+[15:21:36.736] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5049018250","indexName":"by_date","durationMs":15.3,"resultCount":119,"timingScope":"worker_round_trip"}
+[15:21:36.739] [Debug:ACS] Dispatching RecentStickers
+[15:21:36.741] [Debug:ACS] Dispatching notification/initialPushNotification
+[15:21:36.742] [Debug:ACS] Dispatching mainSectionRouting/setMainSectionRoute
+[15:21:36.743] [Debug:ACS] Scheduling action Advertisement/NextDialogAdWithThrottle | 0
+[15:21:36.743] [Debug:ACS] Dispatching scheduler/setPeersWithScheduledTasks
+[15:21:36.746] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":10.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.746] [Debug:ACS] Scheduling action notifications/setShowNotificationGuide | 1
+[15:21:36.748] [Debug:ACS] Scheduling action Settings/Received | 1
+[15:21:36.749] [Debug:ACS] Dispatching Contacts/GetContacts
+[15:21:36.750] [Debug:ACS] Scheduling action Contacts/setContactsLoading | 1
+[15:21:36.751] [Debug:ACS] Dispatching Tooltip/fireEvent
+[15:21:36.752] [Debug:ACS] Dispatching folders/setAreFoldersLoading
+[15:21:36.753] [Debug:ACS] Dispatching Presence/SetOnline
+[15:21:36.753] [Debug:ACS] Dispatching FeedMessages/loadFeedCategories
+[15:21:36.753] [Info:lazyModuleMiddleware] Action "FeedMessages/loadFeedCategories" requires lazy module "flow" - loading module
+[15:21:36.753] [Debug:lazyModuleMiddleware] Loading module "flow"...
+[15:21:36.754] [Debug:ACS] Dispatching ShortDialogs/getShortDialogs
+[15:21:36.754] [Info:SearchEpic] LocalDialogSearch,getDialogsShortEpic 1,true
+[15:21:36.754] [Info:DialogsModule] LocalDialogSearch,loadSHortDialogsFromCache
+[15:21:36.754] [Debug:ACS] Scheduling action ShortDialogsSlice/setShortDialogsLoading | 1
+[15:21:36.755] [Debug:ACS] Dispatching folders/setAreFoldersLoading
+[15:21:36.755] [Debug:ACS] Dispatching Story/GetStories
+[15:21:36.756] [Info:Api] -> Req GetStories #6
+[15:21:36.756] [Info:Api] -> Req GetChannelStories #7
+[15:21:36.757] [Info:Api] -> Req GetMostPopularStories #8
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setLastGetStoriesTime | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setLoading | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.757] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.758] [Debug:ACS] Dispatching Story/GetStories
+[15:21:36.758] [Info:Api] -> Req GetStories #9
+[15:21:36.759] [Info:Api] -> Req GetChannelStories #10
+[15:21:36.759] [Info:Api] -> Req GetMostPopularStories #11
+[15:21:36.759] [Debug:ACS] Scheduling action StorySlice/setLastGetStoriesTime | 1
+[15:21:36.760] [Debug:ACS] Scheduling action StorySlice/setLoading | 1
+[15:21:36.760] [Debug:ACS] Dispatching Meet/GetOnGoingCalls
+[15:21:36.760] [Info:Api] -> Req GetOngoingCalls #12
+[15:21:36.762] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":26.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.763] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":27,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.763] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":27.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.763] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":27.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.764] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.764] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.764] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.764] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":28.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.765] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.766] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":29.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Debug:ACS] Scheduling action Contacts/setContacts | 1
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.768] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":31.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.769] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.770] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.770] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.770] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":32.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.770] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":33,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.770] [Info:Api] <- Res GetStories #9
+[15:21:36.770] [Info:Api] <- Res GetMostPopularStories #11
+[15:21:36.770] [Info:Api] <- Res GetChannelStories #10
+[15:21:36.770] [Debug:StoryEpics] 0,3,0
+[15:21:36.771] [Debug:ACS] Scheduling action StorySlice/setStories | 1
+[15:21:36.771] [Debug:ACS] Scheduling action StorySlice/setMostPopularStories | 1
+[15:21:36.771] [Debug:ACS] Scheduling action StorySlice/setIsStoriesFetched | 1
+[15:21:36.771] [Debug:ACS] Scheduling action Story/RemoveOutdatedStories | 1
+[15:21:36.771] [Debug:ACS] Scheduling action Story/PreloadFirstStories | 1
+[15:21:36.771] [Info:Api] <- Res GetOngoingCalls #12
+[15:21:36.771] [Debug:Meet: Common Epics -> getOnGoingCalls] []
+[15:21:36.772] [Info:DialogsModule] LocalDialogSearch,loadSHortDialogsFromCache,6
+[15:21:36.772] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.773] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.774] [Info:DialogsModule] LocalDialogSearch,loadSHortDialogs,getRequiredPeers,1,5
+[15:21:36.774] [Info:SearchEpic] LocalDialogSearch,getDialogsShortEpic 2,6,{"groups":[{"peer":{"type":2,"id":754050954},"counter":7,"date":1787485235835,"exInfo":{"exPeerType":2,"peerIdentity":0},"firstUnreadDate":{"value":"1787484407215"},"markedAsUnread":false,"id":5049018250}],"channels":[{"peer":{"type":2,"id":204859899},"counter":27,"date":1787485539420,"exInfo":{"exPeerType":3,"peerIdentity":1},"firstUnreadDate":{"value":"1787476264816"},"markedAsUnread":false,"id":4499827195},{"peer":{"type":2,"id":533692756},"counter":22,"date":1787485857904,"exInfo":{"exPeerType":3,"peerIdentity":1},"firstUnreadDate":{"value":"1787477400679"},"markedAsUnread":false,"id":4828660052},{"peer":{"type":2,"id":1848358662},"counter":70,"date":1787485566291,"exInfo":{"exPeerType":3,"peerIdentity":1},"firstUnreadDate":{"value":"1787472071828"},"markedAsUnread":false,"id":6143325958}],"bots":[{"peer":{"type":1,"id":10},"counter":0,"date":1787466196027,"exInfo":{"exPeerType":4,"peerIdentity":0},"firstUnreadDate":{"value":"0"},"markedAsUnread":false,"id":10}],"privates":[]}
+[15:21:36.774] [Debug:ACS] Scheduling action ShortDialogsSlice/dialogShortsReceived | 1
+[15:21:36.774] [Info:DialogsModule] LocalDialogSearch,getRequiredPeers,completed
+[15:21:36.774] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":37.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.774] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":37.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.775] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":37.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.781] [Debug:lazyModule] Module loaded:,flow,1167.4000000022352
+[15:21:36.781] [Info:lazyModuleMiddleware] Module "flow" loaded successfully
+[15:21:36.781] [Debug:lazyModuleMiddleware] Processing 1 queued actions for module "flow"
+[15:21:36.781] [Debug:lazyModuleMiddleware] Dispatching queued action: FeedMessages/loadFeedCategories
+[15:21:36.783] [Info:Api] -> Req LoadCategories #13
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.783] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":46.9,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.1,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.2,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.784] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.785] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":47.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.786] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.3,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.4,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5049018250","durationMs":49.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:36.787] [Warn:MessagingUpdatesHandler] readMessageUpdateHandler,["1812037176290717332","-756588477005344015","4561364748934782102","7014781786805556781","5645769207502263686","-273747731288583026","20263306920100","20263183743343","2001966539309740480","3667741471276216262","1464833685563315682","7786578403798630715","8573511765936777071","-8125425772171502669","5997368595360497181","-1234896776125184512","4387245230993598511","4763929997100774385","-1281645404732206949","-8800088761189331735","-6115261241012166495","-4945609949567344678","-4323941668193229660","-9020065332149615778","-5583396235571657805","5113558503672256440","-5224726921513193498","-1684694326469031633","-964121918382111641","4793377452178561828","-5102341588942169989","-816617856030878767","5740827638339391732","8715834414664690850","-653333025403888354","-421075014912415688","-624040528148668173","-3336044244082860667","-3484037391445036132","-240079457177848875","-8677264743212734567","-2639744474543235161","3853846178762647385","-3186860258883311378","1255404051336636588","3320773537343849939","-2478117745782164737","1048226509415803115","-3004503087898886342","6453811064553863022","-5908086459585806676","-2965294996228778000","-3400542107812020931","-1956122431643950166","1210839510967756185","117356335330601267","3096352098031444809","-796358183934663966","-6849174666345888046","-8524606550866314541","-4220464864702087150","-4348571711266088103","4587378491084506907","5604165625093700626","-1337351024387662570","-3999860240302105847","-3969857966087731367","7473825800957961839","1342051579229552484","5716068066952658374","1262833705453751839","5420838105282918191","4332822094755424735","7368202937675817900","-1654557891539775010","6447434578345874368","6202551906824155017","5754151099262180463","3722981712525684590","-786650936104553851","4687506113482121294","4590100099221680391","-7285988198227303983","7217038073874164155","-4059287831555003970","-6670734156142765308","-1776009600280286360","2625882509039853181","3601893071332949179","5141143749347503705","913249120951033974","3980018649658536932","-8314388065070425659","5037729606308249132","-8293129245430893585","-3403335734602257068","8249057025692918426","-7636506575419563614","5379704382313772336","3697858724768820294","7283475939064238101","69123358001323058","-4425500925782938939","7471963351850590300","8650097798758467219","9112136494418541466","4818552277082042472","1835307270932660886","9156928358984405465","-7483465549946075725","9212125684880333196","4291823684484100618","7120759152977930132","4334196721558036620","-3247913792344709990","-9205201276025743939","-5321621276455600761","-2335201186495593950","-747760772965918195"]
+[15:21:36.787] [Warn:FoldersModule] Unread folder not found
+[15:21:36.788] [Info:Api] <- Res LoadCategories #13
+[15:21:36.788] [Warn:feed categories loaded] {"categories":[{"categoryId":0,"name":{"fa":{"text":""},"en":{"text":""}}},{"categoryId":1,"name":{"fa":{"text":"فروشگاهی"},"en":{"text":"store"}}},{"categoryId":2,"name":{"fa":{"text":"سرگرمی"},"en":{"text":"entertainment"}}},{"categoryId":3,"name":{"fa":{"text":"ورزشی"},"en":{"text":"sport"}}},{"categoryId":7,"name":{"fa":{"text":"سبک زندگی"},"en":{"text":"lifestyle"}}},{"categoryId":4,"name":{"fa":{"text":"خبری"},"en":{"text":"news"}}},{"categoryId":9,"name":{"fa":{"text":"علم و فناوری"},"en":{"text":"scientific"}}},{"categoryId":6,"name":{"fa":{"text":"مذهبی"},"en":{"text":"religious"}}},{"categoryId":5,"name":{"fa":{"text":"فرهنگ و هنر"},"en":{"text":"cultural"}}},{"categoryId":8,"name":{"fa":{"text":"آموزشی"},"en":{"text":"learning"}}}]}
+[15:21:36.788] [Info:MessagingUpdatesHandler] MentionRead,after update dialog -> readMessageUpdate,{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":4,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787485235835,"outMessageRecievedDate":1787485235835}
+[15:21:36.789] [Info:MessagingUpdatesHandler] readMessageUpdateHandler: releasing dialog,754050954
+[15:21:36.789] [Info:MessagingUpdatesHandler] peer events before reducing,[{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"message":"textMessage","state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}]}],"messagesEvents":[{"type":"MessagesEvent/NewMessages","messages":[{"rid":"7120759152977930132","date":1787484637751},{"rid":"4334196721558036620","date":1787484781939},{"rid":"-3247913792344709990","date":1787484782836},{"rid":"-9205201276025743939","date":1787484993205},{"rid":"-5321621276455600761","date":1787485053733},{"rid":"-2335201186495593950","date":1787485189659},{"rid":"-747760772965918195","date":1787485235835}],"myUid":771002554,"peer":{"type":2,"id":754050954},"isRemote":true,"dialog":{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"state":2,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787484407215,"outMessageRecievedDate":1787484407215}}]},{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"message":"textMessage","state":4,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787485235835,"outMessageRecievedDate":1787485235835}]}],"messagesEvents":[{"peer":{"type":2,"id":754050954},"startDate":1787485235835,"readDate":0,"type":"MessagesEvent/UpdateMessages","messages":[{"rid":"1812037176290717332"},{"rid":"-756588477005344015"},{"rid":"4561364748934782102"},{"rid":"7014781786805556781"},{"rid":"5645769207502263686"},{"rid":"-273747731288583026"},{"rid":"20263306920100"},{"rid":"20263183743343"},{"rid":"2001966539309740480"},{"rid":"3667741471276216262"},{"rid":"1464833685563315682"},{"rid":"7786578403798630715"},{"rid":"8573511765936777071"},{"rid":"-8125425772171502669"},{"rid":"5997368595360497181"},{"rid":"-1234896776125184512"},{"rid":"4387245230993598511"},{"rid":"4763929997100774385"},{"rid":"-1281645404732206949"},{"rid":"-8800088761189331735"},{"rid":"-6115261241012166495"},{"rid":"-4945609949567344678"},{"rid":"-4323941668193229660"},{"rid":"-9020065332149615778"},{"rid":"-5583396235571657805"},{"rid":"5113558503672256440"},{"rid":"-5224726921513193498"},{"rid":"-1684694326469031633"},{"rid":"-964121918382111641"},{"rid":"4793377452178561828"},{"rid":"-5102341588942169989"},{"rid":"-816617856030878767"},{"rid":"5740827638339391732"},{"rid":"8715834414664690850"},{"rid":"-653333025403888354"},{"rid":"-421075014912415688"},{"rid":"-624040528148668173"},{"rid":"-3336044244082860667"},{"rid":"-3484037391445036132"},{"rid":"-240079457177848875"},{"rid":"-8677264743212734567"},{"rid":"-2639744474543235161"},{"rid":"3853846178762647385"},{"rid":"-3186860258883311378"},{"rid":"1255404051336636588"},{"rid":"3320773537343849939"},{"rid":"-2478117745782164737"},{"rid":"1048226509415803115"},{"rid":"-3004503087898886342"},{"rid":"6453811064553863022"},{"rid":"-5908086459585806676"},{"rid":"-2965294996228778000"},{"rid":"-3400542107812020931"},{"rid":"-1956122431643950166"},{"rid":"1210839510967756185"},{"rid":"117356335330601267"},{"rid":"3096352098031444809"},{"rid":"-796358183934663966"},{"rid":"-6849174666345888046"},{"rid":"-8524606550866314541"},{"rid":"-4220464864702087150"},{"rid":"-4348571711266088103"},{"rid":"4587378491084506907"},{"rid":"5604165625093700626"},{"rid":"-1337351024387662570"},{"rid":"-3999860240302105847"},{"rid":"-3969857966087731367"},{"rid":"7473825800957961839"},{"rid":"1342051579229552484"},{"rid":"5716068066952658374"},{"rid":"1262833705453751839"},{"rid":"5420838105282918191"},{"rid":"4332822094755424735"},{"rid":"7368202937675817900"},{"rid":"-1654557891539775010"},{"rid":"6447434578345874368"},{"rid":"6202551906824155017"},{"rid":"5754151099262180463"},{"rid":"3722981712525684590"},{"rid":"-786650936104553851"},{"rid":"4687506113482121294"},{"rid":"4590100099221680391"},{"rid":"-7285988198227303983"},{"rid":"7217038073874164155"},{"rid":"-4059287831555003970"},{"rid":"-6670734156142765308"},{"rid":"-1776009600280286360"},{"rid":"2625882509039853181"},{"rid":"3601893071332949179"},{"rid":"5141143749347503705"},{"rid":"913249120951033974"},{"rid":"3980018649658536932"},{"rid":"-8314388065070425659"},{"rid":"5037729606308249132"},{"rid":"-8293129245430893585"},{"rid":"-3403335734602257068"},{"rid":"8249057025692918426"},{"rid":"-7636506575419563614"},{"rid":"5379704382313772336"},{"rid":"3697858724768820294"},{"rid":"7283475939064238101"},{"rid":"69123358001323058"},{"rid":"-4425500925782938939"},{"rid":"7471963351850590300"},{"rid":"8650097798758467219"},{"rid":"9112136494418541466"},{"rid":"4818552277082042472"},{"rid":"1835307270932660886"},{"rid":"9156928358984405465"},{"rid":"-7483465549946075725"},{"rid":"9212125684880333196"},{"rid":"4291823684484100618"},{"rid":"7120759152977930132"},{"rid":"4334196721558036620"},{"rid":"-3247913792344709990"},{"rid":"-9205201276025743939"},{"rid":"-5321621276455600761"},{"rid":"-2335201186495593950"},{"rid":"-747760772965918195"}]}]}]
+[15:21:36.789] [Warn:MessagingUpdatesHandler] reducedDialogEvents,[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":754050954},"unreadCount":7,"sortDate":1787485235835,"senderUid":638436066,"rid":"-747760772965918195","date":1787485235835,"message":"textMessage","state":4,"firstUnreadDate":1787484407215,"exInfo":{"exPeerType":2,"peerIdentity":0},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5049018250,"isGrouped":false,"outMessageReadDate":1787485235835,"outMessageRecievedDate":1787485235835}]}]
+[15:21:36.789] [Info:MessagingUpdatesHandler] apply reduced updates,6
+[15:21:36.789] [Debug:ACS] Scheduling action MessagesEvent/NewMessages | 1
+[15:21:36.789] [Debug:ACS] Scheduling action MessagesEvent/NewMessages | 1
+[15:21:36.789] [Debug:ACS] Scheduling action MessagesEvent/NewMessages | 1
+[15:21:36.789] [Debug:ACS] Scheduling action MessagesEvent/NewMessages | 1
+[15:21:36.790] [Debug:ACS] Scheduling action MessagesEvent/UpdateMessages | 1
+[15:21:36.790] [Debug:ACS] Scheduling action DialogEvent/Update | 1
+[15:21:36.790] [Warn:stop trace] get_diff_apply_MessagingUpdatesHandler,{"app_version":"167429","duration":120}
+[15:21:36.790] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"get_diff_apply_MessagingUpdatesHandler","date":1787485896790}
+[15:21:36.790] [Debug:EventsModule:New] Finished processing events by,MessagingUpdatesHandler
+[15:21:36.790] [Debug:EventsModule:New] Process Finished
+[15:21:36.790] [Warn:EventsModule:New] >>>> GetDiff end applyEvents
+[15:21:36.790] [Warn:stop trace] get_diff_apply_events,{"app_version":"167429","duration":120}
+[15:21:36.790] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"get_diff_apply_events","date":1787485896790}
+[15:21:36.791] [Debug:ACS] Scheduling action Settings/Received | 1
+[15:21:36.796] [Debug:Seraj Log Analytics Event] web_vitals_LCP,{"value":764,"delta":764,"url":"/"}
+[15:21:36.796] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_vitals_LCP","date":1787485896796}
+[15:21:36.796] [Debug:ACS] Scheduling action FlowSearch/setSearchMode | 1
+[15:21:36.797] [Debug:ACS] sidebarSearch/changeSidebarSearchQuery - dispatching immediately
+[15:21:36.798] [Debug:ACS] sidebarSearch/clearSearchResult - dispatching immediately
+[15:21:36.799] [Debug:ACS] sidebarSearch/enterSidebarSearchQuery - dispatching immediately
+[15:21:36.800] [Debug:ACS] StorySlice/setStoryRowVisible - dispatching immediately
+[15:21:36.801] [Debug:ACS] Scheduling action Groups/GetGroupRecommendations | 1
+[15:21:36.801] [Debug:Seraj Log Analytics Event] global_search,{"action_type":1,"query_text":"","section":1,"duration_seconds":0}
+[15:21:36.801] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"global_search","date":1787485896801}
+[15:21:36.801] [Info:Routing] all dummy states popped. navigating to ,[{"pathname":"/chat/search","search":""}]
+[15:21:36.801] [Warn:Navigate] {"pathname":"/chat/search","search":""}
+[15:21:36.816] [Debug:ACS] SidebarSearch/getTopPeers - dispatching immediately
+[15:21:36.817] [Debug:ACS] Scheduling action Dialogs/GetDialogClicks | 1
+[15:21:36.818] [Debug:ACS] sidebarSearch/loadStoredServices - dispatching immediately
+[15:21:36.819] [Debug:ACS] sidebarSearch/requestServicesSearch - dispatching immediately
+[15:21:36.820] [Debug:ACS] Scheduling action Contacts/GetContacts | 1
+[15:21:36.820] [Debug:ACS] sidebarSearch/getPeerRecentSearch - dispatching immediately
+[15:21:36.828] [Info:Api] -> Req GetTopPeer #14
+[15:21:36.829] [Debug:ACS] sidebarSearch/setPeerRecentSearch - dispatching immediately
+[15:21:36.835] [Warn:EventsModule:New] >>>> GetDiff end apply Seqs
+[15:21:36.835] [Info:EventsModule:New] GetDiff Finished
+[15:21:36.835] [Debug:Status] isSyncing,false
+[15:21:36.835] [Debug:Status] current,isSyncing,next,Ok
+[15:21:36.835] [Debug:ACS] OtherSlice/appStatusChanged - dispatching immediately
+[15:21:36.836] [Debug:EventsModule:New] Queue size:,0
+[15:21:36.836] [Warn:stop trace] initial_get_diff,{"app_version":"167429","duration":604}
+[15:21:36.836] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"initial_get_diff","date":1787485896836}
+[15:21:36.840] [Error:Api] -> Req GetTopPeer #14,{"code":5,"message":"value not found","displayMessage":"value not found"}
+[15:21:36.841] [Error:TopPeer epics] getTopPeerEpic,{"code":5,"message":"value not found","displayMessage":"value not found"}
+[15:21:36.853] [Debug:ACS] Dispatching Meet/setSelectCallLogs
+[15:21:36.854] [Debug:ACS] Dispatching growth/emptyStates/GetBotsData
+[15:21:36.855] [Debug:ACS] Scheduling action growth/emptyStates/setBots | 1
+[15:21:36.855] [Debug:ACS] Scheduling action growth/emptyStates/setLoading | 1
+[15:21:36.855] [Debug:ACS] Dispatching marketing/fetchAllTools
+[15:21:36.856] [Debug:ACS] Dispatching Promotion/GetInAppMessageData
+[15:21:36.857] [Error:Promotions] no in-app data found
+[15:21:36.857] [Debug:ACS] Scheduling action Promotions/InAppMessage/startInAppMessage | 1
+[15:21:36.858] [Debug:ACS] Dispatching notifications/setShowNotificationGuide
+[15:21:36.858] [Debug:ACS] Dispatching Settings/Received
+[15:21:36.859] [Debug:ACS] Dispatching Contacts/setContactsLoading
+[15:21:36.859] [Debug:ACS] Dispatching ShortDialogsSlice/setShortDialogsLoading
+[15:21:36.860] [Debug:ACS] Dispatching StorySlice/setLastGetStoriesTime
+[15:21:36.860] [Debug:ACS] Dispatching StorySlice/setLoading
+[15:21:36.870] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.871] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.872] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.873] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.874] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.874] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.875] [Debug:ACS] Dispatching StorySlice/setLastGetStoriesTime
+[15:21:36.876] [Debug:ACS] Dispatching StorySlice/setLoading
+[15:21:36.876] [Debug:ACS] Dispatching Contacts/setContacts
+[15:21:36.878] [Debug:ACS] Scheduling action Presence/GetAllUsersPresence | 1
+[15:21:36.882] [Debug:Seraj Log Analytics Event] web_vitals_FID,{"value":1,"delta":1,"url":"/"}
+[15:21:36.882] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"web_vitals_FID","date":1787485896882}
+[15:21:36.883] [Debug:ACS] Dispatching StorySlice/setStories
+[15:21:36.885] [Debug:Load User Req] [{"uid":255637216,"accessHash":"1"}]
+[15:21:36.885] [Info:Api] -> Req LoadUsers #15
+[15:21:36.885] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.885] [Debug:ACS] Scheduling action StorySlice/setShow | 1
+[15:21:36.885] [Debug:ACS] Scheduling action StorySlice/setNewestStoryCreatedAt | 1
+[15:21:36.885] [Debug:ACS] Dispatching StorySlice/setMostPopularStories
+[15:21:36.886] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.887] [Debug:ACS] Dispatching StorySlice/setIsStoriesFetched
+[15:21:36.887] [Debug:ACS] Dispatching Story/RemoveOutdatedStories
+[15:21:36.888] [Debug:ACS] Dispatching Story/PreloadFirstStories
+[15:21:36.888] [Debug:ACS] Scheduling action Story/DownloadStoriesByIDs | 1
+[15:21:36.889] [Debug:ACS] Dispatching ShortDialogsSlice/dialogShortsReceived
+[15:21:36.890] [Debug:ACS] Dispatching MessagesEvent/NewMessages
+[15:21:36.890] [Info:History:Reducer] DebugRefactorHist new messages received:,["6673107081055596710","-2790664979217472586"],size:,2
+[15:21:36.891] [Debug:ACS] Dispatching MessagesEvent/NewMessages
+[15:21:36.891] [Info:History:Reducer] DebugRefactorHist new messages received:,["-3093704439300121304","8496041572183625949","7122564949888753528","80410390272128037","208471736501330273","7323351259250621980","4352603858399248777","1783803175868008198","1941583966884273819","-2875075520712239754","6595522040609767375","2749820257497334058","-7283077712665444912"],size:,13
+[15:21:36.892] [Debug:ACS] Dispatching MessagesEvent/NewMessages
+[15:21:36.892] [Info:History:Reducer] DebugRefactorHist new messages received:,["6393329519394899217","1107415683170645528","1190044017580222877"],size:,3
+[15:21:36.893] [Debug:ACS] Dispatching MessagesEvent/NewMessages
+[15:21:36.893] [Info:History:Reducer] DebugRefactorHist new messages received:,["7120759152977930132","4334196721558036620","-3247913792344709990","-9205201276025743939","-5321621276455600761","-2335201186495593950","-747760772965918195"],size:,7
+[15:21:36.893] [Debug:ACS] Dispatching MessagesEvent/UpdateMessages
+[15:21:36.899] [Error:getting UTC time failed] {}
+[15:21:36.899] [Info:Api] <- Res LoadUsers #15
+[15:21:36.901] [Debug:ACS] Scheduling action groups/setFullGroups | 1
+[15:21:36.905] [Debug:ACS] Dispatching DialogEvent/Update
+[15:21:36.907] [Debug:ACS] Dispatching Settings/Received
+[15:21:36.907] [Debug:ACS] Dispatching FlowSearch/setSearchMode
+[15:21:36.908] [Debug:ACS] Dispatching Groups/GetGroupRecommendations
+[15:21:36.908] [Info:Api] -> Req GetGroupsRecommendation #16
+[15:21:36.909] [Debug:ACS] Dispatching Dialogs/GetDialogClicks
+[15:21:36.909] [Debug:ACS] Dispatching Contacts/GetContacts
+[15:21:36.910] [Debug:ACS] Dispatching growth/emptyStates/setBots
+[15:21:36.910] [Info:OnboardingEmptyState] Loading avatars for 7 bots,["1834682924","1576290907","2006409041","513133114","294280585","1809438266","1018866566"]
+[15:21:36.910] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.911] [Debug:ACS] Scheduling action growth/emptyStates/setBotUserData | 1
+[15:21:36.938] [Debug:ACS] sidebarSearch/setGlobalSearchTab - dispatching immediately
+[15:21:36.943] [Debug:ACS] SidebarSearch/getTopPeers - dispatching immediately
+[15:21:36.944] [Info:Api] -> Req GetTopPeer #17
+[15:21:36.945] [Debug:ACS] Scheduling action Dialogs/GetDialogClicks | 1
+[15:21:36.945] [Debug:ACS] SidebarSearch/getRecommendedPeers - dispatching immediately
+[15:21:36.946] [Debug:ACS] sidebarSearch/setRecommendedPeersLoading - dispatching immediately
+[15:21:36.954] [Error:Api] -> Req GetGroupsRecommendation #16,{"code":14,"message":"no healthy upstream"}
+[15:21:36.955] [Debug:ACS] Scheduling action DialogsSlice/setDialogClicks | 1
+[15:21:36.957] [Error:Api] -> Req GetTopPeer #17,{"code":5,"message":"value not found","displayMessage":"value not found"}
+[15:21:36.957] [Error:TopPeer epics] getTopPeerEpic,{"code":5,"message":"value not found","displayMessage":"value not found"}
+[15:21:36.957] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:36.959] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:36.959] [Debug:ACS] sidebarSearch/setRecommendedChannels - dispatching immediately
+[15:21:36.961] [Debug:ACS] sidebarSearch/setRecommendedPeersLoading - dispatching immediately
+[15:21:36.967] [Debug:ACS] Dispatching growth/emptyStates/setLoading
+[15:21:36.968] [Debug:ACS] Dispatching Promotions/InAppMessage/startInAppMessage
+[15:21:36.969] [Debug:ACS] Dispatching Presence/GetAllUsersPresence
+[15:21:36.970] [Debug:ACS] Scheduling action UsersPresence/updateContactsPresenceInfo | 1
+[15:21:36.970] [Debug:ACS] Dispatching StorySlice/setShow
+[15:21:36.971] [Debug:ACS] Dispatching StorySlice/setNewestStoryCreatedAt
+[15:21:36.971] [Debug:ACS] Dispatching Story/DownloadStoriesByIDs
+[15:21:36.972] [Info:>>FilesLog] Download start,25691,[download-manager]
+[15:21:36.973] [Debug:ACS] Dispatching groups/setFullGroups
+[15:21:36.974] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:36.975] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:36.975] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:36.976] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:36.977] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:36.981] [Info:>>FilesLog] Download start,23571,[download-manager]
+[15:21:37.100] [Info:>>AnbariStorageBucket] cache HIT,Avatars,2357158076232048385
+[15:21:37.100] [Info:>>AnbariStorageBucket] cache HIT,Stories,2569119076032388864
+[15:21:37.100] [Info:>>AnbariDownloadManager] Called download for 2357158076232048385 with status: Cached
+[15:21:37.100] [Info:>>AnbariDownloadManager] Called download for 2569119076032388864 with status: Cached
+[15:21:37.170] [Info:>>FilesLog] Download start,30043,[download-manager]
+[15:21:37.170] [Info:>>FilesLog] Download start,25283,[download-manager]
+[15:21:37.170] [Info:>>FilesLog] Download start,87019,[download-manager]
+[15:21:37.180] [Info:>>FilesLog] Download start,-3412,[download-manager]
+[15:21:37.250] [Info:>>AnbariStorageBucket] cache HIT,Avatars,3004304491564441344
+[15:21:37.250] [Info:>>AnbariDownloadManager] Called download for 3004304491564441344 with status: Cached
+[15:21:37.260] [Debug:ACS] sidebarSearch/changeSidebarSearchQuery - dispatching immediately
+[15:21:37.370] [Info:>>FilesLog] Download file fetch,23571,size,7320
+[15:21:37.380] [Info:>>FilesLog] Download file fetch,25691,size,550731
+[15:21:37.380] [Debug:Seraj Log Analytics Event] origin_view_story,{"event_type":"pre_load","file_size":550731,"story_type":1,"story_id":"4a06db52-0131-44b6-a11a-253f4bd418c5"}
+[15:21:37.380] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"origin_view_story","date":1787485897038}
+[15:21:37.380] [Debug:DB] Opening DB request,db,undefined
+[15:21:37.400] [Info:>>AnbariStorageBucket] cache HIT,Avatars,2528313954338414336
+[15:21:37.400] [Info:>>AnbariStorageBucket] cache HIT,Avatars,870197050533486336
+[15:21:37.400] [Info:>>AnbariStorageBucket] cache HIT,Avatars,-3412409912924365055
+[15:21:37.400] [Info:>>AnbariDownloadManager] Called download for 2528313954338414336 with status: Cached
+[15:21:37.400] [Info:>>AnbariDownloadManager] Called download for 870197050533486336 with status: Cached
+[15:21:37.400] [Info:>>AnbariDownloadManager] Called download for -3412409912924365055 with status: Cached
+[15:21:37.440] [Debug:DB] DB Opened Successfully!,0,false
+[15:21:37.450] [Info:>>FilesLog] Download file fetch,30043,size,5027
+[15:21:37.490] [Info:>>FilesLog] Download file fetch,25283,size,7631
+[15:21:37.500] [Info:>>FilesLog] Download file fetch,87019,size,5857
+[15:21:37.500] [Info:>>FilesLog] Download file fetch,-3412,size,5872
+[15:21:37.530] [Info:Api] -> Req SetOnline #18
+[15:21:37.540] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:37.550] [Debug:ACS] Dispatching growth/emptyStates/setBotUserData
+[15:21:37.560] [Debug:ACS] Dispatching Dialogs/GetDialogClicks
+[15:21:37.570] [Debug:ACS] Scheduling action DialogsSlice/setDialogClicks | 1
+[15:21:37.570] [Debug:ACS] Dispatching DialogsSlice/setDialogClicks
+[15:21:37.580] [Debug:ACS] Dispatching UsersPresence/updateContactsPresenceInfo
+[15:21:37.590] [Debug:ACS] Dispatching DialogsSlice/setDialogClicks
+[15:21:37.600] [Debug:ACS] Dispatching FlowMagazine/getUpvoteMessages
+[15:21:37.600] [Info:Api] -> Req GetMyUpvotes #19
+[15:21:37.610] [Debug:ACS] Scheduling action FlowMagazine/setUpvoteLoading | 1
+[15:21:37.690] [Info:Api] <- Res SetOnline #18
+[15:21:37.690] [Debug:ACS] Scheduling action marketing/fetchAllToolsStart | 1
+[15:21:37.700] [Info:Api] -> Req GetMarketingToolsConfig #20
+[15:21:37.700] [Info:Api] <- Res GetMyUpvotes #19
+[15:21:37.700] [Debug:ACS] Scheduling action FlowMagazine/setUpvoteMessages | 1
+[15:21:37.700] [Info:Api] -> Req SearchServices #21
+[15:21:37.720] [Debug:ACS] Dispatching FlowMagazine/setUpvoteLoading
+[15:21:37.730] [Debug:ACS] Dispatching marketing/fetchAllToolsStart
+[15:21:37.740] [Debug:ACS] Dispatching FlowMagazine/setUpvoteMessages
+[15:21:37.750] [Debug:ACS] Dispatching Advertisement/GetDialogAdWithInterval
+[15:21:37.760] [Debug:ACS] Dispatching Advertisement/NextDialogAdWithThrottle
+[15:21:37.770] [Info:Api] <- Res GetMarketingToolsConfig #20
+[15:21:37.770] [Debug:ACS] Scheduling action marketing/fetchAllToolsSuccess | 1
+[15:21:37.780] [Debug:ACS] Scheduling action Advertisement/GetAd | 0
+[15:21:37.800] [Info:Api] <- Res SearchServices #21
+[15:21:37.800] [Debug:ACS] sidebarSearch/setServicesSearchResult - dispatching immediately
+[15:21:37.820] [Debug:ACS] Dispatching marketing/fetchAllToolsSuccess
+[15:21:37.830] [Debug:ACS] Dispatching Advertisement/GetAd
+[15:21:37.840] [Info:Api] -> Req GetAdProvider #22
+[15:21:37.116] [Info:Api] <- Res GetAdProvider #22
+[15:21:37.116] [Info:DialogAd Epic] Ad content: ,[{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"7190247832541142787","accessHash":"123","fileStorageVersion":1},"width":1080,"height":1080,"fileSize":47286},"title":"با بله","description":"راحت کارت‌به‌کارت کن🔥🌱😍","link":"https://ble.ir/banking-my-bank-page","id":"40d4ce17-90b2-48e4-bd70-3b97f0018b52@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"3092414240966778626","accessHash":"123","fileStorageVersion":1},"width":853,"height":853,"fileSize":76306},"title":"🔴 ۰ تا ۱۰۰ تجارت","description":"مرجع تخصصی صادرات و واردات🚢","link":"ble.ir/join/Cn8fyZ9nbe","id":"56431904-ed06-4058-af60-734cefbb46c4@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","peer":{"type":3,"id":427532727,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-4447061663349399808","accessHash":"123","fileStorageVersion":1},"width":1000,"height":804,"fileSize":69452},"title":"سیمکارت ۰۹۱۲/موبوسیم","description":"فروش سیمکارت۰۹۱۲ کد ۱تا۹نقد و اقساط","link":"https://ble.ir/mobosim/1887336732828442000/1776610774851","id":"2267415c-25c0-4497-a609-f16e5e4e2e84@1787485897853988443","accessHash":"0","tag1":1,"tag2":104,"linkTitle":"","peer":{"type":3,"id":731018319,"accessHash":"0"},"ownerType":1}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-8939431855780847869","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":22053},"title":"🔴 ایمپلنت اقساطی 🔴","description":"۲۴ ماهه - ضمانت‌نامه کتبی 💎","link":"https://ble.ir/seritaa_clinic","id":"a2136d3b-6f7d-41c0-a17a-297717478a75-campaign@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":23428797,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"308451620794277633","accessHash":"123","fileStorageVersion":1},"width":1080,"height":1080,"fileSize":49860},"title":"محتوات ارزش دیده‌شدن داره 🚀","description":"مسیر ارتباط با کاربران بیشتر!","link":"https://ble.ir/Bale_advertisement/2313989805302724713/1780759790077","id":"24fcbe89-d483-4928-95b2-25a4759e5854@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","peer":{"type":3,"id":1063843314,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"7002938089204096771","accessHash":"123","fileStorageVersion":1},"width":1500,"height":1500,"fileSize":63313},"title":"🚀 ارسال پیام برای کسب‌وکارها","description":"سرویس ارسال پیام انبوه «بله»","link":"https://ble.ir/Bale_advertisement/834067445653913808/1771149404346","id":"0be390ae-a53f-4acc-a18f-0e4e559b4c50@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","peer":{"type":3,"id":1063843314,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-4797540487178739968","accessHash":"123","fileStorageVersion":1},"width":1000,"height":929,"fileSize":128290},"title":"کامپوزیت و ایمپلنت (۵۰٪)","description":"چک و سفته بدون سود (۱۰ سال ضمانت)","link":"https://ble.ir/karan_dental/13683827898743428/1751035829763","id":"39883e1e-edbb-41f0-8551-3546b997d07c@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":454623817,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-4662524453759672573","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":82227},"title":"مدیتیشن؛ آرامش ذهن","description":"۵ قدم تا حذف خاطرات مزاحم","link":"https://ble.ir/aramgroup","id":"f4cdeb7e-e5ca-4d79-a38a-a7283e9e8d8e@1787485897853988443","accessHash":"0","tag1":7,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1790701242,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-8988937397045223679","accessHash":"123","fileStorageVersion":1},"width":957,"height":1000,"fileSize":139186},"title":"‼️ فقط امروز، نصف قیمت‼️","description":"کامپوزیت | لمینت | ایمپلنت اقساطی","link":"https://ble.ir/dentall_vip/-8764708132280060432/1787138191839","id":"9e2a1cef-8df5-4d42-8fd7-eecca7243151@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1314721953,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-7664841057997086973","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":74146},"title":"ایمپلنت 🦷 بدون پیش‌پرداخت","description":"سفر رایگان 🚗 اقساط بلندمدت | تهران","link":"https://ble.ir/sarvimplant","id":"d9e626bc-f246-4dcf-9c09-0dd1e44eabb3-campaign@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1886484113,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-6689096764064456960","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":62709},"title":"آموزش دیوان عدالت اداری","description":"اگر پرونده دیوان عدالت داری عضو شو","link":"https://ble.ir/divan_edalatt/-717048455831838589/1749830430487","id":"9ba131b0-1cf4-4d78-82a8-cfc029e4f4bd@1787485897853988443","accessHash":"0","tag1":1,"tag2":104,"linkTitle":"","peer":{"type":3,"id":2052610516,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"2719772302541397763","accessHash":"123","fileStorageVersion":1},"width":713,"height":682,"fileSize":702965},"title":"کمتر دیده شدی؟ وقت تغییرشه!","description":"تبلیغ کن و فرصت‌های جدید بساز🔥","link":"https://tabligh.bale.ai/","id":"c747bf05-7ccc-403f-975e-7a6d78486797@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-275484396460302590","accessHash":"123","fileStorageVersion":1},"width":750,"height":1000,"fileSize":134660},"title":"تو شمال ویلاتو گرون نخر 😉","description":"کانال ویلاهای قیمت واقعی و قسطی 👇","link":"https://ble.ir/vilastore","id":"f622d1fd-9c5f-4795-a3a5-ed6a004223e7@1787485897853988443","accessHash":"0","tag1":1,"tag2":102,"linkTitle":"","peer":{"type":3,"id":1313128066,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-6328168485719564543","accessHash":"123","fileStorageVersion":1},"width":908,"height":1000,"fileSize":83916},"title":"می‌ترسی مرز بذاری؟","description":"آموزش مرزگذاری سالم + دوره هدیه","link":"https://ble.ir/Melikapeybot","id":"2f2a2389-436c-4e2d-9788-97fe6f92b6a1-campaign@1787485897853988443","accessHash":"0","tag1":7,"tag2":0,"linkTitle":"","peer":{"type":4,"id":111220267,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"2719772302541397763","accessHash":"123","fileStorageVersion":1},"width":713,"height":682,"fileSize":702965},"title":"کمتر دیده شدی؟ وقت تغییرشه!","description":"تبلیغ کن و فرصت‌های جدید بساز🔥","link":"https://tabligh.bale.ai/","id":"1b620a4b-427c-41c3-b6d3-ef68bc883475@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"1602484628500848386","accessHash":"123","fileStorageVersion":1},"width":1254,"height":1254,"fileSize":100873},"title":"سرویس پیام انبوه بله","description":"📩 وقتی یک پیام باید به همه برسد…","link":"https://ble.ir/Bale_advertisement/6743500048214574359/1783929829271","id":"a7bc2883-883b-41fc-83f1-e0ab240e9ab6@1787485897853988443","accessHash":"0","tag1":4,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1063843314,"accessHash":"0"},"ownerType":1}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-3915405827686260989","accessHash":"123","fileStorageVersion":1},"width":608,"height":608,"fileSize":44257},"title":"🪽 فرشته ایران‌نژاد ✨","description":"❌ کلیک نکن اگر آموزش‌پذیر نیستی ✋🏼","link":"https://ble.ir/fereshteirannezhad/5024694032879311979/1786981067196","id":"5f72534c-abe9-4c96-b5d3-6c0834ca989a-campaign@1787485897853988443","accessHash":"0","tag1":7,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1865489189,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-2335033589666013440","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":128501},"title":"الان بخر، قسطشو بعداً بده","description":"فروش ابزارآلات اقساطی بدون سود","link":"https://ble.ir/viratajhiz/-8364938949116396103/1787053260032","id":"e837965e-9bb2-40c3-974f-fe4e5665f4b9@1787485897853988443","accessHash":"0","tag1":2,"tag2":217,"linkTitle":"","peer":{"type":3,"id":591471958,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"4639626574810390275","accessHash":"123","fileStorageVersion":1},"width":615,"height":654,"fileSize":614015},"title":"📌 تبلیغت رو اول نمایش بده","description":"📣 در پربیننده‌ترین جایگاه بله دیده شو!","link":"https://ble.ir/Bale_advertisement/8396738635702667/1710335372793","id":"80b08af5-0239-400c-a8b2-94672f11f2c5@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","peer":{"type":3,"id":1063843314,"accessHash":"0"},"ownerType":1}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"3168481274691854080","accessHash":"123","fileStorageVersion":1},"width":800,"height":800,"fileSize":47980},"title":"دیزل ژنراتور دژن","description":"ولوو، بادوین، پرکینز، کامینز، بنز","link":"https://ble.ir/digengenerators","id":"63d77dd4-d91c-412b-9753-ad85c73b38b0@1787485897853988443","accessHash":"0","tag1":2,"tag2":217,"linkTitle":"","peer":{"type":3,"id":334547787,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"6314602719072165633","accessHash":"123","fileStorageVersion":1},"width":1000,"height":666,"fileSize":27309},"title":"تا ۵۰٪ سود پیش‌بینی‌شده","description":"سکوی جمع‌سپار، فراتر از سود بانکی","link":"https://ble.ir/jam_separ_crowdfunding/-8742306903034297546/1786956052328","id":"01e03a75-223d-4237-af09-aadcea25efd7-campaign@1787485897853988443","accessHash":"0","tag1":1,"tag2":103,"linkTitle":"","peer":{"type":3,"id":757656869,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-1188830216984322302","accessHash":"123","fileStorageVersion":1},"width":273,"height":275,"fileSize":70098},"title":"افتادگی پلک و پف چشم؟!🤔","description":"👁️ نتایج واقعی جراحی پلک را ببینید","link":"https://ble.ir/roujinsurgery/5790248520771133838/1782749256890","id":"62826a34-7246-4cbe-84cb-9f230bd6a4e5@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":695936095,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"6005400034046320384","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":152623},"title":"Tezoa | مرجع یادگیری برند","description":"نمیخوان این ۴لایه محرمانه رو بشناسی","link":"ble.ir/join/E9bzghWm9b","id":"701265ad-2a31-4b4e-99c5-b21a7268fecb-campaign@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","peer":{"type":3,"id":845389907,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-5571939056729317630","accessHash":"123","fileStorageVersion":1},"width":1000,"height":800,"fileSize":102229},"title":"🌸 هیچ‌کس دلیلشو نمی‌دونه","description":"فقط می‌گن چهره‌ات دلنشین‌تر شده","link":"https://ble.ir/jarahibini_ir/592684974256256643/1784882589973","id":"7031e06c-ed34-4ba2-b17c-d6b37c8e5f80-campaign@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":1835027166,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-5404110099530047743","accessHash":"123","fileStorageVersion":1},"width":1254,"height":1254,"fileSize":1931225},"title":"عروسک عمده زیر قیمت 🧸","description":"از بارکد تویز بخر، بیشتر سود کن","link":"https://ble.ir/barkod_toys","id":"36416e3c-419f-4b98-b855-554380f87563@1787485897853988443","accessHash":"0","tag1":2,"tag2":203,"linkTitle":"","peer":{"type":3,"id":788572394,"accessHash":"0"},"ownerType":1}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-2275201476127285501","accessHash":"123","fileStorageVersion":1},"width":1000,"height":1000,"fileSize":74146},"title":"ایمپلنت بدون پیش‌پرداخت","description":"ایمپلنت در تهران 🦷 سفر با ما 💎","link":"https://ble.ir/sarvdent","id":"3b6fa044-d31f-49a2-b297-1f8f72df294a-campaign@1787485897853988443","accessHash":"0","tag1":5,"tag2":0,"linkTitle":"","peer":{"type":3,"id":119298414,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"3101229920685924097","accessHash":"123","fileStorageVersion":1},"width":1254,"height":1254,"fileSize":1176985},"title":"👋 قبل از شروع، دیده شو","description":"با تبلیغ در تب گفت و گو بله","link":"https://tabligh.bale.ai/login","id":"4b3baae3-9dfe-4f54-b1d3-bcab71b703b9@1787485897853988443","accessHash":"0","tag1":4,"tag2":0,"linkTitle":"","ownerType":1}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"2046439453783498499","accessHash":"123","fileStorageVersion":1},"width":640,"height":640,"fileSize":10326},"title":"با مبلغ دلخواه طلا بخر!","description":"برای خرید طلا منتظر پول بزرگ نباش!","link":"https://ble.ir/pasargadcapital/9047250034980471423/1787387487284","id":"71661c41-a5a7-4c73-b188-d8916e74f810-campaign@1787485897853988443","accessHash":"0","tag1":1,"tag2":103,"linkTitle":"","peer":{"type":3,"id":1949178344,"accessHash":"0"},"ownerType":0}},{"baleCustomAd":{"pic":"","imageLocation":{"fileLocation":{"fileId":"-2128299218532425984","accessHash":"123","fileStorageVersion":1},"width":336,"height":324,"fileSize":12998},"title":"کارت‌به‌کارت راحت🔥","description":"با بله سریع و راحت کارت‌به‌کارت کن 💳","link":"https://ble.ir/banking-my-bank-page","id":"87042959-d302-444c-a78b-096531ab0f09@1787485897853988443","accessHash":"0","tag1":1,"tag2":101,"linkTitle":"","ownerType":0}}]
+[15:21:37.116] [Debug:ACS] Scheduling action Advertisement/setDialogAdPlacements | 0
+[15:21:37.116] [Debug:ACS] Scheduling action Advertisement/getNextDialogAd | 0
+[15:21:37.116] [Debug:ACS] Scheduling action Advertisement/PreloadNextDialogAd | 0
+[15:21:37.128] [Debug:ACS] Dispatching Advertisement/setDialogAdPlacements
+[15:21:37.129] [Debug:ACS] Dispatching Advertisement/getNextDialogAd
+[15:21:37.130] [Debug:ACS] Dispatching Advertisement/PreloadNextDialogAd
+[15:21:37.149] [Debug:ACS] Scheduling action Advertisement/DialogAdViewed | 0
+[15:21:37.166] [Debug:ACS] Dispatching Advertisement/DialogAdViewed
+[15:21:37.167] [Debug:Seraj Log Analytics Event] ad_dialogue_view,{"ad_item_provider":"bale","ad_item_state":"web","ad_item_id":"40d4ce17-90b2-48e4-bd70-3b97f0018b52@1787485897853988443","ad_item_title":"با بله","tag_1":1,"tag_2":101,"link_title":"","action_type":1,"peer_type":"channel"}
+[15:21:37.167] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"ad_dialogue_view","date":1787485897167}
+[15:21:37.168] [Info:Api] -> Req UpdateView #23
+[15:21:37.179] [Info:Api] <- Res UpdateView #23
+[15:21:37.233] [Warn:EventsModule:New] Connection
+[15:21:37.332] [Debug:FilesModule] Request Urls,[{"fileId":"7190247832541142787","accessHash":"123","fileStorageVersion":1},{"fileId":"7190247832541142787","accessHash":"123","fileStorageVersion":1}]
+[15:21:37.332] [Info:Api] -> Req GetNasimFileUrls #24
+[15:21:37.342] [Info:Api] <- Res GetNasimFileUrls #24
+[15:21:37.343] [Debug:FilesModule] Response Urls,{"fileLocations":[{"fileId":"7190247832541142787","accessHash":"123","fileStorageVersion":1},{"fileId":"7190247832541142787","accessHash":"123","fileStorageVersion":1}],"response":[{"fileId":"7190247832541142787","chunkSize":131072,"url":"https://file-gw5.ble.ir/proxy_download/VZgMZdDXJcv"}]}
+[15:21:37.427] [Debug:ACS] sidebarSearch/setGlobalChannelSearchLoading - dispatching immediately
+[15:21:37.429] [Info:Api] -> Req SearchPeer #25
+[15:21:37.446] [Debug:DB] Opening DB request,db,undefined
+[15:21:37.446] [Debug:DB] DB Opened Successfully!,0,false
+[15:21:37.451] [Info:Api] <- Res SearchPeer #25
+[15:21:37.451] [Debug:Load User Req] [{"uid":574388427,"accessHash":"1"},{"uid":206701001,"accessHash":"1"},{"uid":44118886,"accessHash":"1"},{"uid":1198221692,"accessHash":"1"},{"uid":943366598,"accessHash":"1"},{"uid":826164648,"accessHash":"1"}]
+[15:21:37.451] [Info:Api] -> Req LoadUsers #26
+[15:21:37.451] [Info:GroupModule] loadGroups,requiredGroups,[{"groupId":84319848,"accessHash":"0"},{"groupId":677926787,"accessHash":"0"},{"groupId":856657089,"accessHash":"0"},{"groupId":1127756212,"accessHash":"0"},{"groupId":1581881927,"accessHash":"0"},{"groupId":743986134,"accessHash":"0"},{"groupId":120616226,"accessHash":"0"},{"groupId":587577161,"accessHash":"0"},{"groupId":1344012794,"accessHash":"0"},{"groupId":2031465130,"accessHash":"0"},{"groupId":1133458077,"accessHash":"0"},{"groupId":1203930072,"accessHash":"0"},{"groupId":1070125184,"accessHash":"0"},{"groupId":1893825523,"accessHash":"0"}]
+[15:21:37.451] [Info:Api] -> Req LoadGroups #27
+[15:21:37.463] [Info:Api] <- Res LoadGroups #27
+[15:21:37.465] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:37.469] [Info:Api] <- Res LoadUsers #26
+[15:21:37.469] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:37.471] [Debug:ACS] sidebarSearch/setGlobalChannelSearchReceived - dispatching immediately
+[15:21:37.489] [Info:>>FilesLog] Download start,-2792,[download-manager]
+[15:21:37.490] [Info:>>FilesLog] Download start,-8853,[download-manager]
+[15:21:37.490] [Info:>>FilesLog] Download start,35376,[download-manager]
+[15:21:37.490] [Info:>>FilesLog] Download start,-9211,[download-manager]
+[15:21:37.490] [Info:>>FilesLog] Download start,74846,[download-manager]
+[15:21:37.491] [Info:>>FilesLog] Download start,-7123,[download-manager]
+[15:21:37.491] [Info:>>FilesLog] Download start,-6294,[download-manager]
+[15:21:37.492] [Info:>>AnbariDownloadManager] Called download for -2792477037627367678 with status: NotCached
+[15:21:37.492] [Info:>>AnbariScheduler] schedule,-2792477037627367678,Medium,→,active=[] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.493] [Info:>>AnbariScheduler] checkQueue → start,-2792477037627367678,Medium
+[15:21:37.493] [Info:>>AnbariScheduler] started,-2792477037627367678,Medium,→,active=[-2792477037627367678:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.493] [Info:Api] -> Req GetNasimFileUrl #28
+[15:21:37.493] [Info:>>AnbariDownloadManager] Called download for -8853037217046782206 with status: NotCached
+[15:21:37.493] [Info:>>AnbariScheduler] schedule,-8853037217046782206,Medium,→,active=[-2792477037627367678:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.493] [Info:>>AnbariScheduler] checkQueue → start,-8853037217046782206,Medium
+[15:21:37.493] [Info:>>AnbariScheduler] started,-8853037217046782206,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.493] [Info:Api] -> Req GetNasimFileUrl #29
+[15:21:37.494] [Info:>>AnbariDownloadManager] Called download for 3537672002523242243 with status: NotCached
+[15:21:37.494] [Info:>>AnbariScheduler] schedule,3537672002523242243,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.494] [Info:>>AnbariScheduler] checkQueue → start,3537672002523242243,Medium
+[15:21:37.494] [Info:>>AnbariScheduler] started,3537672002523242243,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.494] [Info:Api] -> Req GetNasimFileUrl #30
+[15:21:37.494] [Info:>>AnbariDownloadManager] Called download for -9211806149587230974 with status: NotCached
+[15:21:37.494] [Info:>>AnbariScheduler] schedule,-9211806149587230974,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.494] [Info:>>AnbariScheduler] checkQueue → start,-9211806149587230974,Medium
+[15:21:37.494] [Info:>>AnbariScheduler] started,-9211806149587230974,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.494] [Info:Api] -> Req GetNasimFileUrl #31
+[15:21:37.495] [Info:>>AnbariDownloadManager] Called download for 7484648220399705859 with status: NotCached
+[15:21:37.495] [Info:>>AnbariScheduler] schedule,7484648220399705859,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.495] [Info:>>AnbariScheduler] checkQueue → start,7484648220399705859,Medium
+[15:21:37.495] [Info:>>AnbariScheduler] started,7484648220399705859,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium,7484648220399705859:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.495] [Info:Api] -> Req GetNasimFileUrl #32
+[15:21:37.495] [Info:>>AnbariDownloadManager] Called download for -7123637212184568062 with status: NotCached
+[15:21:37.495] [Info:>>AnbariScheduler] schedule,-7123637212184568062,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium,7484648220399705859:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.495] [Info:>>AnbariDownloadManager] Called download for -629447841737531645 with status: NotCached
+[15:21:37.495] [Info:>>AnbariScheduler] schedule,-629447841737531645,Medium,→,active=[-2792477037627367678:Medium,-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium,7484648220399705859:Medium] queue={XH:0 H:0 M:1 L:0 XL:0}
+[15:21:37.507] [Info:Api] <- Res GetNasimFileUrl #28
+[15:21:37.507] [Info:Api] <- Res GetNasimFileUrl #32
+[15:21:37.507] [Info:Api] <- Res GetNasimFileUrl #31
+[15:21:37.507] [Info:Api] <- Res GetNasimFileUrl #30
+[15:21:37.508] [Info:>>AnbariDownloadManager] download started,Avatars,-2792477037627367678,https://file-gw5.ble.ir/proxy_download/DrG8Z8Vz1U_N_AgADBiVjH6VhtE905jmhPagxsCfprg=?u=EaArEIc3uGY9gQT7L49b5mzyoP4dSHBDRLOM-qYBB002OAkhyJ7MAgZeJ_wNvDrhjJqrCRb8BdW-OaoGY_L0&filename=avatar.jpeg
+[15:21:37.508] [Info:>>AnbariDownloadManager] download started,Avatars,7484648220399705859,https://file-gw6.ble.ir/proxy_download/JJNaHxL8byWI07ZUU2PXfqxO6gfhodZaCnWW3ndTUqs=?u=BOvF88ds8mi8TipxGgYZLcfZUohbsYACUCxXPMq1zzJQM6dbfEUk5IM3ubx9bILhFEkZ4XeHhxexgr1GILk%3D&filename=avatar.jpeg
+[15:21:37.509] [Info:>>AnbariDownloadManager] download started,Avatars,-9211806149587230974,https://file-gw6.ble.ir/proxy_download/DflCdRp_2FESizUMZYEBbsKFjpqjiPskFzDJloKrN7o=?u=-QuMHRqjLsLzlOCR53dOBu-BIsuY2-L5FYXsdUKvUA_6hmQsBuDA8ChkuA6Vd0bRr6K09-FOpB20rasiOWHk&filename=avatar.jpeg
+[15:21:37.509] [Info:>>AnbariDownloadManager] download started,Avatars,3537672002523242243,https://file-gw4.ble.ir/proxy_download/rSgXiRQWL9UQGCEous554-wVnL0UAz3t8VJ-tovR9zM=?u=ou2vE5oUALmX79bClAzDdPN9cFg-kdWaTNrLdhGhnko0WOF1l2aS1PV6WWXt9cBymDBGIPsk4tWmYl7s84E%3D&filename=avatar.jpeg
+[15:21:37.509] [Info:Api] <- Res GetNasimFileUrl #29
+[15:21:37.510] [Info:>>AnbariDownloadManager] download started,Avatars,-8853037217046782206,https://file-gw7.ble.ir/proxy_download/6S0MhZTIBQH4TpQrgOeO_Ld93ap6ci5Mw0XDvJN_umY=?u=Rd3QlGK6ekcXKUs8D1E6JzdyrWEGu7NmyShJYNLzV_lsR9bzjb5v2y0v9voXpfZkKh2FpFuUEYl5JB1kEbmF&filename=avatar.jpeg
+[15:21:37.563] [Info:>>AnbariDownloadManager] download progress,Avatars,-2792477037627367678,7624/7624
+[15:21:37.564] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,-2792477037627367678,7624B
+[15:21:37.565] [Info:>>AnbariStorageBucket] put — cached,Avatars,-2792477037627367678,7624B
+[15:21:37.565] [Info:>>FilesLog] Download file fetch,-2792,size,7624
+[15:21:37.565] [Info:>>AnbariDownloadManager] stream finalized,Avatars,-2792477037627367678
+[15:21:37.565] [Info:>>AnbariScheduler] checkQueue → start,-7123637212184568062,Medium
+[15:21:37.565] [Info:>>AnbariScheduler] started,-7123637212184568062,Medium,→,active=[-8853037217046782206:Medium,3537672002523242243:Medium,-9211806149587230974:Medium,7484648220399705859:Medium,-7123637212184568062:Medium] queue={XH:0 H:0 M:1 L:0 XL:0}
+[15:21:37.566] [Info:Api] -> Req GetNasimFileUrl #33
+[15:21:37.568] [Info:>>AnbariDownloadManager] download progress,Avatars,3537672002523242243,4706/4706
+[15:21:37.568] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,3537672002523242243,4706B
+[15:21:37.569] [Info:>>AnbariStorageBucket] put — cached,Avatars,3537672002523242243,4706B
+[15:21:37.569] [Info:>>FilesLog] Download file fetch,35376,size,4706
+[15:21:37.570] [Info:>>AnbariDownloadManager] stream finalized,Avatars,3537672002523242243
+[15:21:37.570] [Info:>>AnbariScheduler] checkQueue → start,-629447841737531645,Medium
+[15:21:37.570] [Info:>>AnbariScheduler] started,-629447841737531645,Medium,→,active=[-8853037217046782206:Medium,-9211806149587230974:Medium,7484648220399705859:Medium,-7123637212184568062:Medium,-629447841737531645:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:37.570] [Info:Api] -> Req GetNasimFileUrl #34
+[15:21:37.573] [Info:>>AnbariDownloadManager] download progress,Avatars,7484648220399705859,8201/8201
+[15:21:37.573] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,7484648220399705859,8201B
+[15:21:37.574] [Info:>>AnbariDownloadManager] download progress,Avatars,-9211806149587230974,6741/6741
+[15:21:37.574] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,-9211806149587230974,6741B
+[15:21:37.575] [Info:Api] <- Res GetNasimFileUrl #33
+[15:21:37.575] [Info:>>AnbariStorageBucket] put — cached,Avatars,7484648220399705859,8201B
+[15:21:37.575] [Info:>>AnbariStorageBucket] put — cached,Avatars,-9211806149587230974,6741B
+[15:21:37.575] [Info:>>AnbariDownloadManager] download progress,Avatars,-8853037217046782206,6024/6024
+[15:21:37.576] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,-8853037217046782206,6024B
+[15:21:37.576] [Info:Api] <- Res GetNasimFileUrl #34
+[15:21:37.577] [Info:>>AnbariStorageBucket] put — cached,Avatars,-8853037217046782206,6024B
+[15:21:37.577] [Info:>>FilesLog] Download file fetch,74846,size,8201
+[15:21:37.577] [Info:>>AnbariDownloadManager] stream finalized,Avatars,7484648220399705859
+[15:21:37.577] [Info:>>FilesLog] Download file fetch,-9211,size,6741
+[15:21:37.577] [Info:>>AnbariDownloadManager] stream finalized,Avatars,-9211806149587230974
+[15:21:37.579] [Info:>>AnbariDownloadManager] download started,Avatars,-7123637212184568062,https://file-gw6.ble.ir/proxy_download/j2CJHt1pA-3fRYJE7Z0UakHxSNDD6xU_4yLjvaB7hhA=?u=LQbOO4Tx8QUcITQbftaj-Tj-e8FSBKAbw1q_f382Q-oZGdML4W6wO_JGibehgPuzuuabfsLpd21O2sFvano9&filename=avatar.jpeg
+[15:21:37.580] [Info:>>FilesLog] Download file fetch,-8853,size,6024
+[15:21:37.580] [Info:>>AnbariDownloadManager] stream finalized,Avatars,-8853037217046782206
+[15:21:37.583] [Info:>>AnbariDownloadManager] download started,Avatars,-629447841737531645,https://file-gw4.ble.ir/proxy_download/IODcVLv9ebC8Ndxnrlfw2KlBUr5kpT51mS0VBbvn_cs=?u=NxjEBibaVNUNRBxyg7DZwqDXjXiaM-NNBi7lWDMVrJr8mgxH5hkIWMc_TRSIxAgCdYk7U4rNLJ2lKXAR0Ew%3D&filename=avatar.jpeg
+[15:21:37.590] [Info:>>AnbariDownloadManager] download progress,Avatars,-7123637212184568062,8306/8306
+[15:21:37.590] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,-7123637212184568062,8306B
+[15:21:37.591] [Info:>>AnbariStorageBucket] put — cached,Avatars,-7123637212184568062,8306B
+[15:21:37.591] [Info:>>FilesLog] Download file fetch,-7123,size,8306
+[15:21:37.591] [Info:>>AnbariDownloadManager] stream finalized,Avatars,-7123637212184568062
+[15:21:37.593] [Info:>>AnbariDownloadManager] download progress,Avatars,-629447841737531645,11445/11445
+[15:21:37.594] [Info:>>AnbariDownloadManager] download complete — cached,Avatars,-629447841737531645,11445B
+[15:21:37.596] [Info:>>AnbariStorageBucket] put — cached,Avatars,-629447841737531645,11445B
+[15:21:37.596] [Info:>>FilesLog] Download file fetch,-6294,size,11445
+[15:21:37.596] [Info:>>AnbariDownloadManager] stream finalized,Avatars,-629447841737531645
+[15:21:37.847] [Debug:DB] Opening DB request,db,undefined
+[15:21:37.847] [Debug:DB] DB Opened Successfully!,0,false
+[15:21:37.847] [Error:ServicesSearch] Failed to load stored service searches,{}
+[15:21:37.867] [Debug:ACS] Scheduling action Search/SaveToPeerRecentSearch | 1
+[15:21:37.868] [Debug:ACS] Scheduling action groups/setJoinData | 1
+[15:21:37.868] [Debug:Seraj Log Analytics Event] global_search,{"peer_id":972228524,"peer_type":2,"query_text":"tasnim","action_type":3,"index":2,"event_type":6,"section":2,"duration_seconds":1}
+[15:21:37.868] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"global_search","date":1787485897868}
+[15:21:37.868] [Info:Routing] all dummy states popped. navigating to ,[{"pathname":"/chat/search","search":"uid=5267195820"}]
+[15:21:37.868] [Warn:Navigate] {"pathname":"/chat/search","search":"uid=5267195820"}
+[15:21:37.873] [Debug:ACS] DialogsSlice/setNextPeer - dispatching immediately
+[15:21:37.880] [Debug:ACS] DialogsSlice/setCurrentChat - dispatching immediately
+[15:21:37.881] [Info:DialogInfoEpics] Draft: load on peer open,{"peerId":972228524,"peerType":2,"savedTextLength":0,"appliedTextLength":0,"savedDraftAction":false}
+[15:21:37.881] [Info:Api] -> Req GetFullGroup #35
+[15:21:37.881] [Info:Api] -> Req GetFullGroup #36
+[15:21:37.882] [Info:Api] -> Req LoadPeerDialogs #37
+[15:21:37.882] [Debug:ACS] Scheduling action Presence/UnSubscribeToPeerListOnline | 1
+[15:21:37.882] [Debug:ACS] Scheduling action Presence/SubscribeToPeersListOnline | 1
+[15:21:37.883] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:37.883] [Debug:ACS] Scheduling action MiniApp/setMainButtonMiniApp | 1
+[15:21:37.884] [Debug:ACS] Scheduling action Purchase/SetMessageDetails | 0
+[15:21:37.884] [Debug:ACS] Scheduling action Purchase/SetMiniAppInvoiceParams | 0
+[15:21:37.884] [Info:Api] -> Req GetAdProvider #38
+[15:21:37.890] [Info:History: MessagesList] Scroll to unread,undefined,false
+[15:21:37.891] [Info:History: MessagesList] Scroll to target,undefined,false
+[15:21:37.893] [Debug:ACS] History/OpenHistory - dispatching immediately
+[15:21:37.894] [Info:History:Epics] history.isLoading,true
+[15:21:37.894] [Info:History:Epics] DebugRefactorHist,handleOpenHistory,{"type":2,"id":972228524}
+[15:21:37.895] [Info:Api] -> Req LoadPeerDialogs #39
+[15:21:37.895] [Debug:ACS] History/SetLoading - dispatching immediately
+[15:21:37.896] [Debug:ACS] Scheduling action History/SetShowCurrentMessages | 1
+[15:21:37.897] [Debug:Chat] open history got,0,messages for peer,972228524
+[15:21:37.897] [Debug:ACS] Scheduling action Groups/GetPinMessages | 1
+[15:21:37.897] [Debug:ACS] Scheduling action Groups/GetPinMessages | 1
+[15:21:37.901] [Debug:ACS] Scheduling action Promotion/GetInAppMessageData | 1
+[15:21:37.902] [Info:Api] -> Req GetRelatedChannels #40
+[15:21:37.903] [Info:Api] <- Res GetFullGroup #36
+[15:21:37.907] [Info:Api] <- Res GetFullGroup #35
+[15:21:37.908] [Info:Api] <- Res GetAdProvider #38
+[15:21:37.908] [Debug:SponsoredAd get ad provider result] {"content":[{"baleSponsoredMessageAd":{"id":"495080bb-ee61-414d-a904-a7e46862c11f-campaign","caption":"تا اربعین امسال یک عراقی عربی حرف بزن💯\n✔️ در 3 روز از صفر به جمله‌سازی می‌رسی\n✔️ نقشه راه مکالمه رو یاد می‌گیری\n✔️ تو کربلا راحت ارتباط می‌گیری\nیادگیری با متد عربینو (در 2 ماه)","imageLocation":{"fileLocation":{"fileId":"3214348451080576768","accessHash":"123","fileStorageVersion":1},"width":1000,"height":562,"fileSize":42673},"tag1":10,"tag2":0,"link":"https://ble.ir/arabi_karemi","linkTitle":"اینجا کلیک کن","peer":{"type":3,"id":649682792,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"372d15ae-1624-4eca-a41c-99b19dd7d49c","caption":"از شنبه تا جمعه، جواب «چی بپزم» همیشه همراهته\nبرای هر روز *چند انتخاب آماده* داشته باش 👇\nناهار و شام خونگی 🍲\nغذاهای ساده، فوری و کم‌خرج\nهفته رو خوشمزه‌تر بچین 😍","imageLocation":{"fileLocation":{"fileId":"3504586005324504835","accessHash":"123","fileStorageVersion":1},"width":1000,"height":538,"fileSize":41682},"tag1":6,"tag2":0,"link":"ble.ir/join/H8Azp4uXyL","linkTitle":"عضویت","peer":{"type":3,"id":418763286,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"72f761e1-5a2f-4108-991d-3c501419f3f6","caption":"بزرگترین دروغی که تو عمرت شنیدی اینه: 😱\n«عسل طبیعی پیدا نمی‌شه!»\nمن راز تشخیص *عسل طبیعی* رو پیدا کردم. 😊\nروی دیدن راز کلیک کن تا ببینی 👇","imageLocation":{"fileLocation":{"fileId":"-932282205884834047","accessHash":"123","fileStorageVersion":1},"width":828,"height":445,"fileSize":41853},"tag1":2,"tag2":210,"link":"https://ble.ir/hajahmad_store/-7847907967859169401/1770702791445","linkTitle":"دیدن راز عسل","peer":{"type":3,"id":932632561,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"b5b55791-3472-4ca2-9fa1-e67f0c0f6cfb","caption":"🌱 *نبات سنتی*، مستقیم از کارگاه! ☕️✨\nتضمین تازگی، کیفیت اصیل و قیمت بی‌واسطه.\nفروش عمده و خرده به سراسر کشور.\nبرای ثبت سفارش عضو کانال شوید👇","imageLocation":{"fileLocation":{"fileId":"-2429497941639356672","accessHash":"123","fileStorageVersion":1},"width":1000,"height":537,"fileSize":81722},"tag1":2,"tag2":210,"link":"https://ble.ir/nabaat_yazdii/3509350475217138535/1785652204654","linkTitle":"خرید با کیفیت","peer":{"type":3,"id":2096540277,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"2fbc5a5e-77d9-4bf9-a641-9764f3a89307","caption":"💕 *آشپزی از صفر تا صد*\n❤️ خوشمزه‌ترین کیک‌ها و خوراکی‌ها\n❤️ راز خوشمزه شدن انواع غذا و شیرینی\nبیا ببین 👇😍","imageLocation":{"fileLocation":{"fileId":"-3712710109759070461","accessHash":"123","fileStorageVersion":1},"width":722,"height":406,"fileSize":34545},"tag1":6,"tag2":0,"link":"ble.ir/join/2FaMm2Ltum","linkTitle":"عضویت","peer":{"type":3,"id":1885981263,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"e2725e05-89fc-43f6-9189-3f93c03ab3ba","caption":"از شنبه تا جمعه، جواب «چی بپزم» همیشه همراهته\nبرای هر روز *چند انتخاب آماده* داشته باش 👇\nناهار و شام خونگی 🍲\nغذاهای ساده، فوری و کم‌خرج\nهفته رو خوشمزه‌تر بچین 😍","imageLocation":{"fileLocation":{"fileId":"-2866587228020400384","accessHash":"123","fileStorageVersion":1},"width":1000,"height":538,"fileSize":41682},"tag1":6,"tag2":0,"link":"ble.ir/join/H8Azp4uXyL","linkTitle":"عضویت","peer":{"type":3,"id":418763286,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"f8cdcde9-6930-4fca-b3fe-c3d9c9105c7e","caption":"🚀 وقتشه دیده بشی!\nتبلیغ کن، مخاطب جدید پیدا کن و کسب‌وکارتو رشد بده.","imageLocation":{"fileLocation":{"fileId":"-7410310647210238206","accessHash":"123","fileStorageVersion":1},"width":1024,"height":479,"fileSize":23220},"tag1":1,"tag2":101,"link":"https://tabligh.bale.ai/","linkTitle":"شروع کن!"}},{"baleSponsoredMessageAd":{"id":"9664aa41-250d-43ad-bc69-351c7622b925","caption":"💳 *با بله سریع و راحت کارت‌به‌کارت کن!*\n\n⁉️ *چطوری؟*\nکافیه وارد *صفحهٔ «خدمات»* شی و *گزینهٔ کارت‌به‌کارت* رو بزنی یا در صفحهٔ *گفتگوی شخصی* روی علامت (+) بزنی و گزینهٔ کارت‌به‌کارت رو انتخاب کنی.\n\n➕ علاوه‌براین، اگه در گفتگوی شخصی، روی شماره کارت ارسالی طرف مقابلت بزنی، *مستقیم* وارد بخش کارت‌به‌کارت می‌شی!","imageLocation":{"fileLocation":{"fileId":"-7769753147834032382","accessHash":"123","fileStorageVersion":1},"width":160,"height":90,"fileSize":8729},"tag1":1,"tag2":101,"link":"https://ble.ir/banking-my-bank-page","linkTitle":"کارت‌به‌کارت کن!"}},{"baleSponsoredMessageAd":{"id":"f33313b0-d88f-49a3-a118-e0cfde932d0a","caption":"از شنبه تا جمعه، جواب «چی بپزم» همیشه همراهته\nبرای هر روز *چند انتخاب آماده* داشته باش 👇\n🍲 ناهار و شام خونگی\nغذاهای ساده، فوری و کم‌خرج\nهفته رو خوشمزه‌تر بچین 😍","imageLocation":{"fileLocation":{"fileId":"3599519131453497089","accessHash":"123","fileStorageVersion":1},"width":1000,"height":538,"fileSize":41682},"tag1":6,"tag2":0,"link":"ble.ir/join/H8Azp4uXyL","linkTitle":"عضویت","peer":{"type":3,"id":418763286,"accessHash":"0"}}},{"baleSponsoredMessageAd":{"id":"bd6e15d7-900d-4289-be4e-d01e58932f8b","caption":"از شنبه تا جمعه، جواب «چی بپزم؟» همیشه همراهته\nبرای هر روز *چند انتخاب آماده* داشته باش 👇\n\nناهار و شام خونگی 🍲\nغذاهای ساده، فوری و کم‌خرج\nهفته رو خوشمزه‌تر بچین 😍","imageLocation":{"fileLocation":{"fileId":"-4109785864747081984","accessHash":"123","fileStorageVersion":1},"width":1000,"height":538,"fileSize":46671},"tag1":6,"tag2":0,"link":"ble.ir/join/H8Azp4uXyL","linkTitle":"عضویت","peer":{"type":3,"id":418763286,"accessHash":"0"}}}]}
+[15:21:37.908] [Debug:ACS] Scheduling action Advertisement/setOpenChatTime | 0
+[15:21:37.908] [Debug:ACS] Scheduling action Advertisement/setSponsoredAd | 0
+[15:21:37.908] [Info:Api] <- Res LoadPeerDialogs #37
+[15:21:37.909] [Debug:Load User Req] [{"uid":1155199630,"accessHash":"1"}]
+[15:21:37.909] [Info:Api] -> Req LoadUsers #41
+[15:21:37.909] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:37.910] [Debug:ACS] Scheduling action Settings/Received | 1
+[15:21:37.911] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:37.920] [Debug:ACS] Scheduling action groups/setFullGroups | 1
+[15:21:37.920] [Error:Api] -> Req GetRelatedChannels #40,{"code":14,"message":"no healthy upstream"}
+[15:21:37.921] [Error:FlowRecommender Epics] getRelatedChannelsEpic error:,{"code":14,"message":"no healthy upstream"}
+[15:21:37.921] [Debug:Set] Recommender/resetRelatedChannel
+[15:21:37.921] [Debug:ACS] Scheduling action Recommender/resetRelatedChannel | 1
+[15:21:37.923] [Info:Api] <- Res LoadUsers #41
+[15:21:37.924] [Info:Api] <- Res LoadPeerDialogs #39
+[15:21:37.925] [Debug:Load User Req] [{"uid":1155199630,"accessHash":"1"}]
+[15:21:37.925] [Info:Api] -> Req LoadUsers #42
+[15:21:37.925] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:37.925] [Debug:ACS] Scheduling action groups/setFullGroups | 1
+[15:21:37.925] [Debug:Set] groups/setFullGroups
+[15:21:37.925] [Debug:ACS] Scheduling action groups/setFullGroups | 1
+[15:21:37.926] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:37.932] [Info:Api] <- Res LoadUsers #42
+[15:21:37.932] [Debug:ACS] Dispatching Search/SaveToPeerRecentSearch
+[15:21:37.934] [Debug:ACS] Dispatching groups/setJoinData
+[15:21:37.936] [Debug:ACS] Dispatching Presence/UnSubscribeToPeerListOnline
+[15:21:37.937] [Debug:ACS] Dispatching Presence/SubscribeToPeersListOnline
+[15:21:37.939] [Debug:ACS] Dispatching MiniApp/setMainButtonMiniApp
+[15:21:37.940] [Debug:ACS] Dispatching History/SetShowCurrentMessages
+[15:21:37.941] [Debug:ACS] Dispatching Groups/GetPinMessages
+[15:21:37.942] [Info:Api] -> Req GetPins #43
+[15:21:37.943] [Debug:ACS] Scheduling action groups/setPinLoading | 1
+[15:21:37.943] [Debug:ACS] Dispatching Groups/GetPinMessages
+[15:21:37.944] [Info:Api] -> Req GetPins #44
+[15:21:37.944] [Debug:ACS] Scheduling action groups/setPinLoading | 1
+[15:21:37.947] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:37.951] [Debug:ACS] sidebarSearch/getPeerRecentSearch - dispatching immediately
+[15:21:37.953] [Debug:ACS] sidebarSearch/setPeerRecentSearch - dispatching immediately
+[15:21:37.955] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":3.6,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:37.955] [Warn:MessagesModule] DebugRefactorHist openHistoryDetails,undefined,972228524,true,0,3,381049,undefined
+[15:21:37.955] [Warn:MessagesModule] DebugRefactorHist Open history from remote,9007199254740991,0,true
+[15:21:37.955] [Info:Api] -> Req LoadHistory #45
+[15:21:37.956] [Info:Api] -> Req GetGroupsRecommendation #46
+[15:21:37.956] [Info:Api] <- Res GetPins #44
+[15:21:37.956] [Debug:ACS] Scheduling action groups/setPinLoading | 1
+[15:21:37.956] [Debug:ACS] Scheduling action groups/setPins | 1
+[15:21:37.957] [Debug:ACS] Dispatching Promotion/GetInAppMessageData
+[15:21:37.958] [Debug:ACS] Dispatching Settings/Received
+[15:21:37.959] [Debug:ACS] Dispatching groups/setFullGroups
+[15:21:37.963] [Error:Api] -> Req GetGroupsRecommendation #46,{"code":14,"message":"no healthy upstream"}
+[15:21:37.964] [Debug:ACS] Dispatching Recommender/resetRelatedChannel
+[15:21:37.965] [Debug:ACS] Dispatching groups/setFullGroups
+[15:21:37.967] [Debug:ACS] Dispatching groups/setFullGroups
+[15:21:37.969] [Debug:ACS] Dispatching groups/setPinLoading
+[15:21:37.970] [Debug:ACS] Dispatching groups/setPinLoading
+[15:21:37.970] [Debug:ACS] Dispatching groups/setPinLoading
+[15:21:37.971] [Debug:ACS] Dispatching groups/setPins
+[15:21:37.973] [Debug:ACS] Dispatching Purchase/SetMessageDetails
+[15:21:37.974] [Debug:ACS] Dispatching Purchase/SetMiniAppInvoiceParams
+[15:21:37.975] [Debug:ACS] Dispatching Advertisement/setOpenChatTime
+[15:21:37.976] [Debug:ACS] Dispatching Advertisement/setSponsoredAd
+[15:21:38.740] [Debug:ACS] sidebarSearch/requestAllMessagesSearch - dispatching immediately
+[15:21:38.850] [Debug:PresenceEpics] Subscribe to online,{"onlyUsers":[],"onlyGroups":[]}
+[15:21:38.970] [Info:Api] <- Res LoadHistory #45
+[15:21:38.980] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:38.108] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":0.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:38.108] [Debug:tZ] updateHistory new,5267195820,{"date":9007199254740991,"mode":3,"updateType":0,"msgCount":20,"range":{"start":1787480144330,"end":1787484908304},"loaded":{"start":false,"end":true}}
+[15:21:38.124] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"putItems","storeName":"peer_5267195820","durationMs":4.6,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:38.125] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":0.5,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:38.125] [Debug:History:Epics] DebugRefactorHist,OpenHistory got messages,20
+[15:21:38.125] [Debug:ACS] History/ReplaceHistory - dispatching immediately
+[15:21:38.126] [Info:History:Reducer] DebugRefactorHist,replace history,{"messages":[{"rid":"2112536981240230376","date":1787480144330,"type":"VIDEO","sid":1155199630},{"rid":"131867433260070729","date":1787480319717,"type":"TEXT","sid":1155199630},{"rid":"7897492128306212994","date":1787480989185,"type":"PHOTO","sid":1155199630},{"rid":"3223896431079715834","date":1787481144670,"type":"VIDEO","sid":1155199630},{"rid":"6518973785675979789","date":1787481287638,"type":"PHOTO","sid":1155199630},{"rid":"741311854269109706","date":1787481883937,"type":"PHOTO","sid":1155199630},{"rid":"7168337099328618813","date":1787482349171,"type":"TEXT","sid":1155199630},{"rid":"2002926950928585799","date":1787482354554,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"7931763123052759274","date":1787482354555,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"7189472270607992179","date":1787482354556,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"2785059410456565635","date":1787482354557,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"4644739998540285124","date":1787482354558,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"5297069665551442281","date":1787482354559,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"4013693169743560783","date":1787482354560,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"6404477676396613301","date":1787482354561,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"8198106619276285308","date":1787482354562,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"7882029882603693006","date":1787482354563,"type":"PHOTO","sid":1155199630,"groupedId":"6684312794231137543"},{"rid":"7728079189524264861","date":1787482510557,"type":"TEXT","sid":1155199630},{"rid":"984134358023361667","date":1787482867794,"type":"VIDEO","sid":1155199630},{"rid":"2255943021154500139","date":1787484908304,"type":"PHOTO","sid":1155199630}],"lastReadDate":0,"loadedend":false}
+[15:21:38.126] [Info:DebugRefactorHist unreadMessages] []
+[15:21:38.126] [Warn:History:Reducer] DebugRefactorHist,replace history concat,undefined
+[15:21:38.126] [Info:History:Reducer] DebugRefactorHist,replace history finished,{"atEnd":true,"end":true,"messagesCount":20,"peer":972228524}
+[15:21:38.168] [Debug:History: MessagesList] Init messages,{"type":2,"id":972228524},20
+[15:21:38.180] [Debug:History: Scroller] scroll to bottom,5933,607
+[15:21:38.184] [Info:>>FilesLog] Download start,32143,[download-manager]
+[15:21:38.193] [Debug:ACS] Scheduling action History/ClearScrollMemory | 1
+[15:21:38.202] [Debug:ACS] Scheduling action Advertisement/ViewSponsoredAd | 0
+[15:21:38.218] [Debug:ACS] Dispatching History/ClearScrollMemory
+[15:21:38.220] [Debug:ACS] Dispatching Advertisement/ViewSponsoredAd
+[15:21:38.223] [Info:>>AnbariDownloadManager] Called download for 3214348451080576768 with status: NotCached
+[15:21:38.223] [Info:>>AnbariScheduler] schedule,3214348451080576768,Medium,→,active=[] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:38.223] [Info:>>AnbariScheduler] checkQueue → start,3214348451080576768,Medium
+[15:21:38.223] [Info:>>AnbariScheduler] started,3214348451080576768,Medium,→,active=[3214348451080576768:Medium] queue={XH:0 H:0 M:0 L:0 XL:0}
+[15:21:38.223] [Info:Api] -> Req GetNasimFileUrl #47
+[15:21:38.226] [Debug:PresenceEpics] unSubscribe to online,{"onlyUsers":[],"onlyGroups":[]}
+[15:21:38.230] [Info:Api] <- Res GetNasimFileUrl #47
+[15:21:38.231] [Info:>>AnbariDownloadManager] download started,Photos,3214348451080576768,https://file-gw6.ble.ir/proxy_download/7fTM8QvSMrao8_8SpW7ITFRsbifCIbvy_SCvvaXITfQ=?u=notpaEY3EHODZA8uVil2j7mT51F_SmclkJNpq6sXfHk9F-MQfnCWfFUiYh2zVwYBZ-cai2QWWVAhgA%3D%3D&filename=bale_sponsored_ad
+[15:21:38.242] [Info:>>AnbariDownloadManager] download progress,Photos,3214348451080576768,32071/42673
+[15:21:38.247] [Info:>>AnbariDownloadManager] download progress,Photos,3214348451080576768,42673/42673
+[15:21:38.248] [Info:>>AnbariDownloadManager] download complete — cached,Photos,3214348451080576768,42673B
+[15:21:38.249] [Info:>>AnbariStorageBucket] put — cached,Photos,3214348451080576768,42673B
+[15:21:38.249] [Info:>>FilesLog] Download file fetch,32143,size,42673
+[15:21:38.249] [Info:>>AnbariDownloadManager] stream finalized,Photos,3214348451080576768
+[15:21:38.250] [Debug:Seraj Log Analytics Event] download_traffic,{"origin":2,"file_mime_type":"image/jpg","file_size":42673,"file_hash":"7fTM8QvSMrao8/8SpW7ITFRsbifCIbvy/SCvvaXITfQ="}
+[15:21:38.250] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"download_traffic","date":1787485898250}
+[15:21:38.335] [Debug:FilesModule] Request Urls,[{"fileId":"-1016044587972223231","accessHash":"1195925967","fileStorageVersion":1},{"fileId":"3641728254137671425","accessHash":"1195925967","fileStorageVersion":1},{"fileId":"1240588444876873473","accessHash":"1195925967","fileStorageVersion":1}]
+[15:21:38.335] [Info:Api] -> Req GetNasimFileUrls #48
+[15:21:38.382] [Info:Api] <- Res GetNasimFileUrls #48
+[15:21:38.383] [Debug:FilesModule] Response Urls,{"fileLocations":[{"fileId":"-1016044587972223231","accessHash":"1195925967","fileStorageVersion":1},{"fileId":"3641728254137671425","accessHash":"1195925967","fileStorageVersion":1},{"fileId":"1240588444876873473","accessHash":"1195925967","fileStorageVersion":1}],"response":[{"fileId":"3641728254137671425","chunkSize":131072,"url":"https://file-gw7.ble.ir/proxy_download/YTeiFKjaZyG"},{"fileId":"1240588444876873473","chunkSize":131072,"url":"https://file-gw6.ble.ir/proxy_download/DRvuO9D9Dme"},{"fileId":"-1016044587972223231","chunkSize":131072,"url":"https://file-gw4.ble.ir/proxy_download/qRbAlJbJM3N"}]}
+[15:21:38.475] [Debug:ACS] sidebarSearch/setAllMessagesSearchLoading - dispatching immediately
+[15:21:38.478] [Info:Api] -> Req SearchMessages #49
+[15:21:38.501] [Info:Api] <- Res SearchMessages #49
+[15:21:38.501] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:38.501] [Debug:ACS] sidebarSearch/setAllMessagesSearchReceived - dispatching immediately
+[15:21:38.677] [Debug:ACS] sidebarSearch/requestAllMessagesSearch - dispatching immediately
+[15:21:39.200] [Debug:ACS] History/LoadReactions - dispatching immediately
+[15:21:39.300] [Info:Reactions] loadReactionsEpic,{"type":"History/LoadReactions","payload":{"messages":{}},"meta":{"@@priority":2}}
+[15:21:39.300] [Info:Api] -> Req GetMessagesReactions #50
+[15:21:39.400] [Debug:ACS] History/LoadViews - dispatching immediately
+[15:21:39.500] [Info:Api] -> Req GetMessagesViews #51
+[15:21:39.160] [Info:Api] <- Res GetMessagesViews #51
+[15:21:39.170] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5267195820","durationMs":0.7,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:39.170] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":0.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:39.170] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":0.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:39.180] [Debug:ACS] MessagesEvent/UpdateMessages - dispatching immediately
+[15:21:39.250] [Info:Api] <- Res GetMessagesReactions #50
+[15:21:39.260] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5267195820","durationMs":0.4,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:39.260] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":0.5,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:39.270] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":0.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:39.270] [Debug:ACS] MessagesEvent/UpdateMessages - dispatching immediately
+[15:21:39.800] [Debug:ACS] sidebarSearch/setAllMessagesSearchLoading - dispatching immediately
+[15:21:39.820] [Info:Api] -> Req SearchMessages #52
+[15:21:39.100] [Info:Api] <- Res SearchMessages #52
+[15:21:39.100] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:39.100] [Debug:ACS] sidebarSearch/setAllMessagesSearchReceived - dispatching immediately
+[15:21:39.222] [Debug:Seraj Log Analytics Event] ad_sponsored_view,{"Ad_item_id":"495080bb-ee61-414d-a904-a7e46862c11f-campaign","Ad_item_state":"web","peer_id":972228524,"tag_1":10,"tag_2":0,"peer_type":3}
+[15:21:39.223] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"ad_sponsored_view","date":1787485899223}
+[15:21:39.223] [Info:Api] -> Req UpdateView #53
+[15:21:39.241] [Info:Api] <- Res UpdateView #53
+[15:21:39.964] [Info:Api] -> Req GetGroupsRecommendation #54
+[15:21:39.973] [Error:Api] -> Req GetGroupsRecommendation #54,{"code":14,"message":"no healthy upstream"}
+[15:21:40.928] [Debug:ACS] Scheduling action Search/SaveToPeerRecentSearch | 1
+[15:21:40.929] [Debug:ACS] Scheduling action groups/setJoinData | 1
+[15:21:40.929] [Debug:Seraj Log Analytics Event] global_search,{"peer_id":972228524,"peer_type":2,"query_text":"tasnim","action_type":4,"index":2,"event_type":6,"section":2,"duration_seconds":4}
+[15:21:40.929] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"global_search","date":1787485900929}
+[15:21:40.929] [Debug:ACS] Scheduling action Groups/Join | 1
+[15:21:40.929] [Debug:ACS] Scheduling action groups/setJoinData | 1
+[15:21:40.929] [Info:Routing] all dummy states popped. navigating to ,[{"pathname":"/chat/search","search":"uid=5267195820"}]
+[15:21:40.929] [Warn:Navigate] {"pathname":"/chat/search","search":"uid=5267195820"}
+[15:21:40.936] [Debug:ACS] Dispatching Search/SaveToPeerRecentSearch
+[15:21:40.938] [Debug:ACS] Dispatching groups/setJoinData
+[15:21:40.940] [Debug:ACS] Dispatching Groups/Join
+[15:21:40.942] [Info:Api] -> Req JoinPublicGroup #55
+[15:21:40.942] [Debug:ACS] Scheduling action groups/setLoading | 1
+[15:21:40.942] [Info:Api] -> Req GetRelatedChannels #56
+[15:21:40.943] [Debug:ACS] Dispatching groups/setJoinData
+[15:21:40.948] [Debug:ACS] sidebarSearch/getPeerRecentSearch - dispatching immediately
+[15:21:40.950] [Debug:ACS] sidebarSearch/setPeerRecentSearch - dispatching immediately
+[15:21:40.952] [Debug:ACS] Dispatching groups/setLoading
+[15:21:40.954] [Error:Api] -> Req GetRelatedChannels #56,{"code":14,"message":"no healthy upstream"}
+[15:21:40.954] [Error:FlowRecommender Epics] getRelatedChannelsEpic error:,{"code":14,"message":"no healthy upstream"}
+[15:21:40.955] [Debug:ACS] Scheduling action Recommender/resetRelatedChannel | 1
+[15:21:40.963] [Debug:ACS] Dispatching Recommender/resetRelatedChannel
+[15:21:40.966] [Debug:EventsModule:New] New Event, SubId:,{"routeId":0,"timestamp":0,"sequence":58,"update":"groupInviteObsolete"}
+[15:21:40.966] [Debug:EventsModule:New] >>>> RealTime start applyEvents
+[15:21:40.966] [Debug:EventsModule:New] Filtered events for processing,["groupInviteObsolete"]
+[15:21:40.966] [Warn:ew] >>> groups update: ,groupInviteObsolete
+[15:21:40.967] [Debug:EventsModule:New] Processing events by,GroupsUpdatesHandler
+[15:21:40.967] [Info:FoldersModule] folder events:,[]
+[15:21:40.967] [Debug:EventsModule:New] Processing events by,FoldersModule
+[15:21:40.967] [Debug:EventsModule:New] Processing events by,MessagingUpdatesHandler
+[15:21:40.967] [Debug:EventsModule:New] Processing events by,ImagesUpdatesHandler
+[15:21:40.967] [Debug:EventsModule:New] Starting to process events by,GroupsUpdatesHandler
+[15:21:40.967] [Info:Api] -> Req GetFullGroup #57
+[15:21:40.967] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:40.969] [Warn:ew] >>> after groups update
+[15:21:40.970] [Debug:EventsModule:New] Finished processing events by,GroupsUpdatesHandler
+[15:21:40.970] [Debug:EventsModule:New] Starting to process events by,FoldersModule
+[15:21:40.970] [Debug:EventsModule:New] Finished processing events by,FoldersModule
+[15:21:40.970] [Debug:EventsModule:New] Starting to process events by,MessagingUpdatesHandler
+[15:21:40.970] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:40.972] [Debug:EventsModule:New] Starting to process events by,ImagesUpdatesHandler
+[15:21:40.972] [Debug:EventsModule:New] Finished processing events by,ImagesUpdatesHandler
+[15:21:40.973] [Info:MessagingUpdatesHandler] newMessagesEventHandler: dialog acquired,{"peer":{"type":2,"id":972228524}}
+[15:21:40.973] [Info:Api] -> Req LoadPeerDialogs #58
+[15:21:40.973] [Info:Api] <- Res JoinPublicGroup #55
+[15:21:40.974] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:40.976] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:40.978] [Debug:Seraj Log Analytics Event] Group_join_source,{"user_id":771002554,"date":1787485900978,"peer_id":972228524,"peer_type":2,"event_type":"search","action_type":2}
+[15:21:40.978] [Debug:SerajEventModule] sendSerajEvent received,{"eventName":"Group_join_source","date":1787485900978}
+[15:21:40.978] [Debug:ACS] Scheduling action groups/setLoading | 1
+[15:21:40.999] [Info:Api] <- Res GetFullGroup #57
+[15:21:41.500] [Info:Api] <- Res LoadPeerDialogs #58
+[15:21:41.500] [Warn:FoldersModule] Unread folder not found
+[15:21:41.600] [Debug:ACS] groups/setGroups - dispatching immediately
+[15:21:41.280] [Debug:ACS] Scheduling action groups/setFullGroups | 1
+[15:21:41.330] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:41.350] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:41.350] [Info:MessagingUpdatesHandler] updateDialog called from newMessage,{"peer":{"type":2,"id":972228524},"dialog":{"peer":{"type":2,"id":972228524},"unreadCount":0,"sortDate":1787485900942,"senderUid":1155199630,"rid":"20262566346218","date":1787485900942,"state":2,"firstUnreadDate":1787485900942,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5267195820,"isGrouped":false}}
+[15:21:41.350] [Info:MessagingUpdatesHandler] newMessagesEventHandler,[{"rid":"20262566346218","date":1787485900942,"sid":1155199630}]
+[15:21:41.350] [Debug:ACS] Users/setUsers - dispatching immediately
+[15:21:41.370] [Info:GroupModule] loadGroups,requiredGroups,[]
+[15:21:41.380] [Info:MessagingUpdatesHandler] newMessagesEventHandler messageContainers,[{"rid":"20262566346218","date":1787485900942,"type":"SERVICE","sid":1155199630}]
+[15:21:41.380] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5267195820","durationMs":0.6,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.380] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"toArray","storeName":"peer_5267195820","indexName":"by_rid","durationMs":0.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.380] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"get","storeName":"_meta","durationMs":0.8,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:41.380] [Debug:tZ] addNewMessages,5267195820,{"newCount":1,"updatedCount":0,"lastMsgDate":1787485900942},{"ranges":[{"start":1787480144330,"end":1787484908304}],"loaded":{"start":false,"end":true}}
+[15:21:41.390] [Debug:ACS] Dispatching groups/setLoading
+[15:21:41.410] [Debug:ACS] Dispatching groups/setFullGroups
+[15:21:41.490] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":10.8,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.520] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"_meta","durationMs":2.6,"resultCount":1,"timingScope":"worker_round_trip"}
+[15:21:41.520] [Debug:MessagesModule] DebugRefactorHist,addNewMessagesToHistorys actions,972228524,1
+[15:21:41.520] [Info:MessagingUpdatesHandler] newMessagesEventHandler event,[{"rid":"20262566346218","date":1787485900942}]
+[15:21:41.520] [Warn:FoldersModule] Unread folder not found
+[15:21:41.530] [Info:MessagingUpdatesHandler] newMessagesEventHandler,updated dialog,{"peer":{"type":2,"id":972228524},"unreadCount":0,"sortDate":1787485900942,"senderUid":1155199630,"rid":"20262566346218","date":1787485900942,"state":2,"firstUnreadDate":1787485900942,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5267195820,"isGrouped":false}
+[15:21:41.530] [Info:MessagingUpdatesHandler] newMessagesEventHandler: releasing dialog,972228524
+[15:21:41.530] [Info:MessagingUpdatesHandler] peer events before reducing,[{"dialogEvents":[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":972228524},"unreadCount":0,"sortDate":1787485900942,"senderUid":1155199630,"rid":"20262566346218","date":1787485900942,"message":"serviceMessage","state":2,"firstUnreadDate":1787485900942,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5267195820,"isGrouped":false}]}],"messagesEvents":[{"type":"MessagesEvent/NewMessages","messages":[{"rid":"20262566346218","date":1787485900942}],"myUid":771002554,"peer":{"type":2,"id":972228524},"isRemote":true,"dialog":{"peer":{"type":2,"id":972228524},"unreadCount":0,"sortDate":1787485900942,"senderUid":1155199630,"rid":"20262566346218","date":1787485900942,"state":2,"firstUnreadDate":1787485900942,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5267195820,"isGrouped":false},"currentPeer":{"type":2,"id":972228524}}]}]
+[15:21:41.530] [Warn:MessagingUpdatesHandler] reducedDialogEvents,[{"type":"DialogEvent/Update","dialogs":[{"peer":{"type":2,"id":972228524},"unreadCount":0,"sortDate":1787485900942,"senderUid":1155199630,"rid":"20262566346218","date":1787485900942,"message":"serviceMessage","state":2,"firstUnreadDate":1787485900942,"exInfo":{"exPeerType":3,"peerIdentity":1},"isMessageForwarded":false,"unreadMentions":[],"unreadReactions":[],"markedAsUnread":false,"isMute":false,"id":5267195820,"isGrouped":false}]}]
+[15:21:41.530] [Info:MessagingUpdatesHandler] apply reduced updates,2
+[15:21:41.530] [Debug:ACS] MessagesEvent/NewMessages - dispatching immediately
+[15:21:41.530] [Info:History:Reducer] DebugRefactorHist new messages received:,["20262566346218"],size:,1
+[15:21:41.540] [Warn:History:Reducer] DebugRefactorHist newMessage has history,20
+[15:21:41.560] [Debug:ACS] DialogEvent/Update - dispatching immediately
+[15:21:41.570] [Debug:EventsModule:New] Finished processing events by,MessagingUpdatesHandler
+[15:21:41.570] [Debug:EventsModule:New] Process Finished
+[15:21:41.570] [Debug:EventsModule:New] >>>> RealTime end applyEvents
+[15:21:41.900] [Debug:EventsModule:New] >>>> RealTime end apply Seqs,{"seq":58,"routeId":0}
+[15:21:41.910] [Debug:EventsModule:New] New Event, SubId:,{"routeId":0,"timestamp":0,"sequence":59,"update":"groupMembersCountChanged"}
+[15:21:41.910] [Debug:EventsModule:New] >>>> RealTime start applyEvents
+[15:21:41.910] [Debug:EventsModule:New] Filtered events for processing,["groupMembersCountChanged"]
+[15:21:41.910] [Warn:ew] >>> groups update: ,groupMembersCountChanged
+[15:21:41.910] [Debug:EventsModule:New] Processing events by,GroupsUpdatesHandler
+[15:21:41.910] [Info:FoldersModule] folder events:,[]
+[15:21:41.910] [Debug:EventsModule:New] Processing events by,FoldersModule
+[15:21:41.910] [Debug:EventsModule:New] Processing events by,MessagingUpdatesHandler
+[15:21:41.910] [Debug:EventsModule:New] Processing events by,ImagesUpdatesHandler
+[15:21:41.910] [Debug:EventsModule:New] Starting to process events by,GroupsUpdatesHandler
+[15:21:41.920] [Warn:ew] >>> after groups update
+[15:21:41.920] [Debug:EventsModule:New] Finished processing events by,GroupsUpdatesHandler
+[15:21:41.920] [Debug:EventsModule:New] Starting to process events by,FoldersModule
+[15:21:41.920] [Debug:EventsModule:New] Finished processing events by,FoldersModule
+[15:21:41.920] [Debug:EventsModule:New] Starting to process events by,MessagingUpdatesHandler
+[15:21:41.920] [Debug:EventsModule:New] Finished processing events by,MessagingUpdatesHandler
+[15:21:41.920] [Debug:EventsModule:New] Starting to process events by,ImagesUpdatesHandler
+[15:21:41.920] [Debug:EventsModule:New] Process Finished
+[15:21:41.930] [Debug:EventsModule:New] >>>> RealTime end applyEvents
+[15:21:41.930] [Debug:EventsModule:New] Finished processing events by,ImagesUpdatesHandler
+[15:21:41.103] [Debug:EventsModule:New] >>>> RealTime end apply Seqs,{"seq":59,"routeId":0}
+[15:21:41.894] [Debug:ACS] History/LoadReactions - dispatching immediately
+[15:21:41.895] [Info:Reactions] loadReactionsEpic,{"type":"History/LoadReactions","payload":{"messages":{}},"meta":{"@@priority":2}}
+[15:21:41.895] [Info:Api] -> Req GetMessagesReactions #59
+[15:21:41.896] [Debug:ACS] History/LoadViews - dispatching immediately
+[15:21:41.897] [Info:Api] -> Req GetMessagesViews #60
+[15:21:41.918] [Info:Api] <- Res GetMessagesViews #60
+[15:21:41.919] [Info:Api] <- Res GetMessagesReactions #59
+[15:21:41.919] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5267195820","durationMs":0.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.919] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":0.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.919] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":0.7,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.920] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":0.5,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.920] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":0.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.920] [Debug:ACS] MessagesEvent/UpdateMessages - dispatching immediately
+[15:21:41.925] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"getItems","storeName":"peer_5267195820","durationMs":2.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.926] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":2.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.926] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"query","operation":"first","storeName":"peer_5267195820","indexName":"by_quoted_rid","durationMs":2.8,"resultCount":0,"timingScope":"worker_round_trip"}
+[15:21:41.926] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":0.7,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.930] [Info:QueryDB Worker] IndexedDB query metrics,{"status":"completed","target":"kv","operation":"put","storeName":"peer_5267195820","durationMs":4.6,"resultCount":2,"timingScope":"worker_round_trip"}
+[15:21:41.930] [Debug:ACS] MessagesEvent/UpdateMessages - dispatching immediately
+[15:21:43.973] [Info:Api] -> Req GetGroupsRecommendation #61
+[15:21:43.980] [Error:Api] -> Req GetGroupsRecommendation #61,{"code":14,"message":"no healthy upstream"}
+[15:21:46.570] [Debug:WS] ws ping,0
+[15:21:46.575] [Debug:WS] ws pong,0
+[15:21:51.981] [Info:Api] -> Req GetGroupsRecommendation #62
+[15:21:51.987] [Error:Api] -> Req GetGroupsRecommendation #62,{"code":14,"message":"no healthy upstream"}
+[15:21:56.570] [Debug:WS] ws ping,1
+[15:21:56.584] [Debug:WS] ws pong,1
+[15:22:06.219] [Info:SerajEventModule] sending batch,{"count":2,"shouldRetry":false,"eventNames":["navigation_select_tab","ad_dialogue_view"]}
+[15:22:06.219] [Info:Api] -> Req SendBatch #63
+[15:22:06.226] [Info:Api] <- Res SendBatch #63
+[15:22:06.226] [Info:SerajEventModule] batch send completed,{"count":2,"ok":true}
+[15:22:06.570] [Debug:WS] ws ping,2
+[15:22:06.578] [Debug:WS] ws pong,2

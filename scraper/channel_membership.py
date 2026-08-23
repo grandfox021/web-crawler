@@ -292,5 +292,5 @@ def join_channel_in_bale(
             raise
 
         finally:
-            time.sleep(15000)
+            time.sleep(10)
             context.close()
