@@ -1,6 +1,6 @@
 workflow:
   rules:
-    - if: $CI_COMMIT_BRANCH == "production"
+    - if: $CI_COMMIT_BRANCH == "production" || $CI_COMMIT_BRANCH == "main"
       when: always
     - when: never
 
@@ -14,113 +14,113 @@ variables:
   REPOSITORY_SSH_URL: "git@${CI_SERVER_HOST}:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git"
 
 stages:
-  - build_update_manifest
-  - push_manifest
-  - argo_refresh
+  # - build_update_manifest
+  # - push_manifest
+  # - argo_refresh
   - merge_to_production           #Change_Me_Production  (comment this line)
 
-.build:
-  stage: build_update_manifest
-  tags:
-    - runner1                     #Change_Me_Production  (change to runner1)
-  variables:
-    CONTAINER_PORT: "8000"        #Change_Me  (service port : 80 or 8000)
-    REPLICAS: ""
-    STAGE_NAME: ""
-    DOCKERFILE_NAME: ""
-  before_script:
-  #  - cd project_directory       #Change_Me  (if exist folder for code files)
-    - export APP_VERSION=$(cat version.txt)
-    - export RANDOM_HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10)
-    - export IMAGE_NAME=$CI_REGISTRY_IMAGE/microservice/$MICRO_SERVICE-$STAGE_NAME
-    - export IMAGE_TAG=$APP_VERSION-$RANDOM_HASH
-  script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_NAME .
-    - docker push $IMAGE_NAME:$IMAGE_TAG
-    - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
-  artifacts:
-    paths:
-      - deployment-$MICRO_SERVICE.yaml
-    expire_in: 1 hour
+# .build:
+#   stage: build_update_manifest
+#   tags:
+#     - runner1                     #Change_Me_Production  (change to runner1)
+#   variables:
+#     CONTAINER_PORT: "8000"        #Change_Me  (service port : 80 or 8000)
+#     REPLICAS: ""
+#     STAGE_NAME: ""
+#     DOCKERFILE_NAME: ""
+#   before_script:
+#   #  - cd project_directory       #Change_Me  (if exist folder for code files)
+#     - export APP_VERSION=$(cat version.txt)
+#     - export RANDOM_HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 10)
+#     - export IMAGE_NAME=$CI_REGISTRY_IMAGE/microservice/$MICRO_SERVICE-$STAGE_NAME
+#     - export IMAGE_TAG=$APP_VERSION-$RANDOM_HASH
+#   script:
+#     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+#     - docker build -t $IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_NAME .
+#     - docker push $IMAGE_NAME:$IMAGE_TAG
+#     - envsubst < kubernetes/deployment.yaml > deployment-$MICRO_SERVICE.yaml
+#   artifacts:
+#     paths:
+#       - deployment-$MICRO_SERVICE.yaml
+#     expire_in: 1 hour
 
-    ##################################### build_update_manifest #####################################
+#     ##################################### build_update_manifest #####################################
 
-build-production:
-  extends: .build
-  variables:
-    REPLICAS: "1"
-    STAGE_NAME: "production"
-    DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.prod)
-  only:
-    - production
+# build-production:
+#   extends: .build
+#   variables:
+#     REPLICAS: "1"
+#     STAGE_NAME: "production"
+#     DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.prod)
+#   only:
+#     - production
 
-build-staging:
-  extends: .build
-  variables:
-    REPLICAS: "1"
-    STAGE_NAME: "staging"
-    DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
-  only:
-    - main
+# build-staging:
+#   extends: .build
+#   variables:
+#     REPLICAS: "1"
+#     STAGE_NAME: "staging"
+#     DOCKERFILE_NAME: "Dockerfile"   #Change_Me  (if exist Dockerfile.stage)
+#   only:
+#     - main
 
-######################################## push manifest ##########################################
+# ######################################## push manifest ##########################################
 
-.push:
-  stage: push_manifest
-  tags:
-    - runner1                      #Change_Me_Production  (change to runner1)
-  variables:
-    BRANCH: ""
-  script:
-    - cd ..
-    - rm -rf $YAMLS_REPO
-    - git clone -b $BRANCH $REPOSITORY_YAML
-    - cd $YAMLS_REPO
-    - mv -t . ../$MONO_REPO/deployment*
-    - git config --global user.email "runner@gmail.com"
-    - git config --global user.name "shell-runner"
-    - git add .
-    - git commit -m "update yaml files"
-    - git push
-    - cd ..
-    - rm -rf $YAMLS_REPO
+# .push:
+#   stage: push_manifest
+#   tags:
+#     - runner1                      #Change_Me_Production  (change to runner1)
+#   variables:
+#     BRANCH: ""
+#   script:
+#     - cd ..
+#     - rm -rf $YAMLS_REPO
+#     - git clone -b $BRANCH $REPOSITORY_YAML
+#     - cd $YAMLS_REPO
+#     - mv -t . ../$MONO_REPO/deployment*
+#     - git config --global user.email "runner@gmail.com"
+#     - git config --global user.name "shell-runner"
+#     - git add .
+#     - git commit -m "update yaml files"
+#     - git push
+#     - cd ..
+#     - rm -rf $YAMLS_REPO
 
-push-production:
-  extends: .push
-  variables:
-    BRANCH: "main"                 #Change_Me  ("main" or "master" for k8s-yaml)
-  only:
-    - production
+# push-production:
+#   extends: .push
+#   variables:
+#     BRANCH: "main"                 #Change_Me  ("main" or "master" for k8s-yaml)
+#   only:
+#     - production
 
-push-staging:
-  extends: .push
-  variables:
-    BRANCH: "staging"
-  only:
-    - main
+# push-staging:
+#   extends: .push
+#   variables:
+#     BRANCH: "staging"
+#   only:
+#     - main
 
-########################################## refresh argocd ##########################################
+# ########################################## refresh argocd ##########################################
 
-.refresh:
-  stage: argo_refresh
-  tags:
-    - runner1                     #Change_Me_Production  (change to runner1)
-  script:
-    - argocd login $argohost --insecure --username $argouser --password $argopass   #Change_Me_Production  (Ex: argohost_stg => argohost)
-    - argocd  app get $MICRO_SERVICE --refresh
-    - sleep 10
-    - echo "your application deploy it successfully."
+# .refresh:
+#   stage: argo_refresh
+#   tags:
+#     - runner1                     #Change_Me_Production  (change to runner1)
+#   script:
+#     - argocd login $argohost --insecure --username $argouser --password $argopass   #Change_Me_Production  (Ex: argohost_stg => argohost)
+#     - argocd  app get $MICRO_SERVICE --refresh
+#     - sleep 10
+#     - echo "your application deploy it successfully."
 
-argo-refresh-production:
-  extends: .refresh
-  only:
-    - production
+# argo-refresh-production:
+#   extends: .refresh
+#   only:
+#     - production
 
-argo-refresh-staging:
-  extends: .refresh
-  only:
-    - main
+# argo-refresh-staging:
+#   extends: .refresh
+#   only:
+#     - main
 
 ########################################## merge to main ##########################################
 
