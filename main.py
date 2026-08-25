@@ -11,7 +11,7 @@ app = FastAPI(
 )
 
 app.include_router(router)
-app.include_router(channels_router)
+# app.include_router(channels_router)
 
 
 if __name__ == "__main__":

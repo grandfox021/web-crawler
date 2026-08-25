@@ -1,14 +1,46 @@
-2026/08/23-15:23:07.527 6c760 Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
-2026/08/23-15:23:07.527 6c760 Recovering log #112
-2026/08/23-15:23:07.527 6c760 Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000112.log 
-2026/08/23-15:23:07.547 6c760 Level-0 table #116: started
-2026/08/23-15:23:07.549 6c760 Level-0 table #116: 1692 bytes OK
-2026/08/23-15:23:07.551 6c760 Delete type=0 #112
-2026/08/23-15:23:07.552 6c760 Manual compaction at level-0 from '\x00\x16\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x17\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x08 \x01\x12\x009\x008\x004\x001\x003\x004\x003\x005\x008\x000\x002\x003\x003\x006\x001\x006\x006\x007\x00\x04\x02\x01\x12\x009\x008\x004\x001\x003\x004\x003\x005\x008\x000\x002\x003\x003\x006\x001\x006\x006\x007\x03\x00 \x85\x80\xe4\x02zB' @ 70934 : 1
-2026/08/23-15:23:07.552 6c760 Compacting 2@0 + 2@1 files
-2026/08/23-15:23:07.578 6c760 Generated table #117@0: 18359 keys, 2140687 bytes
-2026/08/23-15:23:07.589 6c760 Generated table #118@0: 742 keys, 1028008 bytes
-2026/08/23-15:23:07.589 6c760 Compacted 2@0 + 2@1 files => 3168695 bytes
-2026/08/23-15:23:07.590 6c760 compacted to: files[ 0 2 1 0 0 0 0 ]
-2026/08/23-15:23:07.590 6c760 Delete type=2 #116
-2026/08/23-15:23:07.591 6c760 Manual compaction at level-0 from '\x00\x05\x08 \x01\x12\x009\x008\x004\x001\x003\x004\x003\x005\x008\x000\x002\x003\x003\x006\x001\x006\x006\x007\x00\x04\x02\x01\x12\x009\x008\x004\x001\x003\x004\x003\x005\x008\x000\x002\x003\x003\x006\x001\x006\x006\x007\x03\x00 \x85\x80\xe4\x02zB' @ 70934 : 1 .. '\x00\x17\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-15:23:55.487 6cbae Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/MANIFEST-000001
+2026/08/23-15:23:55.487 6cbae Recovering log #115
+2026/08/23-15:23:55.490 6cbae Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/IndexedDB/https_web.bale.ai_0.indexeddb.leveldb/000115.log 
+2026/08/23-15:23:55.490 6cbae Delete type=2 #110
+2026/08/23-15:23:55.490 6cbae Delete type=2 #111
+2026/08/23-15:23:55.490 6cbae Delete type=2 #113
+2026/08/23-15:23:55.501 6cbb0 Level-0 table #121: started
+2026/08/23-15:23:55.512 6cbb0 Level-0 table #121: 485412 bytes OK
+2026/08/23-15:23:55.514 6cbb0 Delete type=0 #115
+2026/08/23-15:23:55.515 6cbad Manual compaction at level-0 from '\x00\x17\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x18\x00\x00\x00' @ 0 : 0; will stop at '\x00\x17\x00\x00\x05' @ 72232 : 1
+2026/08/23-15:23:55.515 6cbad Compacting 1@0 + 2@1 files
+2026/08/23-15:23:55.541 6cbad Generated table #122@0: 18466 keys, 2142970 bytes
+2026/08/23-15:23:55.552 6cbad Generated table #123@0: 738 keys, 1027591 bytes
+2026/08/23-15:23:55.552 6cbad Compacted 1@0 + 2@1 files => 3170561 bytes
+2026/08/23-15:23:55.553 6cbad compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/23-15:23:55.553 6cbad Delete type=2 #121
+2026/08/23-15:23:55.553 6cbad Manual compaction at level-0 from '\x00\x17\x00\x00\x05' @ 72232 : 1 .. '\x00\x18\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-15:23:58.566 6cbb0 Level-0 table #125: started
+2026/08/23-15:23:58.568 6cbb0 Level-0 table #125: 5196 bytes OK
+2026/08/23-15:23:58.570 6cbb0 Delete type=2 #117
+2026/08/23-15:23:58.570 6cbb0 Delete type=0 #120
+2026/08/23-15:23:58.570 6cbb0 Delete type=2 #118
+2026/08/23-15:23:58.571 6cbae Manual compaction at level-0 from '\x00\x18\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at '\x00\x18\x00\x00\x05' @ 72410 : 1
+2026/08/23-15:23:58.571 6cbae Compacting 1@0 + 2@1 files
+2026/08/23-15:23:58.598 6cbae Generated table #126@0: 18470 keys, 2143063 bytes
+2026/08/23-15:23:58.608 6cbae Generated table #127@0: 738 keys, 1027591 bytes
+2026/08/23-15:23:58.608 6cbae Compacted 1@0 + 2@1 files => 3170654 bytes
+2026/08/23-15:23:58.609 6cbae compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/23-15:23:58.609 6cbae Delete type=2 #125
+2026/08/23-15:23:58.609 6cbbb Manual compaction at level-0 from '\x00\x18\x00\x00\x05' @ 72410 : 1 .. '\x00\x19\x00\x00\x00' @ 0 : 0; will stop at (end)
+2026/08/23-15:24:20.766 6cbb0 Level-0 table #129: started
+2026/08/23-15:24:20.778 6cbb0 Level-0 table #129: 3060963 bytes OK
+2026/08/23-15:24:20.781 6cbb0 Delete type=2 #123
+2026/08/23-15:24:20.781 6cbb0 Delete type=0 #124
+2026/08/23-15:24:20.781 6cbb0 Delete type=2 #122
+2026/08/23-15:24:24.618 6cbad Level-0 table #131: started
+2026/08/23-15:24:24.620 6cbad Level-0 table #131: 12561 bytes OK
+2026/08/23-15:24:24.622 6cbad Delete type=0 #128
+2026/08/23-15:24:24.622 6cbad Manual compaction at level-0 from '\x00\x19\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at '\x00\x05\x08!\x01\x13\x005\x001\x009\x009\x009\x003\x006\x005\x005\x005\x002\x009\x003\x006\x009\x000\x007\x009\x005\x00\x04\x02\x01\x13\x005\x003\x005\x006\x006\x008\x001\x001\x005\x006\x006\x000\x005\x007\x007\x009\x009\x005\x007\x03\x00\x00\xdc\xcc\xd5\x02zB' @ 72811 : 1
+2026/08/23-15:24:24.622 6cbad Compacting 2@0 + 2@1 files
+2026/08/23-15:24:24.649 6cbad Generated table #132@0: 18677 keys, 2145176 bytes
+2026/08/23-15:24:24.663 6cbad Generated table #133@0: 896 keys, 2072860 bytes
+2026/08/23-15:24:24.663 6cbad Compacted 2@0 + 2@1 files => 4218036 bytes
+2026/08/23-15:24:24.665 6cbad compacted to: files[ 0 2 1 0 0 0 0 ]
+2026/08/23-15:24:24.665 6cbad Delete type=2 #131
+2026/08/23-15:24:24.667 6cbad Manual compaction at level-0 from '\x00\x05\x08!\x01\x13\x005\x001\x009\x009\x009\x003\x006\x005\x005\x005\x002\x009\x003\x006\x009\x000\x007\x009\x005\x00\x04\x02\x01\x13\x005\x003\x005\x006\x006\x008\x001\x001\x005\x006\x006\x000\x005\x007\x007\x009\x009\x005\x007\x03\x00\x00\xdc\xcc\xd5\x02zB' @ 72811 : 1 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at (end)
