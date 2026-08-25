@@ -71,7 +71,7 @@ def _parse_date(
 
 
 @router.post(
-    "/go-scrap"
+    "/scrape-channels"
 )
 async def go_scrap():
     """
