@@ -54,7 +54,7 @@ def save_news(
         "title": title,
         "body": body,
         "link": news.get("link"),
-        "source": news.get("source"),
+        "category": news.get("category"),
         "source_type": news.get("source_type"),
         "published_at": news.get("published_at"),
         "content_hash": content_hash,

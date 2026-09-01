@@ -1,3 +1,2 @@
-2026/08/25-09:34:46.265 1be74 Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/Session Storage/MANIFEST-000001
-2026/08/25-09:34:46.265 1be74 Recovering log #3
-2026/08/25-09:34:46.265 1be74 Reusing old log /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/Session Storage/000003.log 
+2026/09/01-15:12:29.186 77012 Creating DB /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/Session Storage since it was missing.
+2026/09/01-15:12:29.190 77012 Reusing MANIFEST /home/hassan/Documents/bale_crawler/web-crawler-/profile/Default/Session Storage/MANIFEST-000001

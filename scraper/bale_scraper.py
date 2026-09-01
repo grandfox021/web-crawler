@@ -11,6 +11,7 @@ from db.mongodb.crud_channels import (
     mark_channel_scraped,
 )
 from db.mongodb.mogo import scrape_errors_collection
+from db.kafka.producer import send_news_to_kafka, flush_kafka
 
 
 # =========================================================
@@ -925,7 +926,7 @@ async def _collect_current_messages(
             continue
 
         # -------------------------------------------------
-        # Save
+        # Save (Mongo + Kafka)
         # -------------------------------------------------
 
         try:
@@ -935,7 +936,36 @@ async def _collect_current_messages(
             )
 
             if saved:
+
                 saved_count += 1
+
+                # ---------------------------------------------
+                # Publish to Kafka as well.
+                #
+                # A Kafka failure should never break the scrape:
+                # the news item is already safely stored in
+                # Mongo, so we just log the Kafka error and move
+                # on.
+                # ---------------------------------------------
+
+                try:
+
+                    send_news_to_kafka(
+                        parsed_news
+                    )
+
+                except Exception as e:
+
+                    _log_error(
+                        channel,
+                        e,
+                    )
+
+                    print(
+                        f"[BALE][KAFKA_ERROR] "
+                        f"channel={title} "
+                        f"error={e}"
+                    )
 
         except Exception as e:
 
@@ -1735,6 +1765,13 @@ async def scrape_all_channels() -> dict:
                             str(last_error),
                     }
                 )
+
+        # =================================================
+        # Make sure every buffered Kafka message is
+        # actually flushed before we close the browser.
+        # =================================================
+
+        flush_kafka()
 
         await context.close()
 

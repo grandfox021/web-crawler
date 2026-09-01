@@ -36,7 +36,7 @@ async def clean_body(
         title
         body
         link
-        source
+        category
         source_type
         published_at
 
@@ -246,39 +246,42 @@ async def clean_body(
                     )
 
     # ==================================================
-    # Source
+    # Category (previously "source")
+    #
+    # Taken from the @mention inside the message when
+    # present, otherwise falls back to the channel title.
     # ==================================================
 
     mention = message.locator(
         "span.mention"
     ).first
 
-    mention_source = None
+    mention_category = None
 
     if await mention.count() > 0:
 
-        mention_source = (
+        mention_category = (
             await mention.get_attribute(
                 "data-mention"
             )
         )
 
-        if not mention_source:
+        if not mention_category:
 
-            mention_source = (
+            mention_category = (
                 await mention.inner_text()
             )
 
-        if mention_source:
+        if mention_category:
 
-            mention_source = (
-                mention_source
+            mention_category = (
+                mention_category
                 .strip()
                 .lstrip("@")
             )
 
-    source = (
-        mention_source
+    category = (
+        mention_category
         or channel_title
         or "unknown"
     )
@@ -296,7 +299,7 @@ async def clean_body(
         "title": title,
         "body": body,
         "link": post_url,
-        "source": source,
+        "category": category,
         "source_type": source_type,
         "published_at": published_at,
 
