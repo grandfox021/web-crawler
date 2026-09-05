@@ -9,6 +9,9 @@ ENV PYTHONUNBUFFERED=1 \
 
 WORKDIR /app
 
+
+RUN dpkg -l | grep tzdata || apt-get update && apt-get install -y tzdata && rm -rf /var/lib/apt/lists/*
+
 # نصب dependencyهای پایتون جدا از کد، برای cache بهتر
 COPY requirements.txt .
 RUN pip install -r requirements.txt
