@@ -37,7 +37,7 @@ spec:
           readOnly: true
 
         # - name: profile-storage
-        #   mountPath: "/app/profile"        
+        #   mountPath: "/app/profile"
 
         - name: tz-config
           mountPath: "/etc/localtime"
@@ -47,7 +47,7 @@ spec:
       - name: store-cm
         configMap:
           name: config-cm
-          
+
       # - name: profile-storage
       #   persistentVolumeClaim:
       #     claimName: $MICRO_SERVICE-profile-pvc
@@ -56,5 +56,3 @@ spec:
         hostPath:
           path: /etc/localtime
           type: File
-
-
