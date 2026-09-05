@@ -39,10 +39,10 @@ spec:
         # - name: profile-storage
         #   mountPath: "/app/profile"
 
-        - name: tz-config
-          mountPath: "/etc/localtime"
+        - name: zoneinfo
+          mountPath: /etc/timezone
           readOnly: true
-
+          
       volumes:
       - name: store-cm
         configMap:
@@ -52,7 +52,7 @@ spec:
       #   persistentVolumeClaim:
       #     claimName: $MICRO_SERVICE-profile-pvc
 
-      - name: tz-config
+      - name: zoneinfo
         hostPath:
-          path: /etc/localtime
+          path: /etc/timezone
           type: File
